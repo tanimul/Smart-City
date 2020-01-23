@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6dd5ed"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+<EditText
+    android:id="@+id/LoginEmail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Email"
+    android:gravity="center"
+
+    />
+    <EditText
+        android:layout_below="@id/LoginEmail"
+        android:id="@+id/LoginPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:gravity="center"
+
+        />
+
+    <Button
+        android:id="@+id/Login"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LoginPassword"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="20dp"
+        android:textSize="25dp"
+        android:layout_alignParentRight="true"
+        android:text="Login" />
+
+
+    <TextView
+
+        android:id="@+id/Forgot_Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Login"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="Forgot password ?" />
+
+</RelativeLayout>
