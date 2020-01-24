@@ -4,49 +4,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6dd5ed"
+    android:background="@drawable/group_2"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".MainActivity">
 
-<EditText
-    android:id="@+id/LoginEmail"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Email"
-    android:gravity="center"
-
-    />
-    <EditText
-        android:layout_below="@id/LoginEmail"
-        android:id="@+id/LoginPassword"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView_homepage_title1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
-
-        />
-
-    <Button
-        android:id="@+id/Login"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/LoginPassword"
-        android:layout_marginTop="9dp"
-        android:layout_marginRight="20dp"
-        android:textSize="25dp"
-        android:layout_alignParentRight="true"
-        android:text="Login" />
-
+        android:text="নির্মল"
+        android:textSize="35dp" />
 
     <TextView
-
-        android:id="@+id/Forgot_Password"
-        android:layout_width="match_parent"
+        android:id="@+id/textView_homepage_title2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Login"
-        android:layout_marginTop="14dp"
+        android:layout_below="@id/textView_homepage_title1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
         android:gravity="center"
-        android:text="Forgot password ?" />
+        android:text="নগরী"
+        android:textSize="35dp" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView_quote"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginLeft="29dp"-->
+    <!--        android:layout_marginTop="126dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="Let's come and clean the Dhaka city !"-->
+    <!--        android:textSize="20dp" />-->
+
+
+    <Button
+        android:id="@+id/button_go_Login"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="255dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/rectangle2"
+        android:text="Login"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/textView_loginwith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_go_Login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="260dp"
+        android:gravity="center"
+        android:text="Login with"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_gmail"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/textView_loginwith"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/gmail" />
+
+    <TextView
+        android:id="@+id/textView_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_loginwith"
+        android:layout_alignLeft="@id/imagebutton_gmail"
+        android:layout_marginLeft="42dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="or"
+        android:textSize="20dp" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_facebook"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/textView_loginwith"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/facebook" />
+
+    <TextView
+        android:id="@+id/textView_have_acount_or_not"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagebutton_gmail"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Do You have any account ?"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView_from_main_registration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagebutton_gmail"
+        android:layout_alignLeft="@id/textView_have_acount_or_not"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Register"
+        android:textSize="22dp" />
+
 
 </RelativeLayout>

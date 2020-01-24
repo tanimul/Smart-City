@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/group_6"
+    android:orientation="vertical"
+    tools:context=".Login">
+
+    <TextView
+        android:id="@+id/textView_loginpage_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="নির্মল নগরী "
+        android:textSize="35dp" />
+
+    <EditText
+        android:id="@+id/edittext_login_email"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_loginpage_title1"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/rectangle3"
+        android:gravity="center"
+        android:hint="anyone@example.com"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edittext_login_password"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_login_email"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/rectangle3"
+        android:gravity="center"
+        android:text="********"
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_login_password"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rectangle2"
+        android:text="Sign In"
+        android:textAllCaps="false"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textView_registration_have_acount_or_not"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="240dp"
+        android:gravity="center"
+        android:text="Do You have any account ?"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView_from_login_registration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_login"
+        android:layout_alignLeft="@id/textView_registration_have_acount_or_not"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="240dp"
+        android:gravity="center"
+        android:text="Register"
+        android:textSize="22dp" />
+
+
+</RelativeLayout>

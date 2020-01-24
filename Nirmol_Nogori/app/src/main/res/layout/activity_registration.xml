@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/group_7"
+    tools:context=".Registration">
+
+    <EditText
+        android:id="@+id/edittext_firstname"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:hint="First name"
+        android:textSize="20sp"
+        />
+    <EditText
+        android:id="@+id/edittext_lastname"
+        android:layout_alignLeft="@id/edittext_firstname"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="150dp"
+        android:gravity="center"
+        android:hint="Last name"
+        android:textSize="20sp"
+        />
+
+    <EditText
+
+        android:id="@+id/edittext_registration_email"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_firstname"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:hint="anyone@example.com"
+        android:textSize="20sp"
+        />
+
+    <EditText
+
+        android:id="@+id/edittext_registration_password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_registration_email"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:hint="Password"
+        android:textSize="20sp"
+        />
+    <EditText
+
+        android:id="@+id/edittext_registration_con_password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_registration_password"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:hint="Confirm Password"
+        android:textSize="20sp"
+        />
+
+    <Button
+
+        android:id="@+id/button_registration"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_registration_con_password"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="92dp"
+        android:background="@drawable/rectangle4"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textSize="25dp" />
+    <TextView
+        android:id="@+id/textView_registration_have_acount_or_not"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_registration"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:text="Do You have any account ?"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_registration"
+        android:layout_alignLeft="@id/textView_registration_have_acount_or_not"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:text="Login"
+        android:textSize="22dp" />
+
+</RelativeLayout>
