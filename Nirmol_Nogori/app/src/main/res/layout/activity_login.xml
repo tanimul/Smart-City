@@ -39,18 +39,28 @@
         android:layout_marginTop="28dp"
         android:background="@drawable/rectangle3"
         android:gravity="center"
-        android:text="********"
+        android:hint="********"
         android:textSize="20sp"
         />
-
+    <TextView
+        android:id="@+id/textView_forgotpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_login_password"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="60dp"
+        android:gravity="center"
+        android:text="Forgot Password"
+        android:textSize="20dp" />
     <Button
         android:id="@+id/button_login"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/edittext_login_password"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="50dp"
         android:background="@drawable/rectangle2"
         android:text="Sign In"
         android:textAllCaps="false"

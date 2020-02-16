@@ -51,54 +51,110 @@
         android:text="Login"
         android:textSize="24dp" />
 
-    <TextView
-        android:id="@+id/textView_loginwith"
+    <Button
+        android:id="@+id/button_signout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_go_Login"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="260dp"
-        android:gravity="center"
-        android:text="Login with"
-        android:textSize="18sp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"
+        android:text="signout"
+        android:visibility="invisible"
 
-    <ImageButton
-        android:id="@+id/imagebutton_gmail"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@id/textView_loginwith"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/gmail" />
+        />
 
     <TextView
-        android:id="@+id/textView_or"
+        android:id="@+id/textView_connectwith"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView_loginwith"
-        android:layout_alignLeft="@id/imagebutton_gmail"
-        android:layout_marginLeft="42dp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/button_go_Login"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="265dp"
         android:gravity="center"
-        android:text="or"
-        android:textSize="20dp" />
 
-    <ImageButton
-        android:id="@+id/imagebutton_facebook"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@id/textView_loginwith"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/facebook" />
+        android:text="Connect With Other Ways"
+        android:textSize="18sp" />
+
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/imagebutton_gmail"-->
+    <!--        android:layout_width="30dp"-->
+    <!--        android:layout_height="30dp"-->
+    <!--        android:layout_below="@id/textView_connectwith"-->
+    <!--        android:layout_marginLeft="30dp"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        android:src="@drawable/google"-->
+
+    <!--        />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView_or"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/textView_connectwith"-->
+    <!--        android:layout_alignLeft="@id/imagebutton_gmail"-->
+    <!--        android:layout_marginLeft="42dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="or"-->
+    <!--        android:textSize="20dp" />-->
+
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView_have_acount_or_not"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/imagebutton_gmail"-->
+    <!--        android:layout_marginLeft="20dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="Do You have any account ?"-->
+    <!--        android:textSize="20dp" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView_from_main_registration"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/imagebutton_gmail"-->
+    <!--        android:layout_alignLeft="@id/textView_have_acount_or_not"-->
+    <!--        android:layout_marginLeft="250dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="Register"-->
+    <!--        android:textSize="22dp" />-->
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/signin_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_go_Login"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="293dp" />
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/imagebutton_facebook"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_below="@id/textView_connectwith"-->
+<!--        android:layout_marginLeft="215dp"-->
+<!--        android:layout_marginTop="18dp"-->
+<!--        android:src="@drawable/facebook" />-->
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_facebook_button"
+        android:layout_below="@id/textView_connectwith"
+        android:layout_marginLeft="215dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
     <TextView
         android:id="@+id/textView_have_acount_or_not"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imagebutton_gmail"
+        android:layout_below="@id/signin_google"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Do You have any account ?"
         android:textSize="20dp" />
@@ -107,10 +163,10 @@
         android:id="@+id/textView_from_main_registration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imagebutton_gmail"
+        android:layout_below="@id/signin_google"
         android:layout_alignLeft="@id/textView_have_acount_or_not"
         android:layout_marginLeft="250dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Register"
         android:textSize="22dp" />
