@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "114183716735",
+    "firebase_url": "https://nirmolnogori.firebaseio.com",
+    "project_id": "nirmolnogori",
+    "storage_bucket": "nirmolnogori.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114183716735:android:eae34e50bbdeead2f4e44a",
+        "android_client_info": {
+          "package_name": "com.example.nirmol_nogori"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114183716735-v7veq1u123posd9spuvjrooiikr40nmf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nirmol_nogori",
+            "certificate_hash": "6043c90cdb73f9fe1abb1b5cc9e92cf1e7bb951e"
+          }
+        },
+        {
+          "client_id": "114183716735-nn79e59bpcuk4cu2i6t4sgh1n17gmfd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nirmol_nogori",
+            "certificate_hash": "f3bc0802e0df2bfc8d5ce4ccddfb1051dc523df7"
+          }
+        },
+        {
+          "client_id": "114183716735-asartbk95oh20g09kmgc8s8ise4lanji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt5IftoRXNGG2kqGb2aWSiZ8GlWrDTeMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114183716735-asartbk95oh20g09kmgc8s8ise4lanji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
