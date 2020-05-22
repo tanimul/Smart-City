@@ -20,7 +20,7 @@
             android:icon="@drawable/ic_volunteer"
             android:title="Volunteer" />
         <item
-            android:id="@+id/term_condition"
+            android:id="@+id/nav_term_condition"
             android:icon="@drawable/ic_term_condition"
             android:title="Term &amp; Condition" />
 
