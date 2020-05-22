@@ -1,23 +1,23 @@
-package com.example.nirmol_nogori;
+package com.example.nirmol_nogori.Ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.nirmol_nogori.Ui.MainActivity;
+import com.example.nirmol_nogori.databinding.ActivityHomeBinding;
 
-public class Home_Menu extends AppCompatActivity {
+public class Home_Activity extends AppCompatActivity {
 
+    private ActivityHomeBinding binding;
     private long backpressed;
     private Toast backtost;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home__menu);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
     }
 
@@ -30,7 +30,7 @@ public class Home_Menu extends AppCompatActivity {
             super.onBackPressed();
             return;
         } else {
-            backtost = Toast.makeText(Home_Menu.this, "press BACK again to Exit", Toast.LENGTH_SHORT);
+            backtost = Toast.makeText(Home_Activity.this, "press BACK again to Exit", Toast.LENGTH_SHORT);
             backtost.show();
         }
 

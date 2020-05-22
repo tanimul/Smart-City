@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_menu"
+    android:paddingTop="15dp"
+    tools:context=".Ui.Home_Activity">
+
+    <TextView
+        android:id="@+id/textView_mainmenu_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="নির্মল নগরী"
+        android:textColor="#000000"
+        android:textSize="35dp"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_mainmenu_title"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/linerlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/button_Drop_complain"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:drawableTop="@drawable/drop_complain"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:text="Drop\nComplain"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/button_Find_nearest_dustbine"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:drawableTop="@drawable/dustbine"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:text="Find Nearest\nDustbin"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/liner_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:weightSum="2"
+            app:layout_constraintTop_toBottomOf="@id/linerlayout1">
+
+            <Button
+                android:id="@+id/door_to_door_cleaning_service"
+                android:layout_width="88dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:drawableTop="@drawable/location"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:text="Door To Door\nCleaning Service"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/news_trend"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:drawableTop="@drawable/news_trend"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:text="News &amp; Trend"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_registration"
+        app:layout_constraintVertical_bias="0.814"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/textView_wants_to_ba_a_volunteer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Wants to be a volunteer ?"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textView_volunteer_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=" Form"
+            android:textColor="#E94F1E"
+            android:textSize="25dp"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

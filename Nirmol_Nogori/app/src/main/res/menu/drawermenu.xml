@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_share"
+            android:title="Share" />
+        <item
+            android:id="@+id/nav_rate_me"
+            android:icon="@drawable/ic_star"
+            android:title="Rate me" />
+        <item
+            android:id="@+id/nav_volunteer"
+            android:icon="@drawable/ic_volunteer"
+            android:title="Volunteer" />
+        <item
+            android:id="@+id/term_condition"
+            android:icon="@drawable/ic_term_condition"
+            android:title="Term &amp; Condition" />
+
+        <item
+            android:id="@+id/nav_thanks_credit"
+            android:icon="@drawable/ic_thanks_credit"
+            android:title="Thanks &amp; Credit" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about_us"
+            android:title="About us" />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings"
+            android:title="Setting" />
+
+
+    </group>
+</menu>

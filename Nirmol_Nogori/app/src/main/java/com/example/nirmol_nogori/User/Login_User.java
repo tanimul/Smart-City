@@ -6,27 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nirmol_nogori.Home_Menu;
-import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.Ui.Home_Activity;
 import com.example.nirmol_nogori.databinding.ActivityLoginBinding;
-import com.facebook.login.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Login_User extends AppCompatActivity implements View.OnClickListener {
     private ActivityLoginBinding binding;
@@ -83,7 +71,7 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(Login_User.this, "login successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Login_User.this, Home_Menu.class));
+                                startActivity(new Intent(Login_User.this, Home_Activity.class));
                             } else {
                                 Toast.makeText(Login_User.this, "login unsuccessfully", Toast.LENGTH_SHORT).show();
                             }

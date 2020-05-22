@@ -8,13 +8,9 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nirmol_nogori.Home_Menu;
-import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.Ui.Home_Activity;
 import com.example.nirmol_nogori.Users;
 import com.example.nirmol_nogori.databinding.ActivityRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -92,7 +88,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Toast.makeText(Registration.this, "Registration complete", Toast.LENGTH_SHORT).show();
                                     after_registration();
-                                    Intent intent = new Intent(Registration.this, Home_Menu.class);
+                                    Intent intent = new Intent(Registration.this, Home_Activity.class);
                                     startActivity(intent);
 
                                 }
