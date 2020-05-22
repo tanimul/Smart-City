@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nirmol_nogori.Home_Menu;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityLoginBinding;
+import com.facebook.login.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,70 +30,70 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Login_User extends AppCompatActivity implements View.OnClickListener {
     private ActivityLoginBinding binding;
-    private TextView textView_go_registration, textView_forgot_pass;
-    private Button button_login;
-    private EditText userEmail, userPassword;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
 
-//        textView_go_registration = findViewById(R.id.textView_from_login_registration);
-//        button_login = findViewById(R.id.button_login);
-//        userEmail = findViewById(R.id.edittext_login_email);
-//        userPassword = findViewById(R.id.edittext_login_password);
-//        textView_forgot_pass=findViewById(R.id.textView_forgotpass);
+        mAuth = FirebaseAuth.getInstance();
 
-//        mAuth = FirebaseAuth.getInstance();
-//
-//        textView_go_registration.setOnClickListener(this);
-//        button_login.setOnClickListener(this);
-//        textView_forgot_pass.setOnClickListener(this);
+        //Underline some text
+        binding.textViewForgotpass.setPaintFlags(binding.textViewForgotpass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.textViewFromLoginForRegistration.setPaintFlags(binding.textViewFromLoginForRegistration.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.textViewFromLoginNeedHelp.setPaintFlags(binding.textViewFromLoginNeedHelp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+
+        binding.textViewFromLoginForRegistration.setOnClickListener(this);
+        binding.buttonLoginAsUser.setOnClickListener(this);
+        binding.textViewForgotpass.setOnClickListener(this);
+        binding.textViewFromLoginNeedHelp.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
-//        if (v.getId() == R.id.button_login) {
-//            userLogin();
-//        }
-//        else if(v.getId()==R.id.textView_forgotpass) {
-//
-//        }
-//        else {
-//            Intent intent = new Intent(Login.this, Registration.class);
-//            startActivity(intent);
-//        }
+        if (v == binding.buttonLoginAsUser) {
+            userLogin();
+        } else if (v == binding.textViewForgotpass) {
+
+            //Todo perform forgot password to create another method
+
+        } else if (v == binding.textViewFromLoginForRegistration) {
+            startActivity(new Intent(Login_User.this, Registration.class));
+        } else {
+
+            //Todo perform need help to create another method
+
+        }
 
     }
 
+    //firebase login for user
+    private void userLogin() {
+        String user_email = binding.edittextLoginEmail.getText().toString().trim();
+        String user_password = binding.edittextLoginPassword.getText().toString().trim();
+        try {
+            mAuth.signInWithEmailAndPassword(user_email, user_password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Login_User.this, "login successfully", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(Login_User.this, Home_Menu.class));
+                            } else {
+                                Toast.makeText(Login_User.this, "login unsuccessfully", Toast.LENGTH_SHORT).show();
+                            }
 
-//    private void userLogin() {
-//        String user_email = userEmail.getText().toString().trim();
-//        String user_password = userPassword.getText().toString().trim();
-//        try {
-//            mAuth.signInWithEmailAndPassword(user_email, user_password)
-//                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if (task.isSuccessful()) {
-//                                Toast.makeText(Login.this, "login successfully", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(Login.this, Home_Menu.class);
-//                                startActivity(intent);
-//                            } else {
-//                                Toast.makeText(Login.this, "login unsuccessfully", Toast.LENGTH_SHORT).show();
-//                            }
-//
-//
-//                        }
-//                    });
-//        } catch (Exception e) {
-//            Toast.makeText(Login.this, "login unsuccessfully", Toast.LENGTH_SHORT).show();
-//        }
-//
-//
-//    }
+
+                        }
+                    });
+        } catch (Exception e) {
+            Toast.makeText(Login_User.this, "login unsuccessfully", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

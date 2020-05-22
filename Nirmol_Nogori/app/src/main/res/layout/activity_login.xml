@@ -104,7 +104,7 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/textView_from_login_from_main_registration"
+            android:id="@+id/textView_from_login_for_registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

@@ -1,6 +1,8 @@
-package com.example.nirmol_nogori;
+package com.example.nirmol_nogori.Ui;
 
 import com.example.nirmol_nogori.Admin.Login_Admin;
+import com.example.nirmol_nogori.Home_Menu;
+import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.User.Login_User;
 import com.example.nirmol_nogori.User.Registration;
 import com.example.nirmol_nogori.databinding.ActivityMainBinding;
@@ -38,11 +40,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -101,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //check current user status
     private void checkUserStatus() {
         if (firebaseUser != null) {
-            Log.d(TAG, "onDataChange: New User");
             startActivity(new Intent(MainActivity.this, Home_Menu.class));
             finish();
         }
@@ -208,12 +204,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, personemail + "\n" + personname + "\n" + personid, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, Home_Menu.class);
             startActivity(intent);
+            finish();
 
         }
         if (firebaseUser != null) {
             Toast.makeText(this, "You're logged in", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, Home_Menu.class);
             startActivity(intent);
+            finish();
 
         } else {
 

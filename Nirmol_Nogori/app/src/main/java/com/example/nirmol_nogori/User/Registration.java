@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.nirmol_nogori.Home_Menu;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.Users;
+import com.example.nirmol_nogori.databinding.ActivityRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,55 +26,56 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener {
 
-    private Button buttonregistration;
-    private TextView go_login_from_Reg;
-    private EditText f_name, l_name, u_email, u_password, u_con_password;
-    FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
+    private ActivityRegistrationBinding binding;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        binding = ActivityRegistrationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        buttonregistration = findViewById(R.id.button_registration);
-        f_name = findViewById(R.id.edittext_firstname);
-        l_name = findViewById(R.id.edittext_lastname);
-        u_email = findViewById(R.id.edittext_registration_email);
-        u_password = findViewById(R.id.edittext_registration_password);
-        u_con_password = findViewById(R.id.edittext_registration_con_password);
-        go_login_from_Reg = findViewById(R.id.textView_login_from_registration);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         firebaseAuth = FirebaseAuth.getInstance();
 
-        buttonregistration.setOnClickListener(this);
-        go_login_from_Reg.setOnClickListener(this);
+        //Underline some text
+        binding.textViewLoginFromRegistration.setPaintFlags(binding.textViewLoginFromRegistration.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.textViewFromRegistrationNeedHelp.setPaintFlags(binding.textViewFromRegistrationNeedHelp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+
+        binding.buttonRegistration.setOnClickListener(this);
+        binding.textViewLoginFromRegistration.setOnClickListener(this);
+        binding.textViewFromRegistrationNeedHelp.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.textView_login_from_registration) {
-            Intent intent = new Intent(Registration.this, Login_User.class);
-            startActivity(intent);
+        if (v == binding.textViewLoginFromRegistration) {
 
-        } else {
+            startActivity(new Intent(Registration.this, Login_User.class));
+
+        } else if (binding.buttonRegistration == v) {
             userRegistration();
+        } else {
+            //Todo perform need help to create another method
         }
 
     }
+
 
     String first_name, last_name, user_email, user_password, user_con_password;
 
     public void userRegistration() {
 
-        first_name = f_name.getText().toString().trim();
-        last_name = l_name.getText().toString().trim();
-        user_email = u_email.getText().toString().trim();
-        user_password = u_password.getText().toString().trim();
-        user_con_password = u_con_password.getText().toString().trim();
+        first_name = binding.edittextFirstname.getText().toString().trim();
+        last_name = binding.edittextLastname.getText().toString().trim();
+        user_email = binding.edittextRegistrationEmail.getText().toString().trim();
+        user_password = binding.edittextRegistrationPassword.getText().toString().trim();
+        user_con_password = binding.edittextRegistrationConPassword.getText().toString().trim();
 
         userRegistrationValidation();
 
@@ -103,78 +106,79 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+    //set all filed null
     private void after_registration() {
-        f_name.setText(" ");
-        l_name.setText(" ");
-        u_email.setText(" ");
-        u_password.setText(" ");
-        u_con_password.setText(" ");
+        binding.edittextFirstname.setText(" ");
+        binding.edittextLastname.setText(" ");
+        binding.edittextRegistrationEmail.setText(" ");
+        binding.edittextRegistrationPassword.setText(" ");
+        binding.edittextRegistrationConPassword.setText(" ");
     }
 
 
+    //check all Validation
     public void userRegistrationValidation() {
 
         if (first_name.isEmpty()) {
-            f_name.setError("Enter a First name please");
-            f_name.requestFocus();
+            binding.edittextFirstname.setError("Enter a First name please");
+            binding.edittextFirstname.requestFocus();
             return;
         }
 
         if (last_name.isEmpty()) {
 
-            l_name.setError("Enter a Last name please");
-            l_name.requestFocus();
+            binding.edittextLastname.setError("Enter a Last name please");
+            binding.edittextLastname.requestFocus();
             return;
 
         }
 
         if (user_email.isEmpty()) {
 
-            u_email.setError("Enter a Email please");
-            u_email.requestFocus();
+            binding.edittextRegistrationEmail.setError("Enter a Email please");
+            binding.edittextRegistrationEmail.requestFocus();
             return;
 
         }
 
         if (user_password.isEmpty()) {
 
-            u_password.setError("Enter a Password please");
-            u_password.requestFocus();
+            binding.edittextRegistrationPassword.setError("Enter a Password please");
+            binding.edittextRegistrationPassword.requestFocus();
             return;
 
         }
 
         if (user_con_password.isEmpty()) {
 
-            u_con_password.setError("Enter a Confirm Password please");
-            u_con_password.requestFocus();
+            binding.edittextRegistrationConPassword.setError("Enter a Confirm Password please");
+            binding.edittextRegistrationConPassword.requestFocus();
             return;
 
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(user_email).
+        if (!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()) {
 
-                matches()) {
-
-            u_email.setError("Enter a Valid Email please");
-            u_email.requestFocus();
+            binding.edittextRegistrationEmail.setError("Enter a Valid Email please");
+            binding.edittextRegistrationEmail.requestFocus();
             return;
 
         }
 
         if (user_password.length() < 6) {
-            u_password.setError("Enter a atleast 6 digit Password please");
-            u_password.requestFocus();
+            binding.edittextRegistrationPassword.setError("Enter a atleast 6 digit Password please");
+            binding.edittextRegistrationPassword.requestFocus();
             return;
         }
         if (user_con_password.length() < 6) {
-            u_con_password.setError("Enter a atleast 6 digit Password please");
-            u_con_password.requestFocus();
+            binding.edittextRegistrationConPassword.setError("Enter a atleast 6 digit Password please");
+            binding.edittextRegistrationConPassword.requestFocus();
             return;
         }
         if (!user_password.equals(user_con_password)) {
-            u_password.setError("Password and Confirm Password must be same");
-            u_password.requestFocus();
+            binding.edittextRegistrationPassword.setError("Password and Confirm Password must be same");
+            binding.edittextRegistrationPassword.requestFocus();
             return;
 
         }

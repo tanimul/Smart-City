@@ -15,7 +15,7 @@
         <activity android:name=".Home_Menu" />
         <activity android:name=".User.Registration" />
         <activity android:name=".User.Login_User" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

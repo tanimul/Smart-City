@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/welcome_sceen"
     android:paddingTop="40dp"
-    tools:context=".MainActivity">
+    tools:context=".Ui.MainActivity">
 
     <TextView
         android:id="@+id/textView_homepage_title"
