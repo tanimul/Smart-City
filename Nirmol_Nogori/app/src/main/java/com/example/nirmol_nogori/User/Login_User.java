@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nirmol_nogori.PasswordActivity;
+import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.Ui.Home_Activity;
 import com.example.nirmol_nogori.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,12 +22,15 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Login_User extends AppCompatActivity implements View.OnClickListener {
     private ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
-
+    private  TextView forgotpassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        forgotpassword = (TextView)findViewById(R.id.textView_forgotpass) ;
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -39,6 +45,13 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
         binding.buttonLoginAsUser.setOnClickListener(this);
         binding.textViewForgotpass.setOnClickListener(this);
         binding.textViewFromLoginNeedHelp.setOnClickListener(this);
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login_User.this, PasswordActivity.class));
+
+            }
+        });
     }
 
     @Override
