@@ -115,7 +115,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     //check all Validation
     public void userRegistrationValidation() {
-
+//Todo check correct email or not ?
         if (first_name.isEmpty()) {
             binding.edittextFirstname.setError("Enter a First name please");
             binding.edittextFirstname.requestFocus();

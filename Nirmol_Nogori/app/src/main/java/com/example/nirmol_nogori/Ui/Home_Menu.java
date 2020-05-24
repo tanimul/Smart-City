@@ -15,12 +15,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.User.Login_User;
 import com.example.nirmol_nogori.databinding.ActivityHomeMenuBinding;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Home_Menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ActivityHomeMenuBinding binding;
     private static final String TAG = "Home_Menu";
+    private FirebaseAuth firebaseAuth;
     Toolbar toolbar;
 
 
@@ -92,9 +95,20 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
 
                 break;
 
+            case R.id.nav_logout:
+                logout();
+                break;
+
 
         }
         binding.homeDrwerlayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //logout current user
+    private void logout() {
+        firebaseAuth.getInstance().signOut();
+        finish();
+        startActivity(new Intent(Home_Menu.this, Login_User.class));
     }
 }

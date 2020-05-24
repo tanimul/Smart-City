@@ -17,6 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/drawermenu" />
+        app:menu="@menu/drawermenu"
+        app:headerLayout="@layout/nav_header"
+        />
 
 </androidx.drawerlayout.widget.DrawerLayout>
