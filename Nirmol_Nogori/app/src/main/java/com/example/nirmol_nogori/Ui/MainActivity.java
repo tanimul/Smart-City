@@ -43,8 +43,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityMainBinding binding;
-    private static final String TAG = "MainActivity";
-
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -54,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toast backtost;
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
