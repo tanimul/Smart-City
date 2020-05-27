@@ -115,7 +115,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     //check all Validation
     public void userRegistrationValidation() {
-//Todo check correct email or not ?
+
+//Todo check existing  email or not ? : Rehan
+
         if (first_name.isEmpty()) {
             binding.edittextFirstname.setError("Enter a First name please");
             binding.edittextFirstname.requestFocus();
@@ -155,7 +157,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()) {
-
             binding.edittextRegistrationEmail.setError("Enter a Valid Email please");
             binding.edittextRegistrationEmail.requestFocus();
             return;
@@ -178,6 +179,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             return;
 
         }
+
 
     }
 

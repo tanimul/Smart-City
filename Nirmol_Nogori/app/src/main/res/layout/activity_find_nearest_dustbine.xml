@@ -6,4 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".Ui.Find_Nearest_Dustbine">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        app:liftOnScroll="true"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/home_toolbar"
+            android:background="@color/colorWhite"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:id="@+id/main_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/toolbarTitle"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16dp"
+                    android:paddingEnd="32dp"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -94,7 +94,7 @@
             app:layout_constraintTop_toBottomOf="@id/linerlayout1">
 
             <Button
-                android:id="@+id/door_to_door_cleaning_service"
+                android:id="@+id/button_door_to_door_cleaning_service"
                 android:layout_width="88dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
@@ -109,7 +109,7 @@
                 tools:ignore="MissingConstraints" />
 
             <Button
-                android:id="@+id/news_trend"
+                android:id="@+id/button_news_trend"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -144,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Wants to be a volunteer ?"
+            android:text="Want to be a volunteer ?"
             android:textColor="#000000"
             android:textSize="20dp"
             tools:ignore="MissingConstraints" />

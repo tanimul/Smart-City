@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String personemail = account.getEmail();
             String personid = account.getId();
             Toast.makeText(this, personemail + "\n" + personname + "\n" + personid, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, personemail + "");
             Intent intent = new Intent(MainActivity.this, Home_Menu.class);
             startActivity(intent);
             finish();
