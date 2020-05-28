@@ -34,7 +34,7 @@
                     android:text="Find Nearest Dustbin"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16dp" />
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -120,10 +120,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <fragment-->
-<!--        android:id="@+id/fragmentformap"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginTop="155dp" />-->
+    <fragment
+        android:id="@+id/fragmentformap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="155dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
