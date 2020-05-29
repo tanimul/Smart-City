@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".User.Password_Reset_Activity"></activity>
+        <activity android:name=".Ui.ProfileSetting"></activity>
+        <activity android:name=".Ui.Setting" />
+        <activity android:name=".User.Password_Reset_Activity" />
         <activity android:name=".Ui.Home_Menu" />
         <activity android:name=".Ui.Find_Nearest_Dustbine" />
         <activity android:name=".Admin.Login_Admin" />

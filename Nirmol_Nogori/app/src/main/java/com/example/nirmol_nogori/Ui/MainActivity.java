@@ -418,7 +418,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     //for Double press for Exit
     @Override
     public void onBackPressed() {

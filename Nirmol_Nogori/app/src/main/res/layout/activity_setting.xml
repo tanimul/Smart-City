@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/log_in_screen"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context=".Ui.Setting">
+
+    <TextView
+        android:id="@+id/comingSoon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:text="*More Options Coming Soon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.019"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+    <TextView
+        android:id="@+id/profiletextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:text="Profile"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comingSoon"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/enterprofilefromsetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="#FFFFFF"
+        android:padding="10dp"
+        android:src="@drawable/ic_navigate_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comingSoon"
+        tools:ignore="MissingConstraints" />
+
+
+    <Switch
+        android:id="@+id/darkmodeswitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:padding="10dp"
+        android:text="Dark Mode"
+        app:layout_constraintTop_toBottomOf="@id/profiletextview" />
+
+    <Switch
+        android:id="@+id/autoupdateswitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:padding="10dp"
+        android:text="Auto Update"
+        app:layout_constraintTop_toBottomOf="@id/darkmodeswitch" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

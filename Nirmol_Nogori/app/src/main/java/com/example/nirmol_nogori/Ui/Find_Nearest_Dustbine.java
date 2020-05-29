@@ -18,6 +18,7 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
     private static final String TAG = "Find_Nearest_Dustbine";
     private ActivityFindNearestDustbineBinding binding;
     private GoogleMap map;
+    private static final float DEFAULT_ZOOM = 17f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +32,23 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
                 .findFragmentById(R.id.fragmentformap);
         mapFragment.getMapAsync(Find_Nearest_Dustbine.this);
 
-        
+
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setMyLocationEnabled(true);
+        map.moveCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
+        map.getUiSettings().setMapToolbarEnabled(false);
+        map.getUiSettings().setMyLocationButtonEnabled(true);
+
         LatLng bdbasurhat = new LatLng(22.867805, 91.273210);
         map.addMarker(new MarkerOptions().position(bdbasurhat).title("Bashurhat"));
         map.moveCamera(CameraUpdateFactory.newLatLng(bdbasurhat));
     }
-
 
 
 }

@@ -39,7 +39,6 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
         binding.textViewFromLoginForRegistration.setOnClickListener(this);
         binding.buttonLoginAsUser.setOnClickListener(this);
         binding.textViewForgotpass.setOnClickListener(this);
-        binding.textViewFromLoginNeedHelp.setOnClickListener(this);
     }
 
     @Override
@@ -53,10 +52,6 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
 
         } else if (v == binding.textViewFromLoginForRegistration) {
             startActivity(new Intent(Login_User.this, Registration.class));
-        } else {
-
-            //Todo perform need help to create another method
-
         }
 
     }

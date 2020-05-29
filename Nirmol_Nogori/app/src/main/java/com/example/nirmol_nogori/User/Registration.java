@@ -43,8 +43,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
         binding.buttonRegistration.setOnClickListener(this);
         binding.textViewLoginFromRegistration.setOnClickListener(this);
-        binding.textViewFromRegistrationNeedHelp.setOnClickListener(this);
-
     }
 
     @Override
@@ -56,10 +54,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
         } else if (binding.buttonRegistration == v) {
             userRegistration();
-        } else {
-            //Todo perform need help to create another method
         }
-
     }
 
 
@@ -116,7 +111,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     //check all Validation
     public void userRegistrationValidation() {
 
-//Todo check existing  email or not ? : Rehan
+//Todo check existing  email or not ?
 
         if (first_name.isEmpty()) {
             binding.edittextFirstname.setError("Enter a First name please");

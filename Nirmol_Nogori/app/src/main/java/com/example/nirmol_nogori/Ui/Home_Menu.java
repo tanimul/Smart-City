@@ -83,7 +83,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
 
             case R.id.nav_volunteer:
                 Toast.makeText(this, "navigation volunteer item slelected", Toast.LENGTH_SHORT).show();
-//Todo volunteer activity create : Rehan
+//Todo volunteer activity create
                 break;
             case R.id.nav_term_condition:
                 Toast.makeText(this, "navigation term condition item slelected", Toast.LENGTH_SHORT).show();
@@ -102,8 +102,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case R.id.nav_setting:
-                Toast.makeText(this, "navigation setting item slelected", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(Home_Menu.this,Setting.class));
                 break;
 
             case R.id.nav_logout:
