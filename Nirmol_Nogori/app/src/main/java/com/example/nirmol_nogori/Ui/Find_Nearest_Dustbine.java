@@ -25,9 +25,13 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
         binding = ActivityFindNearestDustbineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //======================================================= maps =======================================================
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragmentformap);
         mapFragment.getMapAsync(Find_Nearest_Dustbine.this);
+
+        
     }
 
     @Override
@@ -38,4 +42,7 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
         map.addMarker(new MarkerOptions().position(bdbasurhat).title("Bashurhat"));
         map.moveCamera(CameraUpdateFactory.newLatLng(bdbasurhat));
     }
+
+
+
 }
