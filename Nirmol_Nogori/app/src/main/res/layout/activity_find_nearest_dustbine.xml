@@ -93,7 +93,7 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/textbox_background"
             android:gravity="center_vertical"
-            android:hint="Start Location"
+            android:hint="Your Location"
             android:paddingLeft="10dp"
             android:textColor="@color/colorBlack"
             app:layout_constraintEnd_toEndOf="parent"
