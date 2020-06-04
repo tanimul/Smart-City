@@ -9,9 +9,7 @@ import androidx.core.view.GravityCompat;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.graphics.Paint;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.User.Login_User;
-import com.example.nirmol_nogori.User.Password_Reset_Activity;
 import com.example.nirmol_nogori.databinding.ActivityHomeMenuBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -119,7 +116,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
     public void onClick(View v) {
 
         if (v == binding.homeActivty.buttonDoorToDoorCleaningService) {
-            Toast.makeText(this, "DoorToDoorCleaningService item slelected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Home_Menu.this, Door_to_Door_Service.class));
 
         } else if (v == binding.homeActivty.buttonDropComplain) {
             Toast.makeText(this, "DropComplain item slelected", Toast.LENGTH_SHORT).show();

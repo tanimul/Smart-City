@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.Ui.Home_Activity;
-import com.example.nirmol_nogori.Users;
+import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.databinding.ActivityRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori;
+package com.example.nirmol_nogori.Model;
 
 public class Users {
 
