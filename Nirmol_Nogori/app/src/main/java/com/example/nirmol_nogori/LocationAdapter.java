@@ -1,5 +1,6 @@
 package com.example.nirmol_nogori;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +9,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Programviewholder> {
 
-    private String[] data;
+    //private String[] location;
+    private ArrayList<String>location;
 
-    public LocationAdapter(String[] data) {
-        this.data = data;
+    public LocationAdapter(ArrayList<String> location) {
+        this.location = location;
     }
+
+//    public LocationAdapter(String[] location) {
+//        this.location = location;
+//    }
 
     public Programviewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
@@ -25,22 +33,23 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Progra
 
     @Override
     public void onBindViewHolder(@NonNull Programviewholder programviewholder, int i) {
-        String title = data[i];
-        programviewholder.textView.setText(title);
+        String locationName = location.get(i);
+        programviewholder.locationName.setText(locationName);
     }
 
     @Override
     public int getItemCount() {
-        return data.length;
+        Log.d("dddddd",""+location.size());
+        return location.size();
     }
 
     public class Programviewholder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView locationName;
 
         public Programviewholder(@NonNull View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.card_location_name);
+            locationName = itemView.findViewById(R.id.card_location_name);
 
         }
     }
