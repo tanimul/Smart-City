@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
-        android:hint="phone"
+        android:hint="Phone"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/cleanerlocation"
