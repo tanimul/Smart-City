@@ -10,7 +10,7 @@ import com.example.nirmol_nogori.R;
 
 public class Login_Admin extends AppCompatActivity {
 
-    //Todo admin login just firebase 
+    //Todo admin login just firebase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
