@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -24,15 +25,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class Door_to_Door_Service extends AppCompatActivity {
+public class Door_to_Door_Service extends AppCompatActivity implements LocationAdapter.OnItemClickListener {
     private ActivityDoorToDoorServiceBinding binding;
     private static final String TAG = "Door_to_Door_Service";
     private RecyclerView rc_location;
@@ -49,6 +48,8 @@ public class Door_to_Door_Service extends AppCompatActivity {
         rc_location = findViewById(R.id.location_recyclerview);
         rc_location.setFitsSystemWindows(true);
         rc_location.setLayoutManager(new LinearLayoutManager(this));
+        locationAdapter = new LocationAdapter(location, this);
+        rc_location.setAdapter(locationAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Location and Cleaner");
         databaseReference.keepSynced(true);
@@ -58,11 +59,10 @@ public class Door_to_Door_Service extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String key = dataSnapshot1.getKey();
                     location.add(key);
-
                     Log.d(TAG, "Key:" + key);
                     Log.d(TAG, "Locations:" + location);
                 }
-                rc_location.setAdapter(new LocationAdapter(location));
+                locationAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -72,14 +72,12 @@ public class Door_to_Door_Service extends AppCompatActivity {
         });
 
 
-        ///problem
-        locationAdapter.setOnItemClickListener(new LocationAdapter.OnItemClickListener() {
-            @Override
-            public void OnItemClick(View view, int position) {
-                Toast.makeText(Door_to_Door_Service.this, "clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
 
+    }
+
+    @Override
+    public void OnItemClick(String location_name) {
+        Log.d(TAG, "OnItemClick: clicked location name:" + location_name);
     }
 
 
