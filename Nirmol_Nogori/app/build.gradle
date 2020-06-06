@@ -33,6 +33,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
+    //design
     implementation 'com.google.android.material:material:1.1.0'
 
     //firebase
@@ -59,4 +60,11 @@ dependencies {
 
     //to request runtime permission
     implementation 'com.karumi:dexter:6.0.0'
+
+    //card view
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    //recycler view
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
 }

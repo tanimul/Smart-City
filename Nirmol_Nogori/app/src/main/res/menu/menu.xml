@@ -5,9 +5,9 @@
     <item
         android:id="@+id/search_view_id"
         android:icon="@drawable/ic_search"
-        android:title="search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        tools:ignore="MenuTitle" />
 
 
 </menu>

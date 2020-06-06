@@ -9,20 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+
 import java.util.ArrayList;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Programviewholder> {
 
-    //private String[] location;
-    private ArrayList<String>location;
+    private ArrayList<String> location;
+    private OnItemClickListener listener;
+
+
+
 
     public LocationAdapter(ArrayList<String> location) {
         this.location = location;
     }
-
-//    public LocationAdapter(String[] location) {
-//        this.location = location;
-//    }
 
     public Programviewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
@@ -35,15 +36,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Progra
     public void onBindViewHolder(@NonNull Programviewholder programviewholder, int i) {
         String locationName = location.get(i);
         programviewholder.locationName.setText(locationName);
+
     }
 
     @Override
     public int getItemCount() {
-        Log.d("dddddd",""+location.size());
         return location.size();
     }
 
-    public class Programviewholder extends RecyclerView.ViewHolder {
+    public  class Programviewholder extends RecyclerView.ViewHolder{
         TextView locationName;
 
         public Programviewholder(@NonNull View itemView) {
@@ -51,7 +52,30 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Progra
 
             locationName = itemView.findViewById(R.id.card_location_name);
 
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.OnItemClick(v,position);
+                    }
+
+                }
+            });
+
+
         }
+
+    }
+
+    public interface OnItemClickListener {
+        void OnItemClick(View view,int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.listener = listener;
     }
 
 

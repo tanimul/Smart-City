@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.LocationAdapter;
@@ -21,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,21 +37,19 @@ public class Door_to_Door_Service extends AppCompatActivity {
     private static final String TAG = "Door_to_Door_Service";
     private RecyclerView rc_location;
     private DatabaseReference databaseReference;
-    //    String[] location;
     ArrayList<String> location = new ArrayList<String>();
+    private LocationAdapter locationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDoorToDoorServiceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        String[] language = {"Dhanmondi", "Kalabagan", "Mohammadpur", "Uttara", "Purbachal", "Gulshan", "Banani", "Mirpur", "Ashulia", "Motijhil", "Narayangonj", "Nilkhet"};
-//        RecyclerView programminglist = findViewById(R.id.location_recyclerview);
-//        programminglist.setLayoutManager(new LinearLayoutManager(this));
-//        programminglist.setAdapter(new LocationAdapter(language));
+
         rc_location = findViewById(R.id.location_recyclerview);
         rc_location.setFitsSystemWindows(true);
         rc_location.setLayoutManager(new LinearLayoutManager(this));
+
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Location and Cleaner");
         databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -55,6 +58,7 @@ public class Door_to_Door_Service extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String key = dataSnapshot1.getKey();
                     location.add(key);
+
                     Log.d(TAG, "Key:" + key);
                     Log.d(TAG, "Locations:" + location);
                 }
@@ -68,7 +72,18 @@ public class Door_to_Door_Service extends AppCompatActivity {
         });
 
 
+        ///problem
+        locationAdapter.setOnItemClickListener(new LocationAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(View view, int position) {
+                Toast.makeText(Door_to_Door_Service.this, "clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+
+
+    //TOdo add searchview
 
 
 }
