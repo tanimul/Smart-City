@@ -43,6 +43,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Progra
     public void onBindViewHolder(@NonNull Programviewholder programviewholder, int i) {
         final String locationName = location.get(i);
         programviewholder.locationName.setText(locationName);
+
+        //Handle the location item
         programviewholder.list_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,13 +58,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Progra
         return location.size();
     }
 
-    public  class Programviewholder extends RecyclerView.ViewHolder{
+    public class Programviewholder extends RecyclerView.ViewHolder {
         TextView locationName;
         CardView list_container;
+
         public Programviewholder(@NonNull View itemView) {
             super(itemView);
             locationName = itemView.findViewById(R.id.card_location_name);
-            list_container=itemView.findViewById(R.id.location_name_container);
+            list_container = itemView.findViewById(R.id.location_name_container);
         }
 
     }
@@ -70,9 +73,5 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Progra
     public interface OnItemClickListener {
         void OnItemClick(String location_name);
     }
-
-
-
-
 
 }

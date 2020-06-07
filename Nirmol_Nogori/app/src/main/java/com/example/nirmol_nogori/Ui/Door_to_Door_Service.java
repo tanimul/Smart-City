@@ -72,9 +72,9 @@ public class Door_to_Door_Service extends AppCompatActivity implements LocationA
         });
 
 
-
     }
 
+    //for recycler views item
     @Override
     public void OnItemClick(String location_name) {
         Log.d(TAG, "OnItemClick: clicked location name:" + location_name);

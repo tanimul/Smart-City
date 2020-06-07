@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Ui.Clener_information"></activity>
+        <activity android:name=".GetReviewFromuser"></activity>
+        <activity android:name=".Ui.Clener_information" />
         <activity android:name=".Admin.Door_to_Door_Admin" />
         <activity android:name=".Ui.Door_to_Door_Service" />
         <activity android:name=".Ui.ProfileSetting" />
