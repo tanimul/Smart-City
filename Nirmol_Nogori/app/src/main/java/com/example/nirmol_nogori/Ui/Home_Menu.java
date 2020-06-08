@@ -116,7 +116,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
     public void onClick(View v) {
 
         if (v == binding.homeActivty.buttonDoorToDoorCleaningService) {
-            startActivity(new Intent(Home_Menu.this, Door_to_Door_Service.class));
+            startActivity(new Intent(Home_Menu.this, Door_to_Door_Location.class));
 
         } else if (v == binding.homeActivty.buttonDropComplain) {
             Toast.makeText(this, "DropComplain item slelected", Toast.LENGTH_SHORT).show();

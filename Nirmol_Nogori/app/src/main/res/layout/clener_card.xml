@@ -190,6 +190,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_reviewer_photo"
             tools:ignore="MissingConstraints" />
+
         <TextView
             android:id="@+id/card_cleanerTXT_reviewer_date"
             android:layout_width="wrap_content"
@@ -201,6 +202,7 @@
             app:layout_constraintStart_toEndOf="@id/card_reviewer_photo"
             app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_reviewer_name"
             tools:ignore="MissingConstraints" />
+
         <TextView
             android:id="@+id/card_cleanerTXT_reviewer_review"
             android:layout_width="wrap_content"
@@ -213,6 +215,15 @@
             app:layout_constraintTop_toBottomOf="@id/card_ratingBar_reviewer"
             tools:ignore="MissingConstraints" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_reviewer_review" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

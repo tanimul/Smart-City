@@ -35,9 +35,9 @@ public class Door_to_Door_Admin extends AppCompatActivity implements View.OnClic
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private int image_rec_code = 1;
-    Uri filepath_uri;
-    StorageReference storageReference;
-    ProgressDialog progressDialog;
+    private Uri filepath_uri;
+    private StorageReference storageReference;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

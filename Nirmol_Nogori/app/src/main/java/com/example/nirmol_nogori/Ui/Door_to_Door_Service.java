@@ -1,23 +1,16 @@
-
 package com.example.nirmol_nogori.Ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.nirmol_nogori.LocationAdapter;
+import com.example.nirmol_nogori.CleanerAdapter;
+import com.example.nirmol_nogori.Model.Cleaner;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityDoorToDoorServiceBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -26,18 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-public class Door_to_Door_Service extends AppCompatActivity implements LocationAdapter.OnItemClickListener {
+public class Door_to_Door_Service extends AppCompatActivity {
     private ActivityDoorToDoorServiceBinding binding;
     private static final String TAG = "Door_to_Door_Service";
-    private RecyclerView rc_location;
+    CleanerAdapter locationAdapter;
     private DatabaseReference databaseReference;
-    ArrayList<String> location = new ArrayList<String>();
-    private LocationAdapter locationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +31,21 @@ public class Door_to_Door_Service extends AppCompatActivity implements LocationA
         binding = ActivityDoorToDoorServiceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        rc_location = findViewById(R.id.location_recyclerview);
-        rc_location.setFitsSystemWindows(true);
-        rc_location.setLayoutManager(new LinearLayoutManager(this));
-        locationAdapter = new LocationAdapter(location, this);
-        rc_location.setAdapter(locationAdapter);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String title = bundle.getString("locationName");
+            binding.doorToDoorServiceToolbar.setTitle(title);
+            Log.d(TAG, "bundle not null" + title);
+        }
+
+
+        RecyclerView recyclerView = findViewById(R.id.cleaner_recyclerview);
+        recyclerView.setFitsSystemWindows(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+
+        recyclerView.setAdapter(locationAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Location and Cleaner");
         databaseReference.keepSynced(true);
@@ -58,9 +54,8 @@ public class Door_to_Door_Service extends AppCompatActivity implements LocationA
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String key = dataSnapshot1.getKey();
-                    location.add(key);
                     Log.d(TAG, "Key:" + key);
-                    Log.d(TAG, "Locations:" + location);
+
                 }
                 locationAdapter.notifyDataSetChanged();
             }
@@ -73,15 +68,4 @@ public class Door_to_Door_Service extends AppCompatActivity implements LocationA
 
 
     }
-
-    //for recycler views item
-    @Override
-    public void OnItemClick(String location_name) {
-        Log.d(TAG, "OnItemClick: clicked location name:" + location_name);
-    }
-
-
-    //TOdo add searchview
-
-
 }
