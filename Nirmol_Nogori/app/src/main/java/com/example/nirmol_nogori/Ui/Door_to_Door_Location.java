@@ -51,7 +51,7 @@ public class Door_to_Door_Location extends AppCompatActivity implements Location
         locationAdapter = new LocationAdapter(location, this);
         rc_location.setAdapter(locationAdapter);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Location and Cleaner");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Location and Cleaner");
         databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

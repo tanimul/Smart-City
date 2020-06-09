@@ -16,7 +16,9 @@ public class Login_Admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login__admin);
 
-        //testing door to door admin
-       startActivity(new Intent(Login_Admin.this, News_nd_Trend_Admin.class));
+//        //testing door to door admin
+//       startActivity(new Intent(Login_Admin.this, Door_to_Door_Admin.class));
+//        //testing news nd trend admin
+//        startActivity(new Intent(Login_Admin.this, News_nd_Trend_Admin.class));
     }
 }

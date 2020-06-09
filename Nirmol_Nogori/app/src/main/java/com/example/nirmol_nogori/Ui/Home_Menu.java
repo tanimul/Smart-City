@@ -125,7 +125,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
             startActivity(new Intent(Home_Menu.this, Find_Nearest_Dustbine.class));
 
         } else if (v == binding.homeActivty.buttonNewsTrend) {
-            Toast.makeText(this, "NewsTrend item slelected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Home_Menu.this, News_nd_Trend.class));
 
         } else if (v == binding.homeActivty.textViewVolunteerForm) {
             Toast.makeText(this, "VolunteerForm item slelected", Toast.LENGTH_SHORT).show();

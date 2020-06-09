@@ -13,6 +13,9 @@ public class News {
         this.news_img_url = news_img_url;
     }
 
+    public News() {
+    }
+
     public String getNews_name() {
         return news_name;
     }

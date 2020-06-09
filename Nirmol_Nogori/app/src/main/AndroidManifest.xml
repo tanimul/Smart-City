@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme" >
         <activity android:name=".Admin.News_nd_Trend_Admin" >
         </activity>
-        <activity android:name=".News_nd_Trend" />
+        <activity android:name=".Ui.News_nd_Trend" />
         <activity android:name=".Ui.Door_to_Door_Service" />
         <activity android:name=".GetReviewFromuser" />
         <activity android:name=".Ui.Clener_information" />
