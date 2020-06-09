@@ -57,7 +57,7 @@ public class Door_to_Door_Service extends AppCompatActivity {
                     Log.d(TAG, "Key:" + key);
 
                 }
-                locationAdapter.notifyDataSetChanged();
+               // locationAdapter.notifyDataSetChanged();
             }
 
             @Override

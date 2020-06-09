@@ -7,18 +7,19 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.databinding.ActivityLoginBinding;
 
 public class Login_Admin extends AppCompatActivity {
+    private ActivityLoginBinding binding;
 
     //Todo admin login just firebase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login__admin);
+        binding=ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-//        //testing door to door admin
-//       startActivity(new Intent(Login_Admin.this, Door_to_Door_Admin.class));
-//        //testing news nd trend admin
-        startActivity(new Intent(Login_Admin.this, News_nd_Trend_Admin.class));
+        //testing
+        startActivity(new Intent(Login_Admin.this, AdminHome.class));
     }
 }
