@@ -1,5 +1,6 @@
 package com.example.nirmol_nogori.Admin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.nirmol_nogori.Model.Cleaner;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityDoorToDoorAdminBinding;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -98,28 +100,44 @@ public class Door_to_Door_Admin extends AppCompatActivity implements View.OnClic
             progressDialog.setTitle("Registration Processing...");
             progressDialog.show();
 
-            StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtention(filepath_uri));
+            final StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtention(filepath_uri));
             storageReference2.putFile(filepath_uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            String name = binding.clenername.getText().toString().trim();
-                            String phoneNo = binding.clenerphone.getText().toString().trim();
-                            String area = binding.cleanerlocation.getText().toString().trim().toLowerCase();
+                            storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String name = binding.clenername.getText().toString().trim();
+                                    String phoneNo = binding.clenerphone.getText().toString().trim();
+                                    String area = binding.cleanerlocation.getText().toString().trim().toLowerCase();
+                                    String url=uri.toString();
 
-                            progressDialog.dismiss();
+                                    progressDialog.dismiss();
 
-                            Toast.makeText(Door_to_Door_Admin.this, "Successfully added", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "done");
+                                    Toast.makeText(Door_to_Door_Admin.this, "Successfully added", Toast.LENGTH_SHORT).show();
 
-                            //String uplodeid = databaseReference.push().getKey();
-                            Cleaner _cleaner = new Cleaner(phoneNo, taskSnapshot.getUploadSessionUri().toString());
-                            databaseReference.child(area).child(name).setValue(_cleaner);
-                            afterRegistrationofClener();
+                                    //String uplodeid = databaseReference.push().getKey();
+                                    Cleaner _cleaner = new Cleaner(phoneNo, url);
+                                    databaseReference.child(area).child(name).setValue(_cleaner);
+                                    afterRegistrationofClener();
+                                    Log.d(TAG, "done"+url);
+                                }
+                            });
+
+
+
+
 
                         }
-                    });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, ""+e.getMessage());
+                    Toast.makeText(Door_to_Door_Admin.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

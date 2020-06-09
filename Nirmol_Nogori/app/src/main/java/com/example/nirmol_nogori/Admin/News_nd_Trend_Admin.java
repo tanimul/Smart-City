@@ -1,5 +1,6 @@
 package com.example.nirmol_nogori.Admin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,17 +23,21 @@ import com.example.nirmol_nogori.Model.Cleaner;
 import com.example.nirmol_nogori.Model.News;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityNewsNdTrendAdminBinding;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.Calendar;
+
+import bolts.Task;
 
 public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnClickListener {
     private ActivityNewsNdTrendAdminBinding binding;
@@ -44,6 +49,7 @@ public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnCli
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
     private DatePickerDialog datePickerDialog;
+    private StorageTask mUploadTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,14 +75,17 @@ public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnCli
         }
 
         if (v == binding.saveNews) {
+
             if (filedchecking()) {
                 NewsInsert();
             }
         }
+
         if (v == binding.newsdate) {
             date();
         }
     }
+
 
     //Date insert
     private void date() {
@@ -129,28 +138,46 @@ public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnCli
         if (filepath_uri != null) {
             progressDialog.setTitle("Insert the news...");
             progressDialog.show();
+            final StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtention(filepath_uri));
 
-            StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtention(filepath_uri));
             storageReference2.putFile(filepath_uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            String name = binding.newstitle.getText().toString();
-                            String newsDate = binding.newsdate.getText().toString().trim();
-                            String src = binding.newssrc.getText().toString().toLowerCase();
+                            storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String name = binding.newstitle.getText().toString();
+                                    String newsDate = binding.newsdate.getText().toString().trim();
+                                    String src = binding.newssrc.getText().toString().toLowerCase();
+                                    String url = uri.toString();
 
-                            progressDialog.dismiss();
+                                    progressDialog.dismiss();
 
-                            Toast.makeText(News_nd_Trend_Admin.this, "Successfully added", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "done");
-                            String uplodeid = databaseReference.push().getKey();
-                            News news = new News(name, src, newsDate, taskSnapshot.getUploadSessionUri().toString());
-                            databaseReference.child(uplodeid).setValue(news);
-                            afterRegistrationofClener();
+                                    Toast.makeText(News_nd_Trend_Admin.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                                    Log.d(TAG, "done");
+
+                                    String uplodeid = databaseReference.push().getKey();
+                                    News news = new News(name, src, newsDate, url);
+                                    databaseReference.child(uplodeid).setValue(news);
+                                    Log.d(TAG, "done" + url);
+
+                                    afterRegistrationofClener();
+
+                                }
+                            });
+
 
                         }
-                    });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "" + e.getMessage());
+                    Toast.makeText(News_nd_Trend_Admin.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
         }
     }
 
@@ -168,13 +195,14 @@ public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnCli
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == image_rec_code && resultCode == RESULT_OK && data != null) {
             filepath_uri = data.getData();
+            Picasso.get().load(filepath_uri).into(binding.newsphoto);
 
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath_uri);
-                binding.newsphoto.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath_uri);
+//                binding.newsphoto.setImageBitmap(bitmap);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
         }
 
@@ -188,8 +216,8 @@ public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnCli
         filepath_uri = null;
 
         Picasso.get().load(R.drawable.adduserphoto).into(binding.newsphoto);
-        binding.newstitle.setHint("Name");
-        binding.newssrc.setHint("Location");
+        binding.newstitle.setHint("News");
+        binding.newssrc.setHint("Source");
         binding.newsdate.setHint("News Date");
 
     }

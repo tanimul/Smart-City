@@ -10,6 +10,8 @@ public class Cleaner {
     public String total_fair;
     public float rating;
 
+    public Cleaner() {
+    }
 
     public Cleaner(String name, String imageurl, String location, String total_fair, float rating) {
         this.name = name;

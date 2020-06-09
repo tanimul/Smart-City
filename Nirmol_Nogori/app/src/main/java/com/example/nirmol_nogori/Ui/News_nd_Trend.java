@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-//Todo add query date wise show
+//Todo add query date wise show data in recyclerview
 
 public class News_nd_Trend extends AppCompatActivity {
     private ActivityNewsNdTrendBinding binding;
@@ -43,7 +43,6 @@ public class News_nd_Trend extends AppCompatActivity {
         rc_newstrend.setHasFixedSize(true);
 
         newsAdapter = new NewsAdapter(News_nd_Trend.this, newslist);
-        rc_newstrend.setAdapter(newsAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("News_Trend");
         databaseReference.keepSynced(true);
@@ -55,12 +54,13 @@ public class News_nd_Trend extends AppCompatActivity {
 
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String key = dataSnapshot1.getKey();
-                    Log.d(TAG, "Key:" + key);
                     News news1 = dataSnapshot1.getValue(News.class);
                     newslist.add(news1);
+                    rc_newstrend.setAdapter(newsAdapter);
+
+                    Log.d(TAG, "Key:" + key+"news name:"+news1.getNews_img_url());
 
                 }
-                newsAdapter.notifyDataSetChanged();
             }
 
             @Override

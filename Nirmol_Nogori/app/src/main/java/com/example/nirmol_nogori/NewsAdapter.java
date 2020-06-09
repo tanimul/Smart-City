@@ -21,8 +21,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Newsholder> {
     private ArrayList<News> news = new ArrayList<>();
     Context context;
 
-    public NewsAdapter(Context context,ArrayList<News> news) {
-        this.context=context;
+    public NewsAdapter(Context context, ArrayList<News> news) {
+        this.context = context;
         this.news = news;
     }
 
@@ -41,8 +41,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Newsholder> {
 
         holder.news_name.setText(newsTrend.getNews_name());
         holder.news_src.setText(newsTrend.getSrc());
-        Picasso.get().load(newsTrend.getNews_img_url()).into(holder.imageView);
-
+        Picasso.get().load(newsTrend.getNews_img_url())
+                .placeholder(R.mipmap.ic_launcher)
+                .fit()
+                .centerCrop()
+                .into(holder.imageView);
 
     }
 
