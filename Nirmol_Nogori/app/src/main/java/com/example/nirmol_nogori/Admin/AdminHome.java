@@ -1,17 +1,26 @@
 package com.example.nirmol_nogori.Admin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
+import android.util.Log;
+import android.view.MenuItem;
 
+import com.example.nirmol_nogori.FragmentAdmin.Door_to_Door_Admin_Fragment;
+import com.example.nirmol_nogori.FragmentAdmin.Drop_Complain_Admin_Fragment;
+import com.example.nirmol_nogori.FragmentAdmin.News_and_Trend_Admin_Fragment;
+import com.example.nirmol_nogori.FragmentAdmin.Profile_Admin_Fragment;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityAdminHomeBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class AdminHome extends AppCompatActivity implements View.OnClickListener {
+public class AdminHome extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private ActivityAdminHomeBinding binding;
+    private BottomNavigationView bottomNavigationView;
+    private Fragment selectedfragment = null;
+    private static final String TAG = "Admin_Home";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,20 +28,61 @@ public class AdminHome extends AppCompatActivity implements View.OnClickListener
         binding = ActivityAdminHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.BTDoorToDoor.setOnClickListener(this);
-        binding.BTNewsTrend.setOnClickListener(this);
+//        binding.BTDoorToDoor.setOnClickListener(this);
+//        binding.BTNewsTrend.setOnClickListener(this);
+
+        if (selectedfragment == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new Drop_Complain_Admin_Fragment()).commit();
+
+        }
+
+        binding.adminBottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
     @Override
-    public void onClick(View v) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-        if (v == binding.BTDoorToDoor) {
-            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(AdminHome.this, Door_to_Door_Admin.class));
+        switch (menuItem.getItemId()) {
+
+            case R.id.nav_drop_complain:
+                Log.d(TAG, "Selected Admin Fragment: Drop Complain");
+                selectedfragment = new Drop_Complain_Admin_Fragment();
+                break;
+
+            case R.id.nav_news_and_trend:
+                Log.d(TAG, "Selected Admin Fragment: News and Trend");
+                selectedfragment = new News_and_Trend_Admin_Fragment();
+                break;
+
+            case R.id.nav_door_to_door:
+                Log.d(TAG, "Selected Admin Fragment: Door to Door");
+                selectedfragment = new Door_to_Door_Admin_Fragment();
+                break;
+            case R.id.nav_profile:
+                Log.d(TAG, "Selected Admin Fragment: Profile");
+                selectedfragment = new Profile_Admin_Fragment();
+                break;
         }
-        if (v == binding.BTNewsTrend) {
-            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(AdminHome.this, News_nd_Trend_Admin.class));
+
+
+        if (selectedfragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, selectedfragment).commit();
+
         }
+
+        return true;
     }
+
+//    @Override
+//    public void onClick(View v) {
+
+//        if (v == binding.BTDoorToDoor) {
+//            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(AdminHome.this, Door_to_Door_Admin.class));
+//        }
+//        if (v == binding.BTNewsTrend) {
+//            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(AdminHome.this, News_nd_Trend_Admin.class));
+//        }
+//    }
 }

@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Trash.News_nd_Trend_Admin">
+    android:background="?android:attr/windowBackground"
+    tools:context=".FragmentAdmin.News_and_Trend_Admin_Fragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_admin_n_a_t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="30dp"
+                android:text="News &amp; Trend"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -22,7 +49,7 @@
         app:layout_constraintEnd_toStartOf="@id/newsdate"
         app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -33,11 +60,11 @@
         android:layout_marginEnd="44dp"
         android:background="@drawable/textbox_background"
         android:gravity="center"
-        android:textSize="20sp"
         android:hint="News Date"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/clenername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintVertical_bias="0.337"
         tools:ignore="MissingConstraints" />
 
@@ -45,20 +72,25 @@
         android:id="@+id/newstitle"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edittext_background"
         android:gravity="center"
         android:hint="News"
-        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/newsphoto"
         tools:ignore="MissingConstraints" />
+
     <EditText
         android:id="@+id/newssrc"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edittext_background"
         android:gravity="center"
         android:hint="Source"
-        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/newstitle"
         tools:ignore="MissingConstraints" />
 
@@ -74,5 +106,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/newssrc"
         tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori.Admin;
+package com.example.nirmol_nogori.Trash;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,20 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-import com.example.nirmol_nogori.Model.Cleaner;
 import com.example.nirmol_nogori.Model.News;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityNewsNdTrendAdminBinding;
@@ -34,10 +30,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.Calendar;
-
-import bolts.Task;
 
 public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnClickListener {
     private ActivityNewsNdTrendAdminBinding binding;
@@ -134,7 +127,7 @@ public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnCli
 
     //News Place
     public void NewsInsert() {
-
+        final String userid = "WM1vIUC6esTbafyXAE69UvwTDLU";
         if (filepath_uri != null) {
             progressDialog.setTitle("Insert the news...");
             progressDialog.show();
@@ -159,7 +152,7 @@ public class News_nd_Trend_Admin extends AppCompatActivity implements View.OnCli
                                     Log.d(TAG, "done");
 
                                     String uplodeid = databaseReference.push().getKey();
-                                    News news = new News(name, src, newsDate, url);
+                                    News news = new News(userid, name, src, newsDate, url);
                                     databaseReference.child(uplodeid).setValue(news);
                                     Log.d(TAG, "done" + url);
 

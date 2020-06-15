@@ -1,31 +1,31 @@
 package com.example.nirmol_nogori.Model;
 
 public class Cleaner {
-    public String name;
-
-
-    public String phoneno;
-    public String imageurl;
-    public String location;
-    public String total_fair;
-    public float rating;
+    private String publisher;
+    private String name;
+    private String phoneno;
+    private String imageurl;
+    private String location;
+    private String total_fair;
+    private float rating;
 
     public Cleaner() {
     }
 
-    public Cleaner(String name, String imageurl, String location, String total_fair, float rating) {
-        this.name = name;
-        //this.phoneno = phoneno;
-        this.imageurl = imageurl;
-        this.location = location;
-        this.total_fair = total_fair;
-        this.rating = rating;
-    }
 
-    public Cleaner(String phoneno, String imageurl) {
+
+    public Cleaner(String name, String phoneno, String imageurl, String location,String publisher,float rating) {
+        this.name = name;
         this.phoneno = phoneno;
         this.imageurl = imageurl;
+        this.location = location;
+        this.publisher=publisher;
+        this.rating=rating;
     }
+
+
+
+
 
     public String getPhoneno() {
         return phoneno;
@@ -74,4 +74,14 @@ public class Cleaner {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+
 }

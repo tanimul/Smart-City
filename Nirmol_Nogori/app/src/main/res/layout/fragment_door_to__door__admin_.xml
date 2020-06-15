@@ -4,7 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Trash.Door_to_Door_Admin">
+    android:background="?android:attr/windowBackground"
+    tools:context=".FragmentAdmin.Door_to_Door_Admin_Fragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_admin_n_a_t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:text="Door to Door Service"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -28,10 +54,12 @@
         android:id="@+id/clenername"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edittext_background"
         android:gravity="center"
         android:hint="Name"
-        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/clenerphoto"
         tools:ignore="MissingConstraints" />
 
@@ -39,10 +67,12 @@
         android:id="@+id/cleanerlocation"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edittext_background"
         android:gravity="center"
         android:hint="Location"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/clenername"
         tools:ignore="MissingConstraints" />
 
@@ -50,10 +80,12 @@
         android:id="@+id/clenerphone"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edittext_background"
         android:gravity="center"
         android:hint="Phone"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/cleanerlocation"
         tools:ignore="MissingConstraints" />
 

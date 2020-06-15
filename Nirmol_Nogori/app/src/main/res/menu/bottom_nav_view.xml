@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_drop_complain"
+        android:icon="@drawable/drop_complain"
+        android:title="" />
+    <item
+        android:id="@+id/nav_door_to_door"
+        android:icon="@drawable/location"
+        android:title="" />
+    <item
+        android:id="@+id/nav_news_and_trend"
+        android:icon="@drawable/news_trend"
+        android:title="" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_person"
+        android:title="" />
+
+</menu>

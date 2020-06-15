@@ -1,24 +1,25 @@
-package com.example.nirmol_nogori.Admin;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.nirmol_nogori.FragmentAdmin;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.Model.Cleaner;
 import com.example.nirmol_nogori.R;
-import com.example.nirmol_nogori.databinding.ActivityDoorToDoorAdminBinding;
+import com.example.nirmol_nogori.databinding.FragmentDoorToDoorAdminBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,11 +30,15 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
+import static android.app.Activity.RESULT_OK;
 
-public class Door_to_Door_Admin extends AppCompatActivity implements View.OnClickListener {
-    private ActivityDoorToDoorAdminBinding binding;
-    private static final String TAG = "Door_to_Door_Admin";
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClickListener {
+    private FragmentDoorToDoorAdminBinding binding;
+
+    private static final String TAG = "Door_to_Door_Adm_frag";
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private int image_rec_code = 1;
@@ -41,25 +46,33 @@ public class Door_to_Door_Admin extends AppCompatActivity implements View.OnClic
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityDoorToDoorAdminBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
 
+    public Door_to_Door_Admin_Fragment() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentDoorToDoorAdminBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        firebaseAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("cleaner_information");
         databaseReference = FirebaseDatabase.getInstance().getReference("Location and Cleaner");
-        firebaseAuth = FirebaseAuth.getInstance();
 
-        progressDialog = new ProgressDialog(Door_to_Door_Admin.this);
+        progressDialog = new ProgressDialog(getActivity());
 
         binding.saveCleanerInformation.setOnClickListener(this);
         binding.clenerphoto.setOnClickListener(this);
 
+        return view;
     }
 
     @Override
     public void onClick(View v) {
+
         if (v == binding.clenerphoto) {
             openGallery();
         }
@@ -69,22 +82,8 @@ public class Door_to_Door_Admin extends AppCompatActivity implements View.OnClic
                 cleanerRegistration();
             }
         }
-
-
     }
 
-    //check all field are empty or not
-    private boolean filedchecking() {
-        if (!binding.clenername.getText().toString().isEmpty()
-                && !binding.cleanerlocation.getText().toString().isEmpty()
-                && !binding.clenerphone.getText().toString().isEmpty()
-                && filepath_uri != null) {
-            return true;
-        } else {
-            Toast.makeText(this, "Please fill the all Informations and Image", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
 
     //Galary open for place picture
     private void openGallery() {
@@ -93,8 +92,18 @@ public class Door_to_Door_Admin extends AppCompatActivity implements View.OnClic
         startActivityForResult(galleryIntent, image_rec_code);
     }
 
+    //Get image extention
+    public String GetFileExtention(Uri uri) {
+        ContentResolver contentResolver = getActivity().getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
     //Registration of Cleaner
     public void cleanerRegistration() {
+
+        final String publisherid = "WM1vIUC6esTbafyXAE69UvwTDLUED";
+        final float rating=4;
 
         if (filepath_uri != null) {
             progressDialog.setTitle("Registration Processing...");
@@ -112,58 +121,61 @@ public class Door_to_Door_Admin extends AppCompatActivity implements View.OnClic
                                     String name = binding.clenername.getText().toString().trim();
                                     String phoneNo = binding.clenerphone.getText().toString().trim();
                                     String area = binding.cleanerlocation.getText().toString().trim().toLowerCase();
-                                    String url=uri.toString();
+                                    String url = uri.toString();
 
                                     progressDialog.dismiss();
 
-                                    Toast.makeText(Door_to_Door_Admin.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Successfully added", Toast.LENGTH_SHORT).show();
 
                                     //String uplodeid = databaseReference.push().getKey();
-                                    Cleaner _cleaner = new Cleaner(phoneNo, url);
-                                    databaseReference.child(area).child(name).setValue(_cleaner);
+                                    Cleaner cleaner = new Cleaner(name, phoneNo, url, area, publisherid,rating);
+                                    databaseReference.child(area).child(name).setValue(cleaner);
                                     afterRegistrationofClener();
-                                    Log.d(TAG, "done"+url);
+                                    Log.d(TAG, "done" + url);
                                 }
                             });
-
-
-
 
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d(TAG, ""+e.getMessage());
-                    Toast.makeText(Door_to_Door_Admin.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "" + e.getMessage());
+                    Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
 
 
-    //Get image extention
-    public String GetFileExtention(Uri uri) {
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == image_rec_code && resultCode == RESULT_OK && data != null) {
             filepath_uri = data.getData();
-
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath_uri);
-                binding.clenerphoto.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Picasso.get().load(filepath_uri).into(binding.clenerphoto);
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filepath_uri);
+//                binding.clenerphoto.setImageBitmap(bitmap);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
         }
 
+    }
+
+    //check all field are empty or not
+    private boolean filedchecking() {
+        if (!binding.clenername.getText().toString().isEmpty()
+                && !binding.cleanerlocation.getText().toString().isEmpty()
+                && !binding.clenerphone.getText().toString().isEmpty()
+                && filepath_uri != null) {
+            return true;
+        } else {
+            Toast.makeText(getActivity(), "Please fill the all Informations and Image", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 
     //set all filed null
@@ -179,5 +191,4 @@ public class Door_to_Door_Admin extends AppCompatActivity implements View.OnClic
         binding.clenerphone.setHint("Phone");
 
     }
-
 }

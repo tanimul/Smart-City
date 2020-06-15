@@ -1,12 +1,15 @@
 package com.example.nirmol_nogori.Model;
 
 public class News {
-    public String news_name;
-    public String src;
-    public String date;
-    public String news_img_url;
+    private String userid;
+    private String news_name;
+    private String src;
+    private String date;
+    private String news_img_url;
 
-    public News(String news_name, String src, String date, String news_img_url) {
+
+    public News(String userid, String news_name, String src, String date, String news_img_url) {
+        this.userid = userid;
         this.news_name = news_name;
         this.src = src;
         this.date = date;
@@ -46,5 +49,13 @@ public class News {
 
     public void setNews_img_url(String news_img_url) {
         this.news_img_url = news_img_url;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }
