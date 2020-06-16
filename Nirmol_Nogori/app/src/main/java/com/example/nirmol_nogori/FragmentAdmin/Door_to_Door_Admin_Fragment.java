@@ -102,6 +102,7 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
     //Registration of Cleaner
     public void cleanerRegistration() {
 
+        //for testing
         final String publisherid = "WM1vIUC6esTbafyXAE69UvwTDLUED";
         final float rating=4;
 

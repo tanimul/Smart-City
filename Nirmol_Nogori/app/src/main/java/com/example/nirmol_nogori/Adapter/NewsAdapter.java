@@ -1,18 +1,17 @@
-package com.example.nirmol_nogori;
+package com.example.nirmol_nogori.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nirmol_nogori.Model.Cleaner;
 import com.example.nirmol_nogori.Model.News;
+import com.example.nirmol_nogori.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

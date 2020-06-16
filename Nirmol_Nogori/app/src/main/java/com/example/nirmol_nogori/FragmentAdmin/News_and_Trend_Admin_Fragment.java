@@ -128,7 +128,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
+                        month = month + 1;
                         binding.newsdate.setText(dayOfMonth + "/" + month + "/" + year);
                     }
                 }, currentYear, currentMonth, currentDay);
@@ -139,7 +139,8 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
     //News Place
     public void NewsInsert() {
 
-        final String userid ="WM1vIUC6esTbafyXAE69UvwTDLUED";
+        //for testing
+        final String userid = "WM1vIUC6esTbafyXAE69UvwTDLUED";
 
         if (filepath_uri != null) {
             progressDialog.setTitle("Insert the news...");
@@ -165,7 +166,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
                                     Log.d(TAG, "done");
 
                                     String uplodeid = databaseReference.push().getKey();
-                                    News news = new News(userid,name, src, newsDate, url);
+                                    News news = new News(userid, name, src, newsDate, url);
                                     databaseReference.child(uplodeid).setValue(news);
                                     Log.d(TAG, "done" + url);
 

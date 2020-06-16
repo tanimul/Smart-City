@@ -9,8 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.nirmol_nogori.Model.News;
-import com.example.nirmol_nogori.Model.Users;
-import com.example.nirmol_nogori.NewsAdapter;
+import com.example.nirmol_nogori.Adapter.NewsAdapter;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityNewsNdTrendBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-//Todo add query date wise show data in recyclerview
+//Todo add order by child data using date  and show data in recyclerview
 
 public class News_nd_Trend extends AppCompatActivity {
     private ActivityNewsNdTrendBinding binding;
@@ -51,21 +50,22 @@ public class News_nd_Trend extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                newslist.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String key = dataSnapshot1.getKey();
                     News news1 = dataSnapshot1.getValue(News.class);
                     newslist.add(news1);
                     rc_newstrend.setAdapter(newsAdapter);
 
-                    Log.d(TAG, "Key:" + key+"news name:"+news1.getNews_img_url());
+                    Log.d(TAG, "Key:" + key + "news name:" + news1.getNews_img_url());
 
                 }
+                newsAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG, "something is wrong:" );
+                Log.d(TAG, "something is wrong:");
             }
         });
     }

@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.nirmol_nogori.CleanerAdapter;
-import com.example.nirmol_nogori.Model.Cleaner;
+import com.example.nirmol_nogori.Adapter.CleanerAdapter;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityDoorToDoorServiceBinding;
 import com.google.firebase.database.DataSnapshot;

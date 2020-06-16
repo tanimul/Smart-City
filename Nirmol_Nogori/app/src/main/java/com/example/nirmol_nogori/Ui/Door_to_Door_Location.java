@@ -3,21 +3,14 @@ package com.example.nirmol_nogori.Ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.nirmol_nogori.LocationAdapter;
+import com.example.nirmol_nogori.Adapter.LocationAdapter;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityDoorToDoorLocationBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -27,9 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class Door_to_Door_Location extends AppCompatActivity implements LocationAdapter.OnItemClickListener {
     private ActivityDoorToDoorLocationBinding binding;
