@@ -34,22 +34,45 @@
         app:layout_constraintTop_toBottomOf="@id/textView_loginpage_title"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/edittext_login_password_admin"
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_1"
         android:layout_width="320dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_background"
-        android:drawableLeft="@drawable/ic_lock"
-        android:gravity="center"
-        android:hint="********"
-        android:inputType="textPassword"
-        android:paddingLeft="10dp"
-        android:textSize="20sp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edittext_login_email_admin"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/edittext_login_password_admin"
+            android:layout_width="320dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_background"
+            android:drawableLeft="@drawable/ic_lock"
+            android:gravity="center"
+            android:hint="********"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textSize="20sp"
+
+           tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/eyebuttonaadmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:onClick="ShowHidePassAdm"
+            android:src="@drawable/ic_eyes"
+            android:background="@null"/>
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/textView_forgotpass_admin"
@@ -63,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.767"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edittext_login_password_admin"
+        app:layout_constraintTop_toBottomOf="@id/relativelayout_1"
         tools:ignore="MissingConstraints" />
 
     <Button

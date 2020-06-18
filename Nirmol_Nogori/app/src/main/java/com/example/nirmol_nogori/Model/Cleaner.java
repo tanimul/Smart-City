@@ -6,26 +6,33 @@ public class Cleaner {
     private String phoneno;
     private String imageurl;
     private String location;
-    private String total_fair;
+    private int total_fair;
     private float rating;
+    private int total_hr;
 
     public Cleaner() {
     }
 
 
-
-    public Cleaner(String name, String phoneno, String imageurl, String location,String publisher,float rating) {
+    public Cleaner(String name, String phoneno, String imageurl, String location,String publisher,float rating,int total_fair,int total_hr) {
         this.name = name;
         this.phoneno = phoneno;
         this.imageurl = imageurl;
         this.location = location;
         this.publisher=publisher;
         this.rating=rating;
+        this.total_fair=total_fair;
+        this.total_hr=total_hr;
     }
 
 
+    public int getTotal_hr() {
+        return total_hr;
+    }
 
-
+    public void setTotal_hr(int total_hr) {
+        this.total_hr = total_hr;
+    }
 
     public String getPhoneno() {
         return phoneno;
@@ -47,7 +54,7 @@ public class Cleaner {
         return location;
     }
 
-    public String getTotal_fair() {
+    public int getTotal_fair() {
         return total_fair;
     }
 
@@ -59,7 +66,7 @@ public class Cleaner {
         this.location = location;
     }
 
-    public void setTotal_fair(String total_fair) {
+    public void setTotal_fair(int total_fair) {
         this.total_fair = total_fair;
     }
 

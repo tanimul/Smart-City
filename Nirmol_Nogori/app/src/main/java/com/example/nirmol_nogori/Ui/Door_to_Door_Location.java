@@ -46,6 +46,7 @@ public class Door_to_Door_Location extends AppCompatActivity implements Location
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                location.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String key = dataSnapshot1.getKey();
                     location.add(key);
@@ -72,10 +73,6 @@ public class Door_to_Door_Location extends AppCompatActivity implements Location
         startActivity(intent);
         Log.d(TAG, "OnItemClick: clicked location name:" + location_name);
     }
-
-
-
-
 
 
     //TOdo add searchview

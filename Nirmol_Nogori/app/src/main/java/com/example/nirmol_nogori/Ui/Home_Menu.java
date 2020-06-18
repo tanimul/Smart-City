@@ -14,22 +14,34 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.User.Login_User;
 import com.example.nirmol_nogori.databinding.ActivityHomeMenuBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
 public class Home_Menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private ActivityHomeMenuBinding binding;
     private static final String TAG = "Home_Menu";
+    private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
     Toolbar toolbar;
-
+    private ImageView headerPic;
+    private TextView headerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +63,17 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
         if (savedInstanceState == null) {
             binding.homeNavigation.setCheckedItem(R.id.nav_home);
         }
+
+
+//        View header = binding.homeNavigation.getHeaderView(0);
+//        headerName = header.findViewById(R.id.header_name);
+//        headerPic = header.findViewById(R.id.header_photo);
+//
+//        //fill up current user information in nav header
+//        firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+//        updateNavHeader(firebaseUser.getUid());
+
+
 
         binding.homeNavigation.setNavigationItemSelectedListener(this);
 
@@ -162,6 +185,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
         finish();
         startActivity(new Intent(Home_Menu.this, Login_User.class));
     }
+
 
 
 }

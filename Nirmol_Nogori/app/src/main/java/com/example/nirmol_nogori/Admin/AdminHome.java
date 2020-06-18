@@ -28,9 +28,6 @@ public class AdminHome extends AppCompatActivity implements BottomNavigationView
         binding = ActivityAdminHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        binding.BTDoorToDoor.setOnClickListener(this);
-//        binding.BTNewsTrend.setOnClickListener(this);
-
         if (selectedfragment == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new Drop_Complain_Admin_Fragment()).commit();
 
@@ -73,16 +70,4 @@ public class AdminHome extends AppCompatActivity implements BottomNavigationView
         return true;
     }
 
-//    @Override
-//    public void onClick(View v) {
-
-//        if (v == binding.BTDoorToDoor) {
-//            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(AdminHome.this, Door_to_Door_Admin.class));
-//        }
-//        if (v == binding.BTNewsTrend) {
-//            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(AdminHome.this, News_nd_Trend_Admin.class));
-//        }
-//    }
 }

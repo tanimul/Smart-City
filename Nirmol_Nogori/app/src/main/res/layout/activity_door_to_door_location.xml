@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Ui.Door_to_Door_Location">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/door_to_door_location_toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:background="@color/colorWhite"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        android:paddingLeft="20dp"-->
-<!--        app:title="Location">-->
-
-<!--    </androidx.appcompat.widget.Toolbar>-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/door_to_door_location_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorWhite"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingConstraints"
+        android:paddingLeft="20dp"
+        app:title="Location">
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/location_recyclerview"

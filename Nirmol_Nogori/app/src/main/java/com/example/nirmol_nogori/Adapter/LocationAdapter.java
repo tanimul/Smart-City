@@ -1,5 +1,6 @@
 package com.example.nirmol_nogori.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import com.example.nirmol_nogori.R;
 import java.util.ArrayList;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locationviewholder> {
-
+    private static final String TAG = "Location_Adapter";
     private ArrayList<String> location;
     private OnItemClickListener listener;
 
@@ -44,6 +45,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
                 listener.OnItemClick(locationName);
             }
         });
+
+        Log.d(TAG,""+location.size());
     }
 
     @Override

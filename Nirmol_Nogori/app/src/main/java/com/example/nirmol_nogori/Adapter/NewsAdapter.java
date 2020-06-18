@@ -1,6 +1,7 @@
 package com.example.nirmol_nogori.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Newsholder> {
+    private static final String TAG = "News_Adapter";
     private ArrayList<News> news = new ArrayList<>();
     Context context;
 
@@ -45,6 +47,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Newsholder> {
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);
+
+        Log.d(TAG,""+news.size());
 
     }
 

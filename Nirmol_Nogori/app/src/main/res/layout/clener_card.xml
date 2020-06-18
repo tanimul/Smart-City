@@ -10,9 +10,13 @@
     app:cardCornerRadius="10dp"
     tools:ignore="MissingDefaultResource">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayot1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        tools:ignore="MissingConstraints">
 
         <de.hdodenhof.circleimageview.CircleImageView
 
@@ -49,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="right|center"
-            android:paddingRight="30dp"
-            android:text="Total Fair"
+            android:paddingRight="50dp"
+            android:text="Fair"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -78,7 +82,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:isIndicator="true"
-            android:rating="5"
+            android:numStars="5"
+            android:rating="4.5"
             app:layout_constraintEnd_toStartOf="@+id/card_clenar_photo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,118 +118,230 @@
 
         <Button
             android:id="@+id/card_cleaner_callbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="91dp"
+            android:layout_height="44dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/button_background"
-            android:text="Call"
+            android:text="Request"
+            android:layout_marginBottom="5dp"
             android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.527"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_area"
             tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/card_cleanerTXT_ratingsreview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Rate &amp; Review the worker"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.527"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_cleaner_callbutton"
-            tools:ignore="MissingConstraints" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/card_cleanerTXT_ratingsreview"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="2dp"-->
+        <!--            android:text="Rate &amp; Review the worker"-->
+        <!--            android:textSize="15dp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.527"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/card_cleaner_callbutton"-->
+        <!--            tools:ignore="MissingConstraints" />-->
+
+        <!--        <RatingBar-->
+        <!--            android:id="@+id/card_ratingBar_for_user_review"-->
+        <!--            style="?android:attr/ratingBarStyleSmall"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:isIndicator="true"-->
+        <!--            android:rating="4"-->
+        <!--            android:numStars="5"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.538"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_ratingsreview"-->
+        <!--            tools:ignore="MissingConstraints" />-->
+
+        <!--        <EditText-->
+        <!--            android:id="@+id/card_reviewedittext_for_user_review"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:layout_marginRight="10dp"-->
+        <!--            android:background="@drawable/edittext_background"-->
+        <!--            android:drawableRight="@drawable/ic_save"-->
+        <!--            android:gravity="center"-->
+        <!--            android:hint="Share your Experience"-->
+        <!--            android:paddingLeft="5dp"-->
+        <!--            android:paddingTop="5dp"-->
+        <!--            android:paddingRight="15dp"-->
+        <!--            android:paddingBottom="5dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/card_ratingBar_for_user_review"-->
+        <!--            tools:ignore="MissingConstraints" />-->
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/card_cleanerTXT_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
             android:text="Rate &amp; Review"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_ratingsreview"
+            app:layout_constraintTop_toBottomOf="@id/card_cleaner_callbutton"
             tools:ignore="MissingConstraints" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/card_reviewer_photo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/user"
-            app:civ_border_color="@color/colorPrimary"
-            app:civ_border_width="2dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_review"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/card_cleanerTXT_reviewer_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Reviewer Name"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/card_reviewer_photo"
-            app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_review"
-            tools:ignore="MissingConstraints" />
-
-        <RatingBar
-            android:id="@+id/card_ratingBar_reviewer"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="3dp"
-            android:isIndicator="true"
-            android:rating="5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_reviewer_photo"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/card_cleanerTXT_reviewer_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="16dp"
-            android:text="Reviewer Name"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/card_reviewer_photo"
-            app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_reviewer_name"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/card_cleanerTXT_reviewer_review"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:text="Reviewer Review"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_ratingBar_reviewer"
-            tools:ignore="MissingConstraints" />
-
-        <View
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/doortodoorcard_constraintlayot1"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/colorBlack"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_reviewer_review" />
+            app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_review">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/card_reviewer_photo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/card_cleanerTXT_reviewer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Reviewer Name"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/card_reviewer_photo"
+                tools:ignore="MissingConstraints" />
+
+            <RatingBar
+                android:id="@+id/card_ratingBar_reviewer"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="4.5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_reviewer_photo"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/card_cleanerTXT_reviewer_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:text="Reviewer Date"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/card_reviewer_photo"
+                app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_reviewer_name"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/card_cleanerTXT_reviewer_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="10dp"
+                android:text="Reviewer Review"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_ratingBar_reviewer"
+                tools:ignore="MissingConstraints" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/doortodoorcard_constraintlayot2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/doortodoorcard_constraintlayot1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/card_reviewer_photo2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/card_cleanerTXT_reviewer_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Reviewer Name"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/card_reviewer_photo2"
+                tools:ignore="MissingConstraints" />
+
+            <RatingBar
+                android:id="@+id/card_ratingBar_reviewer2"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="4.5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_reviewer_photo2"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/card_cleanerTXT_reviewer_date2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:text="Reviewer Date"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/card_reviewer_photo2"
+                app:layout_constraintTop_toBottomOf="@id/card_cleanerTXT_reviewer_name2"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/card_cleanerTXT_reviewer_review2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="10dp"
+                android:text="Reviewer Review"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_ratingBar_reviewer2"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

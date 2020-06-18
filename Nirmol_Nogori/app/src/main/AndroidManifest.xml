@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -12,14 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Ui.DropComplain"></activity>
+        <activity android:name=".PostComplainActivity"></activity>
+        <activity android:name=".Ui.DropComplain" />
         <activity android:name=".Admin.AdminHome" />
-        <activity android:name=".Trash.News_nd_Trend_Admin" />
         <activity android:name=".Ui.News_nd_Trend" />
         <activity android:name=".Ui.Door_to_Door_Service" />
         <activity android:name=".GetReviewFromuser" />
         <activity android:name=".Ui.Clener_information" />
-        <activity android:name=".Trash.Door_to_Door_Admin" />
         <activity android:name=".Ui.Door_to_Door_Location" />
         <activity android:name=".Ui.ProfileSetting" />
         <activity android:name=".Ui.Setting" />
