@@ -162,7 +162,6 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
 
         final String adminid = userid;
 
-
         if (filepath_uri != null) {
             progressDialog.setTitle("Insert the news...");
             progressDialog.show();
