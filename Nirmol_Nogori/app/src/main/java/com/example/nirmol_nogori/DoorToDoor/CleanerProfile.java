@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,7 +31,8 @@ public class CleanerProfile extends AppCompatActivity {
     private static final String TAG = "Cleaner_Profile";
     private ActivityCleanerProfileBinding binding;
     private ArrayList<Review> reviews = new ArrayList<Review>();
-    public static String cleanername = "";
+    public static String cleanername;
+    public static String cleanerarea;
     ReviewAdapter reviewAdapter;
 
     @Override
@@ -67,10 +69,29 @@ public class CleanerProfile extends AppCompatActivity {
         binding.cleanerProfileRecyclerview.setAdapter(reviewAdapter);
 
         String cleaner_name = cleanerinformation.getString("cleaner_name");
+        showCleanerprofile(cleaner_name);
+
+        binding.cleanerCallbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestcleaner(CleanerProfile.this, cleanerinformation.getString("cleaner_name"),
+                        cleanerinformation.getString("cleaner_phone"), cleanerinformation.getString("cleaner_area"));
+            }
+        });
+
+    }
+
+    private void showCleanerprofile(String cleanername) {
+        final ProgressDialog Dialog = new ProgressDialog(CleanerProfile.this);
+        Dialog.setMessage("Please wait ...");
+        Dialog.show();
+        String cleaner_name = cleanername;
+        Log.d(TAG, "" + cleaner_name);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Experience").child(cleaner_name);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Dialog.dismiss();
                 if (dataSnapshot.getChildrenCount() == 0) {
                     binding.cleanerTXTReview.setVisibility(View.VISIBLE);
                 } else {
@@ -78,10 +99,10 @@ public class CleanerProfile extends AppCompatActivity {
                     binding.cleanerTXTReview.setVisibility(View.VISIBLE);
                 }
                 reviews.clear();
+
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Review review = dataSnapshot1.getValue(Review.class);
                     reviews.add(review);
-                    Log.d(TAG, "" + dataSnapshot1.getValue());
                     Log.d(TAG, "Reviewer name: " + review.getUsername());
                 }
                 reviewAdapter.notifyDataSetChanged();
@@ -92,23 +113,15 @@ public class CleanerProfile extends AppCompatActivity {
 
             }
         });
-
-        binding.cleanerCallbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestcleaner(CleanerProfile.this, cleanerinformation.getString("cleaner_name"), cleanerinformation.getString("cleaner_phone"));
-            }
-        });
-
     }
 
     //Request Cleaner by Call
-    private void requestcleaner(Context context, String name, String number) {
+    private void requestcleaner(Context context, String name, String number, String area) {
         MainActivity.CLEANER_REQUEST = true;
-     //   cleanername=name;
+        cleanername = name;
+        cleanerarea = area;
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "" + number));
         context.startActivity(intent);
         Log.d(TAG, "Cleaner name: +" + name + " Cleaner number: " + number + " CLEANER_REQUEST:" + MainActivity.CLEANER_REQUEST);
-
     }
 }

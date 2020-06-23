@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(TAG, personemail + "");
 
 
-            Users user = new Users(account.getDisplayName(), account.getGivenName(), account.getEmail());
+            Users user = new Users(account.getDisplayName(), account.getGivenName(), account.getEmail(),null);
             databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

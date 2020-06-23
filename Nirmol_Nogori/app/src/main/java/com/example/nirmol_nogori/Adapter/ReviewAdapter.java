@@ -46,7 +46,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewwHol
         holder.reviewerreview.setText(review.getReview());
         holder.ratingBar.setRating(review.getRating());
         Picasso.get().load(review.getImageurl())
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.ic_user)
                 .fit()
                 .centerCrop()
                 .into(holder.reviewerImage);

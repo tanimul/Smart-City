@@ -6,17 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".DoorToDoor.Door_to_Door_Service">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/door_to_door_service_toolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorWhite"
-        android:gravity="center_horizontal"
-        tools:ignore="MissingConstraints"
-        android:paddingLeft="20dp"
-        app:title="Cleaner">
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        tools:ignore="MissingConstraints">
 
-    </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/door_to_door_service_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:id="@+id/door_to_door_service_toolbar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Location"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/cleaner_search"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/transparent"
+                android:drawableRight="@drawable/ic_search"
+                android:hint="Cleaner Search ..."
+                android:paddingLeft="10dp"
+                android:paddingRight="15dp"
+                android:paddingTop="5dp"
+                android:textColorHint="@color/colorPrimaryDark" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cleaner_recyclerview"

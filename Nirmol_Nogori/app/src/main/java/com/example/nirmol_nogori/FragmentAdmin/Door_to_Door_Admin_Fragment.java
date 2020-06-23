@@ -79,9 +79,21 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
 
         if (v == binding.saveCleanerInformation) {
             if (filedchecking()) {
-                cleanerRegistration();
+                adminid();
             }
         }
+    }
+
+    private void adminid() {
+        final Bundle admininformation = getActivity().getIntent().getExtras();
+        if (admininformation != null) {
+            String adminid = admininformation.getString("adminid");
+            Log.d(TAG, "" + adminid);
+            
+            cleanerRegistration(adminid);
+        }
+
+
     }
 
 
@@ -100,13 +112,13 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
     }
 
     //Registration of Cleaner
-    public void cleanerRegistration() {
+    public void cleanerRegistration(String adminid) {
 
         //for testing
-        final String publisherid = "WM1vIUC6esTbafyXAE69UvwTDLUED";
-        final float rating=4;
-        final int t_fair=0;
-        final int t_hour=0;
+        final String publisherid = adminid;
+        final float rating = 4;
+        final int t_fair = 0;
+        final int t_hour = 0;
 
         if (filepath_uri != null) {
             progressDialog.setTitle("Registration Processing...");
@@ -131,7 +143,7 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
                                     Toast.makeText(getActivity(), "Successfully added", Toast.LENGTH_SHORT).show();
 
                                     //String uplodeid = databaseReference.push().getKey();
-                                    Cleaner cleaner = new Cleaner(name, phoneNo, url, area, publisherid,rating,t_fair,t_hour);
+                                    Cleaner cleaner = new Cleaner(name, phoneNo, url, area, publisherid, rating, t_fair, t_hour);
                                     databaseReference.child(area).child(name).setValue(cleaner);
                                     afterRegistrationofClener();
                                     Log.d(TAG, "done" + url);

@@ -59,9 +59,13 @@ public class CleanerAdapter extends RecyclerView.Adapter<CleanerAdapter.Cleanerh
             @Override
             public void onClick(View v) {
                 MainActivity.CLEANER_REQUEST = true;
+                CleanerProfile.cleanername = cleaner.getName();
+                CleanerProfile.cleanerarea = cleaner.getLocation();
                 Log.d(TAG, "calling" + cleaner.getPhoneno());
                 Context context = v.getContext();
                 requestcleaner(context, cleaner.getPhoneno());
+                Log.d(TAG, "Cleaner name: +" + cleaner.getName() + " Cleaner number: " + cleaner.getPhoneno() + " CLEANER_REQUEST:" + MainActivity.CLEANER_REQUEST);
+
             }
         });
 

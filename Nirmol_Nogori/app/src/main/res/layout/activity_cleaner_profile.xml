@@ -13,10 +13,9 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?android:attr/windowBackground"
         android:gravity="center_horizontal"
-        tools:ignore="MissingConstraints"
         android:paddingLeft="20dp"
-        app:title="Cleaner Profile">
-    </androidx.appcompat.widget.Toolbar>
+        app:title="Cleaner Profile"
+        tools:ignore="MissingConstraints"></androidx.appcompat.widget.Toolbar>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/clenar_photo"
@@ -28,11 +27,10 @@
         android:src="@drawable/user"
         app:civ_border_color="@color/colorPrimary"
         app:civ_border_width="2dp"
-        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
-       />
+        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar" />
 
     <TextView
         android:id="@+id/cleanerTXT_ratings"
@@ -43,10 +41,9 @@
         android:paddingLeft="30dp"
         android:text="Ratings"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar"
         app:layout_constraintEnd_toStartOf="@+id/clenar_photo"
         app:layout_constraintLeft_toLeftOf="parent"
-      />
+        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar" />
 
     <TextView
         android:id="@+id/cleanerTXT_tFair"
@@ -60,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/clenar_photo"
-        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar"/>
+        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar" />
 
     <TextView
         android:id="@+id/cleanerTXT_tFairValue"
@@ -135,14 +132,15 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/cleanerTXT_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="10dp"
         android:text="There is No Review yet"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cleaner_callbutton"
         tools:ignore="MissingConstraints" />
@@ -151,9 +149,9 @@
         android:id="@+id/cleaner_profile_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cleanerTXT_review"
         android:layout_marginTop="10dp"
         android:background="@color/colorWhite"
+        app:layout_constraintTop_toBottomOf="@id/cleanerTXT_review"
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/review_card" />
 

@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.nirmol_nogori.DoorToDoor.GetReviewFromuser;
 import com.example.nirmol_nogori.Model.News;
 import com.example.nirmol_nogori.Adapter.NewsAdapter;
 import com.example.nirmol_nogori.R;
@@ -43,16 +45,23 @@ public class News_nd_Trend extends AppCompatActivity {
         newsAdapter = new NewsAdapter(News_nd_Trend.this, newslist);
         rc_newstrend.setAdapter(newsAdapter);
 
+        readnews();
+
+    }
+
+    private void readnews() {
+        final ProgressDialog Dialog = new ProgressDialog(News_nd_Trend.this);
+        Dialog.setMessage("Please wait ...");
+        Dialog.show();
         databaseReference = FirebaseDatabase.getInstance().getReference("News_Trend");
         databaseReference.keepSynced(true);
-
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 newslist.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     for (DataSnapshot snapshot : dataSnapshot1.getChildren()) {
+                        Dialog.dismiss();
                         limitationshow++;
                         String key = snapshot.getKey();
                         News news1 = snapshot.getValue(News.class);

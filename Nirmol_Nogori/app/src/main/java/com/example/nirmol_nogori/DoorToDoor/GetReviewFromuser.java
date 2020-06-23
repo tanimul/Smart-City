@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +16,10 @@ import android.widget.TextView;
 
 import com.example.nirmol_nogori.Model.Cleaner;
 import com.example.nirmol_nogori.Model.Review;
+import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.Ui.Home_Menu;
+import com.example.nirmol_nogori.Ui.MainActivity;
 import com.example.nirmol_nogori.databinding.ActivityGetReviewFromuserBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +35,8 @@ public class GetReviewFromuser extends AppCompatActivity {
     private ActivityGetReviewFromuserBinding binding;
     private DatePickerDialog datePickerDialog;
     private static final String TAG = "Get_Review_From_User";
+    String username = "";
+    String userimageurl = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +44,10 @@ public class GetReviewFromuser extends AppCompatActivity {
         binding = ActivityGetReviewFromuserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Log.d(TAG, "Cleaner Name:" + CleanerProfile.cleanername);
+
         cleanerinformation();
+        userinformation();
 
         binding.workdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,36 +63,55 @@ public class GetReviewFromuser extends AppCompatActivity {
                 reviewsubmit(binding.reviewCleanerTXTName.getText().toString(), binding.reviewCleanerTXTArea.getText().toString()
                         , binding.workdate.getText().toString(), binding.reviewET.getText().toString(),
                         binding.totalfairET.getText().toString(), binding.totalhourET.getText().toString(), binding.reviewRatingBar.getRating());
+
             }
         });
 
 
     }
 
-    private void reviewsubmit(final String reviewCleanerTXTName, final String reviewCleanerTXTArea, final String workdate,
-                              final String reviewET, final String totalfairET, final String totalhourET, final float rating) {
-
+    //user information
+    private void userinformation() {
         final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Log.d("ddddd", "" + userid);
+        final DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Users users = dataSnapshot.getValue(Users.class);
+                username = users.getFirst_name();
+                userimageurl = users.getUser_image_url();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    //Adding review
+    private void reviewsubmit(final String reviewCleanerTXTName, final String reviewCleanerTXTArea, final String workdate,
+                              final String reviewET, final String totalfairET, final String totalhourET, final float rating) {
+        final ProgressDialog Dialog = new ProgressDialog(GetReviewFromuser.this);
+        Dialog.setMessage("Feedback is being shared ...");
+        Dialog.show();
+        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d(TAG, "" + userid);
+
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Experience");
 
-
-//        final Review review = new Review(workdate, Integer.parseInt(totalhourET), Integer.parseInt(totalfairET), reviewET, rating,
-//                userid, reviewCleanerTXTName, reviewCleanerTXTArea
-//                , null, "bisad");
-
+        final Review review = new Review(workdate, Integer.parseInt(totalhourET), Integer.parseInt(totalfairET), reviewET, rating,
+                userid, reviewCleanerTXTName, reviewCleanerTXTArea
+                , userimageurl, username);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.hasChild(reviewCleanerTXTName)) {
-//                    Log.d(TAG, "available");
-//                    databaseReference.child(reviewCleanerTXTName).child(userid).setValue(review);
-//                } else {
-//                    Log.d(TAG, "not available");
-//                    databaseReference.child(reviewCleanerTXTName).setValue(review);
-//                }
-
+                databaseReference.child(reviewCleanerTXTName).child(userid).setValue(review);
+                startActivity(new Intent(GetReviewFromuser.this, Home_Menu.class));
+                Dialog.dismiss();
             }
 
             @Override
@@ -111,7 +141,16 @@ public class GetReviewFromuser extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                        binding.workdate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        month = month + 1;
+                        String monthofyear = "" + month;
+                        String dayofmonth = "" + dayOfMonth;
+                        if (month < 10) {
+                            monthofyear = "0" + month;
+                        }
+                        if (dayOfMonth < 10) {
+                            dayofmonth = "0" + dayOfMonth;
+                        }
+                        binding.workdate.setText(year + "-" + monthofyear + "-" + dayofmonth);
                     }
                 }, currentYear, currentMonth, currentDay);
         datePickerDialog.show();
@@ -119,29 +158,29 @@ public class GetReviewFromuser extends AppCompatActivity {
 
 
     private void cleanerinformation() {
-        //testing
-        //   String usrid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String usrid = "HMf7C5z3erdMgqxseyz0alneq973";
-        // String cleanerName=CleanerProfile.cleanername;
-        String cleanerName = "cerag ali";
-        String area = "kalabagan";
-        // Log.d("dddd", "" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+        final ProgressDialog Dialog = new ProgressDialog(GetReviewFromuser.this);
+        Dialog.setMessage("Please wait ...... ");
+        Dialog.show();
+        Log.d(TAG, "User id:" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+        String cleanerName = CleanerProfile.cleanername;
+        String area = CleanerProfile.cleanerarea;
+
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Location and Cleaner")
                 .child(area).child(cleanerName);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                Cleaner review = dataSnapshot.getValue(Cleaner.class);
-                binding.reviewCleanerTXTName.setText(review.getName());
-                binding.reviewCleanerTXTArea.setText(review.getLocation());
-                Picasso.get().load(review.getImageurl())
+Dialog.dismiss();
+                Cleaner cleaner = dataSnapshot.getValue(Cleaner.class);
+                binding.reviewCleanerTXTName.setText(cleaner.getName());
+                binding.reviewCleanerTXTArea.setText(cleaner.getLocation());
+                Picasso.get().load(cleaner.getImageurl())
                         .placeholder(R.mipmap.ic_launcher)
                         .fit()
                         .centerCrop()
                         .into(binding.reviewTXTClenarPhoto);
-                Log.d("ddddd", "" + review.getName());
+                Log.d(TAG, "Cleaner name:" + cleaner.getName());
             }
 
 

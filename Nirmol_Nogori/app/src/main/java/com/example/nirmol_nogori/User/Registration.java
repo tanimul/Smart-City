@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.nirmol_nogori.BuildConfig;
 import com.example.nirmol_nogori.Ui.Home_Activity;
 import com.example.nirmol_nogori.Model.Users;
+import com.example.nirmol_nogori.Ui.Home_Menu;
 import com.example.nirmol_nogori.databinding.ActivityRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,30 +74,30 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
         userRegistrationValidation();
 
-//        firebaseAuth.createUserWithEmailAndPassword(user_email, user_password)
-//                .addOnCompleteListener(Registration.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//
-//                        if (task.isSuccessful()) {
-//                            Users user = new Users(first_name, last_name, user_email);
-//                            databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    Toast.makeText(Registration.this, "Registration complete", Toast.LENGTH_SHORT).show();
-//                                    after_registration();
-//                                    Intent intent = new Intent(Registration.this, Home_Activity.class);
-//                                    startActivity(intent);
-//
-//                                }
-//                            });
-//                        } else {
-//                            Toast.makeText(Registration.this, "Registration failed", Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                    }
-//                });
+        firebaseAuth.createUserWithEmailAndPassword(user_email, user_password)
+                .addOnCompleteListener(Registration.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()) {
+                            Users user = new Users(first_name, last_name, user_email,null);
+                            databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(Registration.this, "Registration complete", Toast.LENGTH_SHORT).show();
+                                    after_registration();
+                                    Intent intent = new Intent(Registration.this, Home_Menu.class);
+                                    startActivity(intent);
+
+                                }
+                            });
+                        } else {
+                            Toast.makeText(Registration.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
 
     }
 
@@ -116,92 +117,92 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
 //Todo check existing  email or not ?
 
-        firebaseAuth = FirebaseAuth.getInstance();
+ //       firebaseAuth = FirebaseAuth.getInstance();
+//
+//
+//        ActionCodeSettings actionCodeSettings;
+//
+//        actionCodeSettings = ActionCodeSettings.newBuilder()
+//                .setUrl("https://droidmentor.com/finishSignUp?")
+//                .setHandleCodeInApp(true)
+//                .setAndroidPackageName(BuildConfig.APPLICATION_ID, false, null)
+//                .build();
+//
+//        firebaseAuth.sendSignInLinkToEmail(user_email, actionCodeSettings)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        Log.d("dddddd", "onComplete: ");
+//                        if (task.isSuccessful()) {
+//                            Log.d("dddddd", "Email sent.");
+//                        } else {
+//                            Log.d("dddddd", "Email not sent.");
+//                            Objects.requireNonNull(task.getException()).printStackTrace();
+//                        }
+//                    }
+//                });
 
+        if (first_name.isEmpty()) {
+            binding.edittextFirstname.setError("Enter a First name please");
+            binding.edittextFirstname.requestFocus();
+            return;
+        }
 
-        ActionCodeSettings actionCodeSettings;
+        if (last_name.isEmpty()) {
 
-        actionCodeSettings = ActionCodeSettings.newBuilder()
-                .setUrl("https://droidmentor.com/finishSignUp?")
-                .setHandleCodeInApp(true)
-                .setAndroidPackageName(BuildConfig.APPLICATION_ID, false, null)
-                .build();
+            binding.edittextLastname.setError("Enter a Last name please");
+            binding.edittextLastname.requestFocus();
+            return;
 
-        firebaseAuth.sendSignInLinkToEmail(user_email, actionCodeSettings)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.d("dddddd", "onComplete: ");
-                        if (task.isSuccessful()) {
-                            Log.d("dddddd", "Email sent.");
-                        } else {
-                            Log.d("dddddd", "Email not sent.");
-                            Objects.requireNonNull(task.getException()).printStackTrace();
-                        }
-                    }
-                });
+        }
 
-//        if (first_name.isEmpty()) {
-//            binding.edittextFirstname.setError("Enter a First name please");
-//            binding.edittextFirstname.requestFocus();
-//            return;
-//        }
-//
-//        if (last_name.isEmpty()) {
-//
-//            binding.edittextLastname.setError("Enter a Last name please");
-//            binding.edittextLastname.requestFocus();
-//            return;
-//
-//        }
-//
-//        if (user_email.isEmpty()) {
-//
-//            binding.edittextRegistrationEmail.setError("Enter a Email please");
-//            binding.edittextRegistrationEmail.requestFocus();
-//            return;
-//
-//        }
-//
-//        if (user_password.isEmpty()) {
-//
-//            binding.edittextRegistrationPassword.setError("Enter a Password please");
-//            binding.edittextRegistrationPassword.requestFocus();
-//            return;
-//
-//        }
-//
-//        if (user_con_password.isEmpty()) {
-//
-//            binding.edittextRegistrationConPassword.setError("Enter a Confirm Password please");
-//            binding.edittextRegistrationConPassword.requestFocus();
-//            return;
-//
-//        }
-//
-//        if (!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()) {
-//            binding.edittextRegistrationEmail.setError("Enter a Valid Email please");
-//            binding.edittextRegistrationEmail.requestFocus();
-//            return;
-//
-//        }
-//
-//        if (user_password.length() < 6) {
-//            binding.edittextRegistrationPassword.setError("Enter a atleast 6 digit Password please");
-//            binding.edittextRegistrationPassword.requestFocus();
-//            return;
-//        }
-//        if (user_con_password.length() < 6) {
-//            binding.edittextRegistrationConPassword.setError("Enter a atleast 6 digit Password please");
-//            binding.edittextRegistrationConPassword.requestFocus();
-//            return;
-//        }
-//        if (!user_password.equals(user_con_password)) {
-//            binding.edittextRegistrationPassword.setError("Password and Confirm Password must be same");
-//            binding.edittextRegistrationPassword.requestFocus();
-//            return;
-//
-//        }
+        if (user_email.isEmpty()) {
+
+            binding.edittextRegistrationEmail.setError("Enter a Email please");
+            binding.edittextRegistrationEmail.requestFocus();
+            return;
+
+        }
+
+        if (user_password.isEmpty()) {
+
+            binding.edittextRegistrationPassword.setError("Enter a Password please");
+            binding.edittextRegistrationPassword.requestFocus();
+            return;
+
+        }
+
+        if (user_con_password.isEmpty()) {
+
+            binding.edittextRegistrationConPassword.setError("Enter a Confirm Password please");
+            binding.edittextRegistrationConPassword.requestFocus();
+            return;
+
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()) {
+            binding.edittextRegistrationEmail.setError("Enter a Valid Email please");
+            binding.edittextRegistrationEmail.requestFocus();
+            return;
+
+        }
+
+        if (user_password.length() < 6) {
+            binding.edittextRegistrationPassword.setError("Enter a atleast 6 digit Password please");
+            binding.edittextRegistrationPassword.requestFocus();
+            return;
+        }
+        if (user_con_password.length() < 6) {
+            binding.edittextRegistrationConPassword.setError("Enter a atleast 6 digit Password please");
+            binding.edittextRegistrationConPassword.requestFocus();
+            return;
+        }
+        if (!user_password.equals(user_con_password)) {
+            binding.edittextRegistrationPassword.setError("Password and Confirm Password must be same");
+            binding.edittextRegistrationPassword.requestFocus();
+            return;
+
+        }
 
 
     }
