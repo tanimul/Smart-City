@@ -159,7 +159,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
 
     //News Place
     public void NewsInsert(String userid) {
-        
+
         final String adminid = userid;
 
 
