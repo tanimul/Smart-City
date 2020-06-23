@@ -185,20 +185,6 @@
             tools:ignore="MissingConstraints" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView_from_registration_need_help"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:gravity="center"
-        android:text=" Need help ?"
-        android:textColor="#FC0A1A"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,8 +39,6 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
         //Underline some text
         binding.textViewForgotpass.setPaintFlags(binding.textViewForgotpass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         binding.textViewFromLoginForRegistration.setPaintFlags(binding.textViewFromLoginForRegistration.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        binding.textViewFromLoginNeedHelp.setPaintFlags(binding.textViewFromLoginNeedHelp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
 
         binding.textViewFromLoginForRegistration.setOnClickListener(this);
         binding.buttonLoginAsUser.setOnClickListener(this);
@@ -52,11 +50,11 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
         if (v == binding.buttonLoginAsUser) {
             userLogin();
         } else if (v == binding.textViewForgotpass) {
-
             startActivity(new Intent(Login_User.this, Password_Reset_Activity.class));
 
         } else if (v == binding.textViewFromLoginForRegistration) {
             startActivity(new Intent(Login_User.this, Registration.class));
+            finish();
         }
 
 
@@ -94,10 +92,12 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
             //Show Password
             binding.edittextLoginPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             binding.eyebutton.setImageResource(R.drawable.hide);
+            binding.edittextLoginPassword.setHint("");
         } else {
             //Hide Password
             binding.edittextLoginPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
             binding.eyebutton.setImageResource(R.drawable.ic_eyes);
+            binding.edittextLoginPassword.setHint("********");
         }
     }
 

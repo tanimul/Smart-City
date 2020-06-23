@@ -89,8 +89,21 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
         if (v == binding.saveNews) {
 
             if (filedchecking()) {
-                NewsInsert();
+                adminid();
             }
+        }
+
+
+    }
+
+    private void adminid() {
+        final Bundle admininformation = getActivity().getIntent().getExtras();
+        if (admininformation != null) {
+
+            String adminid = admininformation.getString("adminid");
+            Log.d(TAG, "" + adminid);
+
+            NewsInsert(adminid);
         }
 
 
@@ -129,7 +142,15 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         month = month + 1;
-                        binding.newsdate.setText(dayOfMonth + "/" + month + "/" + year);
+                        String monthofyear = "" + month;
+                        String dayofmonth = "" + dayOfMonth;
+                        if (month < 10) {
+                            monthofyear = "0" + month;
+                        }
+                        if (dayOfMonth < 10) {
+                            dayofmonth = "0" + dayOfMonth;
+                        }
+                        binding.newsdate.setText(year + "-" + monthofyear + "-" + dayofmonth);
                     }
                 }, currentYear, currentMonth, currentDay);
         datePickerDialog.show();
@@ -137,10 +158,10 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
 
 
     //News Place
-    public void NewsInsert() {
+    public void NewsInsert(String userid) {
+        
+        final String adminid = userid;
 
-        //for testing
-        final String userid = "WM1vIUC6esTbafyXAE69UvwTDLUED";
 
         if (filepath_uri != null) {
             progressDialog.setTitle("Insert the news...");
@@ -155,7 +176,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
                             storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    String name = binding.newstitle.getText().toString();
+                                    String newstitle = binding.newstitle.getText().toString();
                                     String newsDate = binding.newsdate.getText().toString().trim();
                                     String src = binding.newssrc.getText().toString().toLowerCase();
                                     String url = uri.toString();
@@ -166,8 +187,8 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
                                     Log.d(TAG, "done");
 
                                     String uplodeid = databaseReference.push().getKey();
-                                    News news = new News(userid, name, src, newsDate, url);
-                                    databaseReference.child(uplodeid).setValue(news);
+                                    News news = new News(adminid, newsDate, url, newstitle, src);
+                                    databaseReference.child(newsDate).child(uplodeid).setValue(news);
                                     Log.d(TAG, "done" + url);
 
                                     afterRegistrationofClener();

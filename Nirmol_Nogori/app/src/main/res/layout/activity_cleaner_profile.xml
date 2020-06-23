@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="2dp"
+    tools:context=".DoorToDoor.CleanerProfile">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/cleaner_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?android:attr/windowBackground"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingConstraints"
+        android:paddingLeft="20dp"
+        app:title="Cleaner Profile">
+    </androidx.appcompat.widget.Toolbar>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/clenar_photo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="2dp"
+        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+       />
+
+    <TextView
+        android:id="@+id/cleanerTXT_ratings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:paddingLeft="30dp"
+        android:text="Ratings"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar"
+        app:layout_constraintEnd_toStartOf="@+id/clenar_photo"
+        app:layout_constraintLeft_toLeftOf="parent"
+      />
+
+    <TextView
+        android:id="@+id/cleanerTXT_tFair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="right|center"
+        android:paddingRight="25dp"
+        android:text="Total Fair"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/clenar_photo"
+        app:layout_constraintTop_toBottomOf="@id/cleaner_toolbar"/>
+
+    <TextView
+        android:id="@+id/cleanerTXT_tFairValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="right|bottom"
+        android:paddingRight="30dp"
+        android:text="100tk/hr"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/clenar_photo"
+        app:layout_constraintTop_toBottomOf="@id/cleanerTXT_tFair" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:rating="4.5"
+        app:layout_constraintEnd_toStartOf="@+id/clenar_photo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cleanerTXT_ratings"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/cleanerTXT_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Name"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clenar_photo"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/cleanerTXT_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Area"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cleanerTXT_name"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/cleaner_callbutton"
+        android:layout_width="91dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button_background"
+        android:text="Request"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cleanerTXT_area"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/cleanerTXT_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="10dp"
+        android:text="There is No Review yet"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cleaner_callbutton"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cleaner_profile_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cleanerTXT_review"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorWhite"
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/review_card" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

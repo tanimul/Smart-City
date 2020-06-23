@@ -114,7 +114,7 @@
             android:textColor="@color/colorBlack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-
+            android:onClick="onClick"
             app:layout_constraintTop_toBottomOf="@+id/search_startLocation" />
 
 

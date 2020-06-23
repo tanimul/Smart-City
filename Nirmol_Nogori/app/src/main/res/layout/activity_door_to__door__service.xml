@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ui.Door_to_Door_Service">
+    tools:context=".DoorToDoor.Door_to_Door_Service">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/door_to_door_service_toolbar"

@@ -12,7 +12,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.nirmol_nogori.GetNearbyPlacesData;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityFindNearestDustbineBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -42,6 +46,9 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
     private Location lastLocation;
     private Handler mainHandler = new Handler();
     private LocationCallback locationCallback;
+
+    int PROXIMITY_RADIUS = 500;
+    double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +80,36 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
         map.getUiSettings().setMyLocationButtonEnabled(true);
 
 
+    }
+
+    public void onClick(View v) {
+        Object dataTransfer[] = new Object[2];
+        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+        switch (v.getId()) {
+            case R.id.search_destination_location:
+                map.clear();
+                String hospital = "hospital";
+                String url = getUrl(latitude, longitude, hospital);
+                dataTransfer[0] = map;
+                dataTransfer[1] = url;
+
+                getNearbyPlacesData.execute(dataTransfer);
+                Toast.makeText(Find_Nearest_Dustbine.this, "Showing Nearby Hospitals", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+    private String getUrl(double latitude, double longitude, String nearbyPlace) {
+
+        StringBuilder googlePlaceUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlaceUrl.append("location=" + latitude + "," + longitude);
+        googlePlaceUrl.append("&radius=" + PROXIMITY_RADIUS);
+        googlePlaceUrl.append("&type=" + nearbyPlace);
+        googlePlaceUrl.append("&sensor=true");
+        googlePlaceUrl.append("&key=" + "AIzaSyCWAzqH-TzKUf5CpVErKYs1iLWhDzA3EF4");
+
+        Log.d("MapsActivity", "url = " + googlePlaceUrl.toString());
+
+        return googlePlaceUrl.toString();
     }
 
 

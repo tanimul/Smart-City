@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ui.News_nd_Trend">
+    tools:context=".NewsAndTrend.News_nd_Trend">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/news_nd_trend_toolbar"

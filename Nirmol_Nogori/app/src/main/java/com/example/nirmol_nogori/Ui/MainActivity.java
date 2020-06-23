@@ -1,6 +1,8 @@
 package com.example.nirmol_nogori.Ui;
 
 import com.example.nirmol_nogori.Admin.Login_Admin;
+import com.example.nirmol_nogori.DoorToDoor.GetReviewFromuser;
+import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.User.Login_User;
 import com.example.nirmol_nogori.User.Registration;
@@ -52,17 +54,13 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
-import java.util.List;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityMainBinding binding;
+    private android.app.AlertDialog.Builder alretdialog;
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -75,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     private static final int FINE_LOCATION_REQUEST_CODE = 11;
     private static final int LOCATION_SETTINGS_REQUEST_CODE = 22;
+    public static boolean CLEANER_REQUEST;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,16 +82,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-//        if (firebaseUser != null) {
-//            checkUserStatus();
-//        }
         if (requestlocationpermission()) {
             locationSettingOption();
         }
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
         //Authenticate with Firebase for facebook Login
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -182,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         resolvable.startResolutionForResult(MainActivity.this,
                                 LOCATION_SETTINGS_REQUEST_CODE);
                     } catch (IntentSender.SendIntentException sendEx) {
-                        Log.d(TAG, "try to loction onnnn ");
                     }
                 }
             }
@@ -200,12 +197,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+
     //check current user status
     private void checkUserStatus() {
         if (firebaseUser != null) {
-            startActivity(new Intent(MainActivity.this, Home_Menu.class));
-            finish();
+            if (CLEANER_REQUEST == true) {
+                service();
+            } else {
+                startActivity(new Intent(MainActivity.this, Home_Menu.class));
+                finish();
+            }
         }
+    }
+
+    private void service() {
+        alretdialog = new android.app.AlertDialog.Builder(MainActivity.this);
+        alretdialog.setTitle("Service");
+        alretdialog.setMessage("Have you taken the SERVICE before ?");
+        alretdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(MainActivity.this, GetReviewFromuser.class));
+                finish();
+            }
+        });
+        alretdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                CLEANER_REQUEST = false;
+                checkUserStatus();
+                dialog.dismiss();
+            }
+        });
+        alretdialog.create();
+        alretdialog.show();
+
     }
 
     @Override
@@ -245,9 +271,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (resultCode) {
                 case RESULT_OK:
                     Log.d(TAG, "onActivityResult: RESULT_OK");
-                    if (firebaseUser != null) {
-                        checkUserStatus();
-                    }
+
+                    checkUserStatus();
                     break;
                 case RESULT_CANCELED:
                     new AlertDialog.Builder(this)
@@ -340,9 +365,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String personid = account.getId();
             Toast.makeText(this, personemail + "\n" + personname + "\n" + personid, Toast.LENGTH_SHORT).show();
             Log.d(TAG, personemail + "");
-            Intent intent = new Intent(MainActivity.this, Home_Menu.class);
-            startActivity(intent);
-            finish();
+
+
+            Users user = new Users(account.getDisplayName(), account.getGivenName(), account.getEmail());
+            databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Log.d(TAG,"adding successfully in Database.");
+                    checkUserStatus();
+                }
+            });
 
         }
         if (firebaseUser != null) {
@@ -351,7 +384,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
 
-        } else {
+        }
+        else {
 
             Toast.makeText(this, "You're not logged in", Toast.LENGTH_SHORT).show();
 

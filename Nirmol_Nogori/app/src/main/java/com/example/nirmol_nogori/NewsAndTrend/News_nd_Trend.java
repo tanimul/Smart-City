@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori.Ui;
+package com.example.nirmol_nogori.NewsAndTrend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-//Todo add order by child data using date  and show data in recyclerview
 
 public class News_nd_Trend extends AppCompatActivity {
     private ActivityNewsNdTrendBinding binding;
@@ -29,6 +28,7 @@ public class News_nd_Trend extends AppCompatActivity {
     private RecyclerView rc_newstrend;
     private DatabaseReference databaseReference;
     NewsAdapter newsAdapter;
+    int limitationshow = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,8 @@ public class News_nd_Trend extends AppCompatActivity {
         rc_newstrend.setFitsSystemWindows(true);
         rc_newstrend.setLayoutManager(new LinearLayoutManager(this));
         rc_newstrend.setHasFixedSize(true);
-
         newsAdapter = new NewsAdapter(News_nd_Trend.this, newslist);
+        rc_newstrend.setAdapter(newsAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("News_Trend");
         databaseReference.keepSynced(true);
@@ -52,13 +52,15 @@ public class News_nd_Trend extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 newslist.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    String key = dataSnapshot1.getKey();
-                    News news1 = dataSnapshot1.getValue(News.class);
-                    newslist.add(news1);
-                    rc_newstrend.setAdapter(newsAdapter);
-
-                    Log.d(TAG, "Key:" + key + "news name:" + news1.getNews_img_url());
-
+                    for (DataSnapshot snapshot : dataSnapshot1.getChildren()) {
+                        limitationshow++;
+                        String key = snapshot.getKey();
+                        News news1 = snapshot.getValue(News.class);
+                        if (limitationshow <= 20) {
+                            newslist.add(news1);
+                        }
+                        Log.d(TAG, "Key:" + key + "news name:" + news1.getNewstitle());
+                    }
                 }
                 newsAdapter.notifyDataSetChanged();
             }

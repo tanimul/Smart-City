@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori.Ui;
+package com.example.nirmol_nogori.DoorToDoor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +27,6 @@ public class Door_to_Door_Service extends AppCompatActivity {
     private ActivityDoorToDoorServiceBinding binding;
     private static final String TAG = "Door_to_Door_Service";
     private ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
-    private ArrayList<Review> reviews = new ArrayList<Review>();
     CleanerAdapter CleanerAdapter;
     private DatabaseReference databaseReference;
     private DatabaseReference databaseReference2;
@@ -51,6 +50,7 @@ public class Door_to_Door_Service extends AppCompatActivity {
         binding.cleanerRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.cleanerRecyclerview.setHasFixedSize(true);
         CleanerAdapter = new CleanerAdapter(cleaners);
+        binding.cleanerRecyclerview.setAdapter(CleanerAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Location and Cleaner").child(title);
         databaseReference.keepSynced(true);
@@ -61,33 +61,9 @@ public class Door_to_Door_Service extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Cleaner cleaner = dataSnapshot1.getValue(Cleaner.class);
                     cleaners.add(cleaner);
-                    binding.cleanerRecyclerview.setAdapter(CleanerAdapter);
                     Log.d(TAG, dataSnapshot1.getKey() + "key:" + "value:" + cleaner.getName());
-
                 }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        //just for testing
-        String alom = "alom";
-        String path = "jvkOpv04aAc73y9DFOJbXRFVUxk2";
-        databaseReference2 = FirebaseDatabase.getInstance().getReference("Experience").child(alom).child(path);
-        databaseReference2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Review review = dataSnapshot.getValue(Review.class);
-
-                Log.d("ddddd", "" + review.getCleanername());
-                Log.d("ddddd", "" + review.getReview());
-                Log.d("ddddd", "" + review.getRating());
-                Log.d("ddddd", "" + review.getLocation());
+                CleanerAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -98,4 +74,6 @@ public class Door_to_Door_Service extends AppCompatActivity {
 
 
     }
+
+    //TOdo add searchview 0002
 }

@@ -69,7 +69,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="30dp"
             android:onClick="ShowHidePassAdm"
-            android:src="@drawable/ic_eyes"
+            android:src="@drawable/hide"
             android:background="@null"/>
     </RelativeLayout>
 
@@ -90,7 +90,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button_Login_as_user"
+        android:id="@+id/button_Login_as_admin"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"

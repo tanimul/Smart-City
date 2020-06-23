@@ -9,12 +9,11 @@ public class Review {
     private String userid;
     private String cleanername;
     private String location;
+    private String imageurl;
+    private String username;
 
-
-    public Review() {
-    }
-
-    public Review(String date, int total_hour, int total_fair, String review, float rating, String userid, String cleanername,String location) {
+    public Review(String date, int total_hour, int total_fair, String review,
+                  float rating, String userid, String cleanername, String location, String imageurl, String username) {
         this.date = date;
         this.total_hour = total_hour;
         this.total_fair = total_fair;
@@ -22,15 +21,12 @@ public class Review {
         this.rating = rating;
         this.userid = userid;
         this.cleanername = cleanername;
-        this.location=location;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
         this.location = location;
+        this.imageurl = imageurl;
+        this.username = username;
+    }
+
+    public Review() {
     }
 
     public String getDate() {
@@ -41,20 +37,12 @@ public class Review {
         this.date = date;
     }
 
-    public String getCleanername() {
-        return cleanername;
+    public int getTotal_hour() {
+        return total_hour;
     }
 
-    public void setCleanername(String cleanername) {
-        this.cleanername = cleanername;
-    }
-
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setTotal_hour(int total_hour) {
+        this.total_hour = total_hour;
     }
 
     public int getTotal_fair() {
@@ -65,12 +53,12 @@ public class Review {
         this.total_fair = total_fair;
     }
 
-    public int getTotal_hour() {
-        return total_hour;
+    public String getReview() {
+        return review;
     }
 
-    public void setTotal_hour(int total_hour) {
-        this.total_hour = total_hour;
+    public void setReview(String review) {
+        this.review = review;
     }
 
     public float getRating() {
@@ -81,11 +69,43 @@ public class Review {
         this.rating = rating;
     }
 
-    public String getReview() {
-        return review;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getCleanername() {
+        return cleanername;
+    }
+
+    public void setCleanername(String cleanername) {
+        this.cleanername = cleanername;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

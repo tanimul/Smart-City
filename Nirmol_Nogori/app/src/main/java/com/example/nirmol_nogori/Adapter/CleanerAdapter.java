@@ -1,11 +1,8 @@
 package com.example.nirmol_nogori.Adapter;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,21 +11,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nirmol_nogori.DoorToDoor.CleanerProfile;
 import com.example.nirmol_nogori.Model.Cleaner;
 import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.Ui.MainActivity;
 import com.squareup.picasso.Picasso;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 public class CleanerAdapter extends RecyclerView.Adapter<CleanerAdapter.Cleanerholder> {
     private static final String TAG = "Cleaner_Adapter";
@@ -64,15 +58,32 @@ public class CleanerAdapter extends RecyclerView.Adapter<CleanerAdapter.Cleanerh
         holder.request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.CLEANER_REQUEST = true;
                 Log.d(TAG, "calling" + cleaner.getPhoneno());
                 Context context = v.getContext();
                 requestcleaner(context, cleaner.getPhoneno());
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, CleanerProfile.class);
+                intent.putExtra("cleaner_name", cleaner.getName());
+                intent.putExtra("cleaner_area", cleaner.getLocation());
+                intent.putExtra("cleaner_imageurl", cleaner.getImageurl());
+                intent.putExtra("cleaner_ratings", cleaner.getRating());
+                intent.putExtra("cleaner_totalfair", cleaner.getTotal_fair());
+                intent.putExtra("cleaner_totalhr", cleaner.getTotal_hr());
+                intent.putExtra("cleaner_phone", cleaner.getPhoneno());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
+    //Request Cleaner by Call
     private void requestcleaner(Context context, String number) {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "" + number));
         context.startActivity(intent);

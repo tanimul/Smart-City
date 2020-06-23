@@ -40,7 +40,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Newsholder> {
 
         final News newsTrend = news.get(position);
 
-        holder.news_name.setText(newsTrend.getNews_name());
+        holder.news_name.setText(newsTrend.getNewstitle());
         holder.news_src.setText(newsTrend.getSrc());
         Picasso.get().load(newsTrend.getNews_img_url())
                 .placeholder(R.mipmap.ic_launcher)

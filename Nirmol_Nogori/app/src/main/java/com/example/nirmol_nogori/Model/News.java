@@ -1,38 +1,29 @@
 package com.example.nirmol_nogori.Model;
 
 public class News {
-    private String userid;
-    private String news_name;
-    private String src;
+    private String adminid;
     private String date;
     private String news_img_url;
+    private String newstitle;
+    private String src;
 
-
-    public News(String userid, String news_name, String src, String date, String news_img_url) {
-        this.userid = userid;
-        this.news_name = news_name;
-        this.src = src;
+    public News(String adminid, String date, String news_img_url, String newstitle, String src) {
+        this.adminid = adminid;
         this.date = date;
         this.news_img_url = news_img_url;
+        this.newstitle = newstitle;
+        this.src = src;
     }
 
     public News() {
     }
 
-    public String getNews_name() {
-        return news_name;
+    public String getAdminid() {
+        return adminid;
     }
 
-    public void setNews_name(String news_name) {
-        this.news_name = news_name;
-    }
-
-    public String getSrc() {
-        return src;
-    }
-
-    public void setSrc(String src) {
-        this.src = src;
+    public void setAdminid(String adminid) {
+        this.adminid = adminid;
     }
 
     public String getDate() {
@@ -51,11 +42,19 @@ public class News {
         this.news_img_url = news_img_url;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getNewstitle() {
+        return newstitle;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setNewstitle(String newstitle) {
+        this.newstitle = newstitle;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
     }
 }
