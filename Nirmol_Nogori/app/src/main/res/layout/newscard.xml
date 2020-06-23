@@ -21,7 +21,7 @@
             android:src="@drawable/user"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="2dp"
-            android:layout_marginRight="2dp"
+            android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -46,11 +46,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginRight="75dp"
+            android:layout_marginBottom="5dp"
             android:gravity="start"
             android:paddingLeft="10dp"
             android:text="News source"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/card_newsTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="MissingConstraints" />
 
         <!--        <View-->
