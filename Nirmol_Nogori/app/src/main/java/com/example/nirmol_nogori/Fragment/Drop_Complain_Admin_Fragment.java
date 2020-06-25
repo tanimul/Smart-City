@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori.FragmentAdmin;
+package com.example.nirmol_nogori.Fragment;
 
 import android.os.Bundle;
 

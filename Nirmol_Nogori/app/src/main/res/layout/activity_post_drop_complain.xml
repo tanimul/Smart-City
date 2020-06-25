@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DropComplain.PostDropComplain">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_dropcomplain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:paddingTop="2dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/back"
+                    android:text="Drop Complain"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/postcomplainsubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/button_6_background"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Drop"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:background="?android:attr/windowBackground"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/linerlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userPhoto"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_user"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="2dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="User name"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/complain_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="User name"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayot3"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintTop_toBottomOf="@id/linerlayout1">
+
+            <EditText
+                android:id="@+id/edittextcomplain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/editextbackground2"
+                android:gravity="start"
+                android:hint="Describe your complain ..."
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageforcompalain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="230dp"
+            android:layout_marginBottom="55dp"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintTop_toBottomOf="@id/constraintlayot3" />
+
+        <ImageButton
+            android:id="@+id/closecomplainimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close"
+            android:layout_margin="20dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/constraintlayot3"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@null"
+            />
+        
+
+        <LinearLayout
+            android:id="@+id/linerlayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <Button
+                android:id="@+id/addphotoforcomplain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_5_background"
+                android:drawableLeft="@drawable/ic_image"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="    Photo"
+                android:textAllCaps="false"
+                android:textColor="@color/colorBlack"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_5_background"
+                android:drawableLeft="@drawable/ic_location"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="    Location"
+                android:textAllCaps="false"
+                android:textColor="@color/colorBlack"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

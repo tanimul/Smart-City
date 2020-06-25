@@ -2,17 +2,26 @@ package com.example.nirmol_nogori.Model;
 
 public class Users {
 
-    private String first_name, last_name, user_email, user_image_url;
+    private String first_name, last_name, user_email, user_image_url,phoneno;
 
     public Users() {
 
     }
 
-    public Users(String first_name, String last_name, String user_email, String user_image_url) {
+    public Users(String first_name, String last_name, String user_email, String user_image_url,String phoneno) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.user_email = user_email;
         this.user_image_url = user_image_url;
+        this.phoneno=phoneno;
+    }
+
+    public String getPhoneno() {
+        return phoneno;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
     }
 
     public String getUser_image_url() {

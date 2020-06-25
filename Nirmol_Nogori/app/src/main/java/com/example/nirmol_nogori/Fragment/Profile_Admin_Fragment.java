@@ -1,9 +1,7 @@
-package com.example.nirmol_nogori.FragmentAdmin;
+package com.example.nirmol_nogori.Fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.core.view.PointerIconCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -13,11 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.FragmentProfileAdminBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -39,7 +33,6 @@ public class Profile_Admin_Fragment extends Fragment {
         binding = FragmentProfileAdminBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        //for testing
 
         final Bundle admininformation = getActivity().getIntent().getExtras();
         if (admininformation != null) {

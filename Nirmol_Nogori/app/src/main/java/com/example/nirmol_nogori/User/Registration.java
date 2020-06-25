@@ -15,6 +15,7 @@ import com.example.nirmol_nogori.BuildConfig;
 import com.example.nirmol_nogori.Ui.Home_Activity;
 import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.Ui.Home_Menu;
+
 import com.example.nirmol_nogori.databinding.ActivityRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -62,13 +63,14 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    String first_name, last_name, user_email, user_password, user_con_password;
+    String first_name, last_name, user_email,user_phone, user_password, user_con_password;
 
     public void userRegistration() {
 
         first_name = binding.edittextFirstname.getText().toString().trim();
         last_name = binding.edittextLastname.getText().toString().trim();
         user_email = binding.edittextRegistrationEmail.getText().toString().trim();
+        user_phone = binding.edittextRegistrationPhone.getText().toString().trim();
         user_password = binding.edittextRegistrationPassword.getText().toString().trim();
         user_con_password = binding.edittextRegistrationConPassword.getText().toString().trim();
 
@@ -80,7 +82,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            Users user = new Users(first_name, last_name, user_email,null);
+                            Users user = new Users(first_name, last_name, user_email,null,user_phone);
                             databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

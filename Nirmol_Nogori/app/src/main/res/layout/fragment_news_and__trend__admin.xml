@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground"
-    tools:context=".FragmentAdmin.News_and_Trend_Admin_Fragment">
+    tools:context=".Fragment.News_and_Trend_Admin_Fragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar"

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="40dp"
     android:background="@drawable/sign_up_sceen"
     tools:context=".User.Registration">
 
@@ -19,11 +18,12 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayot2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/reg_background"
         app:layout_constraintTop_toBottomOf="@id/textView_regpage_title"
         tools:ignore="MissingConstraints">
@@ -82,7 +82,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linerlayout3"
+            android:id="@+id/linerlayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -90,6 +90,31 @@
             android:weightSum="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linerlayout2">
+
+            <EditText
+
+                android:id="@+id/edittext_registration_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="Phone number"
+                android:inputType="number|phone"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linerlayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linerlayout6">
 
             <EditText
 
@@ -124,10 +149,10 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginBottom="15dp"
-                android:inputType="textPassword"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:hint="Confirm Password"
+                android:inputType="textPassword"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -140,18 +165,15 @@
         android:id="@+id/button_registration"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button_background"
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_regpage_title"
-        app:layout_constraintVertical_bias="0.457"
+        app:layout_constraintTop_toBottomOf="@id/constraintlayot2"
         tools:ignore="MissingConstraints" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -184,7 +206,6 @@
             android:textSize="25dp"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

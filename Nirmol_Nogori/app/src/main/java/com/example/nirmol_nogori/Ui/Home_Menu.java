@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.DoorToDoor.Door_to_Door_Location;
+import com.example.nirmol_nogori.DropComplain.DropComplain;
 import com.example.nirmol_nogori.NewsAndTrend.News_nd_Trend;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.User.Login_User;
@@ -69,7 +70,6 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
 //        updateNavHeader(firebaseUser.getUid());
 
 
-
         binding.homeNavigation.setNavigationItemSelectedListener(this);
 
         binding.homeActivty.buttonFindNearestDustbine.setOnClickListener(this);
@@ -117,7 +117,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case R.id.nav_setting:
-                startActivity(new Intent(Home_Menu.this,Setting.class));
+                startActivity(new Intent(Home_Menu.this, Setting.class));
                 break;
 
             case R.id.nav_logout:
@@ -137,7 +137,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
             startActivity(new Intent(Home_Menu.this, Door_to_Door_Location.class));
 
         } else if (v == binding.homeActivty.buttonDropComplain) {
-            Toast.makeText(this, "DropComplain item slelected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Home_Menu.this, DropComplain.class));
 
         } else if (v == binding.homeActivty.buttonFindNearestDustbine) {
             startActivity(new Intent(Home_Menu.this, Find_Nearest_Dustbine.class));
@@ -180,7 +180,6 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
         finish();
         startActivity(new Intent(Home_Menu.this, Login_User.class));
     }
-
 
 
 }

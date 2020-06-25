@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.Ui.Home_Activity;
+import com.example.nirmol_nogori.Ui.Home_Menu;
 import com.example.nirmol_nogori.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -71,7 +72,7 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(Login_User.this, "login successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Login_User.this, Home_Activity.class));
+                                startActivity(new Intent(Login_User.this, Home_Menu.class));
                             } else {
                                 Toast.makeText(Login_User.this, "login unsuccessfully", Toast.LENGTH_SHORT).show();
                             }

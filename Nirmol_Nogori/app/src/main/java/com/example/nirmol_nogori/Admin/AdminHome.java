@@ -8,18 +8,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.nirmol_nogori.FragmentAdmin.Door_to_Door_Admin_Fragment;
-import com.example.nirmol_nogori.FragmentAdmin.Drop_Complain_Admin_Fragment;
-import com.example.nirmol_nogori.FragmentAdmin.News_and_Trend_Admin_Fragment;
-import com.example.nirmol_nogori.FragmentAdmin.Profile_Admin_Fragment;
+import com.example.nirmol_nogori.Fragment.Door_to_Door_Admin_Fragment;
+import com.example.nirmol_nogori.Fragment.Drop_Complain_Admin_Fragment;
+import com.example.nirmol_nogori.Fragment.News_and_Trend_Admin_Fragment;
+import com.example.nirmol_nogori.Fragment.Profile_Admin_Fragment;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityAdminHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.squareup.picasso.Picasso;
 
 public class AdminHome extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private ActivityAdminHomeBinding binding;
-    private BottomNavigationView bottomNavigationView;
     private Fragment selectedfragment = null;
     private static final String TAG = "Admin_Home";
 

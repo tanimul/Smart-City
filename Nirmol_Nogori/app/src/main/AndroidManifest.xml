@@ -13,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DoorToDoor.CleanerProfile"></activity>
-        <activity android:name=".PostComplainActivity" />
-        <activity android:name=".Ui.DropComplain" />
+        <activity android:name=".DropComplain.LocationShare"></activity>
+        <activity android:name=".DropComplain.PostDropComplain" />
+        <activity android:name=".DoorToDoor.CleanerProfile" />
+        <activity android:name=".DropComplain.DropComplain" />
         <activity android:name=".Admin.AdminHome" />
         <activity android:name=".NewsAndTrend.News_nd_Trend" />
         <activity android:name=".DoorToDoor.Door_to_Door_Service" />
@@ -26,10 +27,16 @@
         <activity android:name=".User.Password_Reset_Activity" />
         <activity android:name=".Ui.Home_Menu" />
         <activity android:name=".Ui.Find_Nearest_Dustbine" />
-        <activity android:name=".Admin.Login_Admin" android:parentActivityName=".Ui.MainActivity"/>
+        <activity
+            android:name=".Admin.Login_Admin"
+            android:parentActivityName=".Ui.MainActivity" />
         <activity android:name=".Ui.Home_Activity" />
-        <activity android:name=".User.Registration"  android:parentActivityName=".Ui.MainActivity"/>
-        <activity android:name=".User.Login_User" android:parentActivityName=".Ui.MainActivity" />
+        <activity
+            android:name=".User.Registration"
+            android:parentActivityName=".Ui.MainActivity" />
+        <activity
+            android:name=".User.Login_User"
+            android:parentActivityName=".Ui.MainActivity" />
         <activity android:name=".Ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

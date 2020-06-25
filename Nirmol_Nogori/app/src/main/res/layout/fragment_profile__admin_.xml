@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentAdmin.Profile_Admin_Fragment">
+    tools:context=".Fragment.Profile_Admin_Fragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar"
@@ -41,6 +41,8 @@
         android:id="@+id/adminPhoto"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
