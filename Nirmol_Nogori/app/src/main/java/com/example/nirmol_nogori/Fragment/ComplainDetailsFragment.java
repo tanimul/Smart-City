@@ -1,12 +1,11 @@
 package com.example.nirmol_nogori.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,45 +14,42 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.Adapter.ComplainAdapter;
-import com.example.nirmol_nogori.Adapter.LocationAdapter;
-import com.example.nirmol_nogori.DropComplain.PostDropComplain;
+import com.example.nirmol_nogori.Adapter.RepostAdapter;
+import com.example.nirmol_nogori.DropComplain.DropComplain;
 import com.example.nirmol_nogori.Model.Complain;
-import com.example.nirmol_nogori.Model.Users;
+import com.example.nirmol_nogori.Model.Repost;
 import com.example.nirmol_nogori.R;
-import com.example.nirmol_nogori.databinding.FragmentHomeDropComplainBinding;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.nirmol_nogori.databinding.FragmentComplainDetailsBinding;
+import com.example.nirmol_nogori.databinding.FragmentDoorToDoorAdminBinding;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.database.core.Repo;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HomeDropComplainFragment extends Fragment {
-    private FragmentHomeDropComplainBinding binding;
-    private static final String TAG = "Home_Drop_Complain_Fragment";
+public class ComplainDetailsFragment extends Fragment {
+    private FragmentComplainDetailsBinding binding;
+    String postid;
     private RecyclerView recyclerView;
     private ComplainAdapter complainAdapter;
     private List<Complain> complains;
-    ProgressBar progressBar;
-    private int image_rec_code = 1;
-    private Uri filepath_uri;
+    private static final String TAG = "Complains_Dtls_Fragment";
 
+    String  publisherid;
+    FirebaseUser firebaseUser;
+    private RepostAdapter repostAdapter;
+    private List<Repost> repostList;
 
-    public HomeDropComplainFragment() {
+    public ComplainDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -61,59 +57,64 @@ public class HomeDropComplainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentHomeDropComplainBinding.inflate(inflater, container, false);
+
+        binding = FragmentComplainDetailsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        progressBar = view.findViewById(R.id.progress_circular);
-        recyclerView = view.findViewById(R.id.recycler_view_complainall);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+
+        postid = sharedPreferences.getString("postid", "none");
+
+
+        recyclerView = view.findViewById(R.id.complain_details_recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+
         complains = new ArrayList<>();
         complainAdapter = new ComplainAdapter(getContext(), complains);
         recyclerView.setAdapter(complainAdapter);
 
+        readComplains(postid);
 
-        readComplains();
 
-        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        updateprofilepic(userid);
-
-        binding.goaddcomplianFragment.setOnClickListener(new View.OnClickListener() {
+        binding.backfromPostdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PostDropComplain.class));
+                startActivity(new Intent(getActivity(), DropComplain.class));
                 getActivity().finish();
             }
         });
-        binding.userPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container, new UserProfileFragment()).commit();
 
-            }
-        });
 
+        binding.complainRepostRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
+        binding.complainRepostRecyclerView.setLayoutManager(linearLayoutManager1);
+        repostList = new ArrayList<>();
+        repostAdapter = new RepostAdapter(getContext(),repostList);
+        binding.complainRepostRecyclerView.setAdapter(repostAdapter);
+
+
+        readrepost(postid);
 
         return view;
     }
 
-    private void updateprofilepic(String userid) {
-        String usesid = userid;
-        Log.d("dddd", "update profile");
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(usesid);
-        databaseReference.keepSynced(true);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void readrepost(String postid) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Repost").child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Users users = dataSnapshot.getValue(Users.class);
-                Picasso.get().load(users.getUser_image_url())
-                        .placeholder(R.drawable.ic_user)
-                        .fit()
-                        .centerCrop()
-                        .into(binding.userPhoto);
+                repostList.clear();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                      if(dataSnapshot.getChildrenCount() !=0){
+                          binding.textrepostall.setVisibility(View.VISIBLE);
+                          Repost repost = dataSnapshot1.getValue(Repost.class);
+                          repostList.add(repost);
+                      }
+                }
+                repostAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -123,8 +124,8 @@ public class HomeDropComplainFragment extends Fragment {
         });
     }
 
-    private void readComplains() {
-        Log.d("dddd", "read");
+    private void readComplains(final String postid) {
+        Log.d(TAG, "read");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Complains");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -135,15 +136,15 @@ public class HomeDropComplainFragment extends Fragment {
                     for (DataSnapshot snapshot : dataSnapshot1.getChildren()) {
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                             Complain complain = snapshot1.getValue(Complain.class);
-                            complains.add(complain);
+                            if (postid.equals(complain.getComplainid())) {
+                                complains.add(complain);
+                            }
                         }
 
 
                     }
                 }
-                Collections.reverse(complains);
                 complainAdapter.notifyDataSetChanged();
-                progressBar.setVisibility(View.GONE);
             }
 
 
@@ -153,5 +154,4 @@ public class HomeDropComplainFragment extends Fragment {
             }
         });
     }
-
 }

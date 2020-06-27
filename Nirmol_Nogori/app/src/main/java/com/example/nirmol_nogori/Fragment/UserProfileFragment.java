@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import com.example.nirmol_nogori.Adapter.PhotoAdapter;
 import com.example.nirmol_nogori.DoorToDoor.CleanerProfile;
+import com.example.nirmol_nogori.DropComplain.DropComplain;
+import com.example.nirmol_nogori.DropComplain.PostDropComplain;
 import com.example.nirmol_nogori.Model.Complain;
 import com.example.nirmol_nogori.Model.News;
 import com.example.nirmol_nogori.Model.Users;
@@ -86,13 +88,20 @@ public class UserProfileFragment extends Fragment {
 
         if (profileid.equals(userid)) {
             updateprofilefiled(userid);
-            Log.d("dddddd", "user:" + userid);
+            Log.d(TAG, "user:" + userid);
         } else {
-            Log.d("dddddd", "profile:" + profileid);
+            Log.d(TAG, "profile:" + profileid);
             updateprofilefiled(profileid);
             binding.savedcomplain.setVisibility(View.GONE);
         }
 
+        binding.backfromprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), DropComplain.class));
+                getActivity().finish();
+            }
+        });
 
         binding.userPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,7 +254,7 @@ public class UserProfileFragment extends Fragment {
     }
 
     private void complainsaves() {
-        Log.d("dddd", "complain");
+        Log.d(TAG, "complain");
         mysaves = new ArrayList<>();
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Saves")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -267,7 +276,7 @@ public class UserProfileFragment extends Fragment {
     }
 
     private void readsaves() {
-        Log.d("dddd", "read");
+        Log.d(TAG, "read");
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Complains");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

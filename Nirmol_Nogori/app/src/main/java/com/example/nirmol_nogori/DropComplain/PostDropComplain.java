@@ -4,25 +4,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
+import com.example.nirmol_nogori.Fragment.HomeDropComplainFragment;
+import com.example.nirmol_nogori.Model.News;
+import com.example.nirmol_nogori.Model.Repost;
 import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
 
 import com.example.nirmol_nogori.databinding.ActivityPostDropComplainBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Repo;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 public class PostDropComplain extends AppCompatActivity {
@@ -33,6 +43,7 @@ public class PostDropComplain extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private Uri filepath_uri;
     private StorageReference storageReference;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +51,27 @@ public class PostDropComplain extends AppCompatActivity {
         binding = ActivityPostDropComplainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        updateprofilepic(userid);
+        final Bundle complainid = getIntent().getExtras();
+        if (complainid != null) {
+            binding.toolbarTitle.setText("Repost complain");
+            binding.postcomplainsubmit.setText("Repost");
+            binding.edittextcomplain.setHint("Describe your repost...");
+            binding.complainlocation.setVisibility(View.GONE);
+            storageReference = FirebaseStorage.getInstance().getReference("Repost");
+            databaseReference = FirebaseDatabase.getInstance().getReference("Repost");
+
+        } else {
+            storageReference = FirebaseStorage.getInstance().getReference("Complains");
+            databaseReference = FirebaseDatabase.getInstance().getReference("Complains");
+        }
+
+        progressDialog = new ProgressDialog(PostDropComplain.this);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference("Complains");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Complains");
+
+        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        updateprofilepic(userid);
+
 
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +90,7 @@ public class PostDropComplain extends AppCompatActivity {
             }
         });
 
-        binding.complainLocation.setOnClickListener(new View.OnClickListener() {
+        binding.complainlocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -74,7 +100,12 @@ public class PostDropComplain extends AppCompatActivity {
         binding.postcomplainsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (complainid != null) {
+                    String complain_id = complainid.getString("complain_id");
+                    repost(complain_id);
+                }else {
+                    complain(userid);
+                }
             }
         });
 
@@ -85,6 +116,56 @@ public class PostDropComplain extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void complain(String userid) {
+
+    }
+
+    private void repost(final String complain_id) {
+        final String complainId = complain_id;
+
+        if (filepath_uri != null) {
+            progressDialog.setTitle("Insert the Repost...");
+            progressDialog.show();
+            final StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtention(filepath_uri));
+
+            storageReference2.putFile(filepath_uri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String repostdetails = binding.edittextcomplain.getText().toString();
+                                    String url = uri.toString();
+
+                                    progressDialog.dismiss();
+
+                                    Toast.makeText(PostDropComplain.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                                    Log.d(TAG, "Repost Done.");
+
+                                    String repostid = databaseReference.push().getKey();
+                                    Repost repost = new Repost(repostdetails, url, firebaseAuth.getCurrentUser().getUid());
+                                    databaseReference.child(complainId).child(repostid).setValue(repost);
+                                    Log.d(TAG, "done" + url);
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container, new HomeDropComplainFragment()).commit();
+
+                                }
+                            });
+
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "" + e.getMessage());
+                    Toast.makeText(PostDropComplain.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
     }
 
     private void updateprofilepic(String userid) {

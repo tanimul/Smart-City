@@ -25,13 +25,31 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/windowBackground">
 
-                <TextView
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                <ImageView
+                    android:id="@+id/backfromprofile"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="Profile"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:paddingTop="2dp"
+                    android:src="@drawable/ic_back" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Profile"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@color/colorBlack"
+                        android:layout_toRightOf="@id/backfromprofile"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>

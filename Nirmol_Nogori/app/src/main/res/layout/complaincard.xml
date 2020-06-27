@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/complaincard"
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/linerlayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -23,10 +25,9 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
                 android:scaleType="centerCrop"
-                app:civ_border_width="1dp"
+                android:src="@drawable/ic_user"
                 app:civ_border_color="@color/colorPrimary"
-                android:src="@drawable/ic_user" />
-
+                app:civ_border_width="1dp" />
 
 
             <LinearLayout
@@ -63,8 +64,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:paddingBottom="5dp"
             android:paddingTop="3dp"
+            android:paddingBottom="5dp"
             android:text="Description"
             android:textColor="@color/colorBlack" />
 
@@ -78,35 +79,55 @@
                 android:layout_height="0dp"
                 app:layout_constraintDimensionRatio="1:1"
                 tools:ignore="MissingConstraints" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:orientation="horizontal"
+            android:paddingLeft="2dp"
+            android:paddingTop="3dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="3dp"
+            android:weightSum="7">
 
 
-            <Button
+
+            <TextView
                 android:id="@+id/addrepost"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/button_4_background"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="5"
+                android:background="@drawable/button_7background"
                 android:text="Add Repost?"
+                android:paddingLeft="20dp"
                 android:textAllCaps="false" />
+
+
 
             <ImageView
                 android:id="@+id/savecomplain"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_weight="0.5"
+                android:paddingRight="5dp"
+
                 android:src="@drawable/ic_bookmark_border" />
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_below="@id/linerlayout1"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorLite_ash" />
 
 </RelativeLayout>

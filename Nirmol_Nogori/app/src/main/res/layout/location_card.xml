@@ -9,7 +9,6 @@
     app:cardBackgroundColor="#7585E4"
     app:cardCornerRadius="10dp"
     android:clickable="true"
-
     tools:ignore="MissingDefaultResource">
 
     <TextView

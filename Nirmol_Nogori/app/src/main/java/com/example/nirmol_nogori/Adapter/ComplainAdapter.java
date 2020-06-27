@@ -1,19 +1,29 @@
 package com.example.nirmol_nogori.Adapter;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nirmol_nogori.DropComplain.PostDropComplain;
+import com.example.nirmol_nogori.Fragment.ComplainDetailsFragment;
 import com.example.nirmol_nogori.Fragment.UserProfileFragment;
 import com.example.nirmol_nogori.Model.Complain;
 import com.example.nirmol_nogori.Model.Users;
@@ -35,10 +45,12 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
     public List<Complain> complains;
     private FirebaseUser firebaseUser;
 
+
     public ComplainAdapter(Context mcontext, List<Complain> complains) {
         this.mcontext = mcontext;
         this.complains = complains;
     }
+
 
     @NonNull
     @Override
@@ -69,7 +81,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
                 SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                 editor.putString("complainerid", complain.getUserid());
                 editor.apply();
-                Log.d("ddddd",""+complain.getUserid());
+                Log.d("ddddd", "" + complain.getUserid());
 
                 ((FragmentActivity) mcontext).getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container,
                         new UserProfileFragment()).commit();
@@ -82,7 +94,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
                 SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                 editor.putString("complainerid", complain.getUserid());
                 editor.apply();
-                Log.d("ddddd",""+complain.getUserid());
+                Log.d("ddddd", "" + complain.getUserid());
                 ((FragmentActivity) mcontext).getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container,
                         new UserProfileFragment()).commit();
             }
@@ -100,7 +112,27 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
                 }
             }
         });
+        holder.complainImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("postid", complain.getComplainid());
+                editor.apply();
 
+                ((FragmentActivity) mcontext).getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container,
+                        new ComplainDetailsFragment()).commit();
+            }
+        });
+
+
+        holder.repost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mcontext,PostDropComplain.class);
+                intent.putExtra("complain_id",""+complain.getComplainid());
+                ((Activity)mcontext). startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -111,7 +143,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageprofile, complainImage, save;
         public TextView location, username, complain_desc;
-        public Button repost;
+        public TextView repost;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -123,7 +155,11 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
             username = itemView.findViewById(R.id.complainername);
             complain_desc = itemView.findViewById(R.id.complain_description);
             repost = itemView.findViewById(R.id.addrepost);
+
+
         }
+
+
     }
 
 
@@ -172,4 +208,6 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
             }
         });
     }
+
+
 }
