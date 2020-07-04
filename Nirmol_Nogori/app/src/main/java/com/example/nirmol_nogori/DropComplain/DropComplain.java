@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.nirmol_nogori.Fragment.HomeDropComplainFragment;
 import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.Ui.MainActivity;
 import com.example.nirmol_nogori.databinding.ActivityDropComplainBinding;
 
 public class DropComplain extends AppCompatActivity {
@@ -23,5 +25,8 @@ public class DropComplain extends AppCompatActivity {
         if (selectedfragment == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container, new HomeDropComplainFragment()).commit();
         }
+
     }
+
+
 }

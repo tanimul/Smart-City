@@ -4,9 +4,13 @@
     <string name="fb_login_protocol_scheme">fb604564466990188</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="thankcredit">Icons made by freepic from www.flaticon.com is lisenced by CC 3.0 BY</string>
+    <string name="termcondtion">the Google Play Developer Distribution Agreement requires that
+  you grant your users a "nonexclusive, worldwide, and perpetual license to perform, display, and use the Product on the Device."
+\nYou could cover this in the End-User License Agreement (EULA)
+ or cover it in your Terms and Conditions agreement along with
+other clauses that are useful for your Android app.</string>
 
 
 </resources>

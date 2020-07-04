@@ -1,37 +1,27 @@
-package com.example.nirmol_nogori.Fragment;
-
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Bundle;
+package com.example.nirmol_nogori.DropComplain;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.Adapter.PhotoAdapter;
-import com.example.nirmol_nogori.DoorToDoor.CleanerProfile;
-import com.example.nirmol_nogori.DropComplain.DropComplain;
-import com.example.nirmol_nogori.DropComplain.PostDropComplain;
 import com.example.nirmol_nogori.Model.Complain;
-import com.example.nirmol_nogori.Model.News;
 import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
-import com.example.nirmol_nogori.databinding.FragmentProfileAdminBinding;
-import com.example.nirmol_nogori.databinding.FragmentUserProfileBinding;
+import com.example.nirmol_nogori.databinding.ActivityUserProfileActivtyBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,16 +40,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
-
-public class UserProfileFragment extends Fragment {
-    private FragmentUserProfileBinding binding;
+public class UserProfileActivty extends AppCompatActivity {
+    private ActivityUserProfileActivtyBinding binding;
     private int image_rec_code = 1;
     private Uri filepath_uri;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
+    private FirebaseUser firebaseUser;
     String profileid;
-    private static final String TAG = "User_Profile_Fragment";
+    String userid;
+    private static final String TAG = "User_Profile_Activity";
 
     RecyclerView recyclerView;
     PhotoAdapter myphotoAdapter;
@@ -70,43 +60,55 @@ public class UserProfileFragment extends Fragment {
     PhotoAdapter complain_photo_saved_adapter;
     List<Complain> complainlist_saves;
 
-    public UserProfileFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentUserProfileBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityUserProfileActivtyBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+//        SharedPreferences prefs = getApplicationContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+//        profileid = prefs.getString("userid", "none");
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        Bundle intent = getIntent().getExtras();
+        if (intent != null) {
+            profileid = intent.getString("userid");
+            Log.d(TAG, "profile id:" + profileid);
+
+            if (firebaseUser == null) {
+                updateprofilefiled(profileid);
+                binding.savedcomplain.setVisibility(View.GONE);
+
+            } else {
+                userid = firebaseUser.getUid();
+
+                if (profileid.equals(userid)) {
+                    updateprofilefiled(userid);
+                    Log.d(TAG, "user id:" + userid);
+                } else {
+                    Log.d(TAG, "profile id:" + profileid);
+                    updateprofilefiled(profileid);
+                    binding.savedcomplain.setVisibility(View.GONE);
+                }
+            }
 
 
-        SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
-        profileid = prefs.getString("complainerid", "none");
-
-        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        if (profileid.equals(userid)) {
-            updateprofilefiled(userid);
-            Log.d(TAG, "user:" + userid);
-        } else {
-            Log.d(TAG, "profile:" + profileid);
-            updateprofilefiled(profileid);
-            binding.savedcomplain.setVisibility(View.GONE);
         }
+
 
         binding.backfromprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), DropComplain.class));
-                getActivity().finish();
+                startActivity(new Intent(UserProfileActivty.this, DropComplain.class));
+                finish();
             }
         });
 
         binding.userPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Choose your Profile picture", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserProfileActivty.this, "Choose your Profile picture", Toast.LENGTH_SHORT).show();
                 openGallery();
             }
         });
@@ -127,32 +129,34 @@ public class UserProfileFragment extends Fragment {
         });
 
 
-        recyclerView = view.findViewById(R.id.recycler_view_complain);
+        recyclerView = findViewById(R.id.recycler_view_complain);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
+        LinearLayoutManager linearLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(linearLayoutManager);
         mpostlist = new ArrayList<>();
-        myphotoAdapter = new PhotoAdapter(getContext(), mpostlist);
+        myphotoAdapter = new PhotoAdapter(this, mpostlist);
         recyclerView.setAdapter(myphotoAdapter);
 
 
-        recyclerView_saves = view.findViewById(R.id.recycler_view_complain_save);
+        recyclerView_saves = findViewById(R.id.recycler_view_complain_save);
         recyclerView_saves.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 3);
+        LinearLayoutManager linearLayoutManager1 = new GridLayoutManager(this, 3);
         recyclerView_saves.setLayoutManager(linearLayoutManager1);
         complainlist_saves = new ArrayList<>();
-        complain_photo_saved_adapter = new PhotoAdapter(getContext(), complainlist_saves);
+        complain_photo_saved_adapter = new PhotoAdapter(this, complainlist_saves);
         recyclerView_saves.setAdapter(complain_photo_saved_adapter);
 
 
         recyclerView_saves.setVisibility(View.GONE);
 
+        if (firebaseUser != null) {
+            complainsaves();
+        }
 
-        complainsaves();
         mycomplain();
 
-        return view;
     }
+
 
     //Galary open for place picture
     private void openGallery() {
@@ -163,7 +167,7 @@ public class UserProfileFragment extends Fragment {
 
     //Get image extention
     public String GetFileExtention(Uri uri) {
-        ContentResolver contentResolver = getActivity().getContentResolver();
+        ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
@@ -212,7 +216,7 @@ public class UserProfileFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
         if (filepath_uri != null) {
-            final ProgressDialog Dialog = new ProgressDialog(getActivity());
+            final ProgressDialog Dialog = new ProgressDialog(UserProfileActivty.this);
             Dialog.setMessage("Updating Profile ...");
             Dialog.show();
             final StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtention(filepath_uri));
@@ -229,7 +233,7 @@ public class UserProfileFragment extends Fragment {
 
                                     String url = uri.toString();
 
-                                    Toast.makeText(getActivity(), "Successfully Updated", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UserProfileActivty.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
                                     Log.d(TAG, "done");
 
                                     databaseReference.child("user_image_url").setValue("" + url);
@@ -246,7 +250,7 @@ public class UserProfileFragment extends Fragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.d(TAG, "" + e.getMessage());
-                    Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserProfileActivty.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
             });

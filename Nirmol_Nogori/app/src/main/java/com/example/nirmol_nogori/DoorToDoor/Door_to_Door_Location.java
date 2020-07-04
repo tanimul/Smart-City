@@ -3,18 +3,30 @@ package com.example.nirmol_nogori.DoorToDoor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.nirmol_nogori.Adapter.LocationAdapter;
 import com.example.nirmol_nogori.Model.Cleaner;
+import com.example.nirmol_nogori.Model.News;
+import com.example.nirmol_nogori.NewsAndTrend.News_nd_Trend;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityDoorToDoorLocationBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +59,7 @@ public class Door_to_Door_Location extends AppCompatActivity implements Location
         rc_location.setAdapter(locationAdapter);
 
         readLocation();
+
 
         binding.locationSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,6 +136,10 @@ public class Door_to_Door_Location extends AppCompatActivity implements Location
     @Override
     public void OnItemClick(String location_name) {
         Intent intent = new Intent(Door_to_Door_Location.this, Door_to_Door_Service.class);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            intent.putExtra("location_cleaner_admin_request", "location_cleaner_admin_request");
+        }
         intent.putExtra("locationName", location_name);
         startActivity(intent);
         Log.d(TAG, "OnItemClick: clicked location name:" + location_name);

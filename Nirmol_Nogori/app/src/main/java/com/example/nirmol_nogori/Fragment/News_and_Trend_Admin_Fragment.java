@@ -20,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.Model.News;
+import com.example.nirmol_nogori.NewsAndTrend.News_nd_Trend;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.FragmentNewsAndTrendAdminBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -70,6 +71,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
         binding.saveNews.setOnClickListener(this);
         binding.newsphoto.setOnClickListener(this);
         binding.newsdate.setOnClickListener(this);
+        binding.shownewstrend.setOnClickListener(this);
 
 
         return view;
@@ -91,6 +93,11 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
             if (filedchecking()) {
                 adminid();
             }
+        }
+        if(v==binding.shownewstrend){
+            Intent intent=new Intent(getContext(), News_nd_Trend.class);
+            intent.putExtra("news_trend_admin_request","news_trend_admin_request");
+            getActivity().startActivity(intent);
         }
 
 

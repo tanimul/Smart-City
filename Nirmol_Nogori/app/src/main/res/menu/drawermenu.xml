@@ -15,10 +15,10 @@
             android:id="@+id/nav_rate_me"
             android:icon="@drawable/ic_star"
             android:title="Rate me" />
-        <item
-            android:id="@+id/nav_volunteer"
-            android:icon="@drawable/ic_volunteer"
-            android:title="Volunteer" />
+<!--        <item-->
+<!--            android:id="@+id/nav_volunteer"-->
+<!--            android:icon="@drawable/ic_volunteer"-->
+<!--            android:title="Volunteer" />-->
         <item
             android:id="@+id/nav_term_condition"
             android:icon="@drawable/ic_term_condition"

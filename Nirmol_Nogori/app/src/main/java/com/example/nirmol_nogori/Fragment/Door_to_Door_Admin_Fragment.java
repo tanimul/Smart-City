@@ -3,6 +3,7 @@ package com.example.nirmol_nogori.Fragment;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -17,7 +18,9 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import com.example.nirmol_nogori.DoorToDoor.Door_to_Door_Location;
 import com.example.nirmol_nogori.Model.Cleaner;
+import com.example.nirmol_nogori.NewsAndTrend.News_nd_Trend;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.FragmentDoorToDoorAdminBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -66,6 +69,7 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
 
         binding.saveCleanerInformation.setOnClickListener(this);
         binding.clenerphoto.setOnClickListener(this);
+        binding.showlocCleaner.setOnClickListener(this);
 
         return view;
     }
@@ -81,6 +85,11 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
             if (filedchecking()) {
                 adminid();
             }
+        }
+        if(v == binding.showlocCleaner){
+            Intent intent=new Intent(getContext(), Door_to_Door_Location.class);
+            intent.putExtra("location_cleaner_admin_request","location_cleaner_admin_request");
+            getActivity().startActivity(intent);
         }
     }
 

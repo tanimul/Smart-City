@@ -107,6 +107,17 @@
         app:layout_constraintTop_toBottomOf="@id/newssrc"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/shownewstrend"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/save_news"
+        android:text="Show all News &amp; Trend ?"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        />
 
 
 

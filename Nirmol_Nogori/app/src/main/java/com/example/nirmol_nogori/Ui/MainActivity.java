@@ -57,7 +57,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
+        {
 
     private ActivityMainBinding binding;
     private android.app.AlertDialog.Builder alretdialog;
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestlocationpermission()) {
             locationSettingOption();
         }
+
+
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -360,6 +364,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 
         if (account != null) {
+            String userid=FirebaseAuth.getInstance().getCurrentUser().getUid();
             String personname = account.getDisplayName();
             String personemail = account.getEmail();
             String personid = account.getId();
@@ -367,12 +372,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(TAG, personemail + "");
 
 
-            Users user = new Users(account.getDisplayName(), account.getGivenName(), account.getEmail(),null,null);
-            databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+            Users user = new Users(account.getDisplayName(), account.getGivenName(), account.getEmail(), null, null,userid);
+            databaseReference.child(userid)
                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    Log.d(TAG,"adding successfully in Database.");
+                    Log.d(TAG, "adding successfully in Database.");
                     checkUserStatus();
                 }
             });
@@ -384,8 +389,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
 
-        }
-        else {
+        } else {
 
             Toast.makeText(this, "You're not logged in", Toast.LENGTH_SHORT).show();
 
@@ -468,5 +472,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         backpressed = System.currentTimeMillis();
 
     }
+
 
 }

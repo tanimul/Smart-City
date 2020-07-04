@@ -5,8 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,11 +17,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.Adapter.ComplainAdapter;
-import com.example.nirmol_nogori.Adapter.LocationAdapter;
+import com.example.nirmol_nogori.DropComplain.DropComplain;
 import com.example.nirmol_nogori.DropComplain.PostDropComplain;
 import com.example.nirmol_nogori.Model.Complain;
 import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.DropComplain.UserProfileActivty;
 import com.example.nirmol_nogori.databinding.FragmentHomeDropComplainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -37,14 +36,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeDropComplainFragment extends Fragment {
     private FragmentHomeDropComplainBinding binding;
-    private static final String TAG = "Home_Drop_Complain_Fragment";
+    private static final String TAG = "Home_Drop_Comp_Fragment";
     private RecyclerView recyclerView;
     private ComplainAdapter complainAdapter;
     private List<Complain> complains;
@@ -78,7 +75,7 @@ public class HomeDropComplainFragment extends Fragment {
 
         readComplains();
 
-        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         updateprofilepic(userid);
 
         binding.goaddcomplianFragment.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +88,16 @@ public class HomeDropComplainFragment extends Fragment {
         binding.userPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container, new UserProfileFragment()).commit();
 
+//                SharedPreferences.Editor editor =getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+//                editor.putString("userid", userid);
+//                editor.apply();
+                Log.d(TAG, "" + userid);
+              //  getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container, new UserProfileFragment()).commit();
+                Intent intent=new Intent(getContext(), UserProfileActivty.class);
+                intent.putExtra("userid",userid);
+                Log.d("ddddd", "" + userid);
+                getActivity().startActivity(intent);
             }
         });
 
@@ -153,5 +158,9 @@ public class HomeDropComplainFragment extends Fragment {
             }
         });
     }
+
+
+
+
 
 }

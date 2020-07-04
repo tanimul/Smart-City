@@ -18,10 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nirmol_nogori.Aboutus;
 import com.example.nirmol_nogori.DoorToDoor.Door_to_Door_Location;
 import com.example.nirmol_nogori.DropComplain.DropComplain;
 import com.example.nirmol_nogori.NewsAndTrend.News_nd_Trend;
 import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.Term_Condition;
+import com.example.nirmol_nogori.ThanksCredit;
 import com.example.nirmol_nogori.User.Login_User;
 import com.example.nirmol_nogori.databinding.ActivityHomeMenuBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -76,7 +79,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
         binding.homeActivty.buttonDropComplain.setOnClickListener(this);
         binding.homeActivty.buttonDoorToDoorCleaningService.setOnClickListener(this);
         binding.homeActivty.buttonNewsTrend.setOnClickListener(this);
-        binding.homeActivty.textViewVolunteerForm.setOnClickListener(this);
+        //binding.homeActivty.textViewVolunteerForm.setOnClickListener(this);
 
     }
 
@@ -96,24 +99,20 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
                 rating();
                 break;
 
-            case R.id.nav_volunteer:
-                Toast.makeText(this, "navigation volunteer item slelected", Toast.LENGTH_SHORT).show();
-//Todo volunteer activity create
-                break;
+//            case R.id.nav_volunteer:
+//                Toast.makeText(this, "navigation volunteer item slelected", Toast.LENGTH_SHORT).show();
+//
+//                break;
             case R.id.nav_term_condition:
-                Toast.makeText(this, "navigation term condition item slelected", Toast.LENGTH_SHORT).show();
-
-
+                startActivity(new Intent(Home_Menu.this, Term_Condition.class));
                 break;
 
             case R.id.nav_thanks_credit:
-                Toast.makeText(this, "navigation thanks credit item slelected", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(Home_Menu.this, ThanksCredit.class));
                 break;
 
             case R.id.nav_about:
-                Toast.makeText(this, "navigation about item slelected", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(Home_Menu.this, Aboutus.class));
                 break;
 
             case R.id.nav_setting:
@@ -145,10 +144,11 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
         } else if (v == binding.homeActivty.buttonNewsTrend) {
             startActivity(new Intent(Home_Menu.this, News_nd_Trend.class));
 
-        } else if (v == binding.homeActivty.textViewVolunteerForm) {
-            Toast.makeText(this, "VolunteerForm item slelected", Toast.LENGTH_SHORT).show();
-
         }
+//        else if (v == binding.homeActivty.textViewVolunteerForm) {
+//            Toast.makeText(this, "VolunteerForm item slelected", Toast.LENGTH_SHORT).show();
+//
+//        }
 
     }
 

@@ -22,45 +22,6 @@
         tools:layout_editor_absoluteX="0dp" />
 
 
-    <TextView
-        android:id="@+id/profiletextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:paddingLeft="10dp"
-        android:text="Profile"
-        android:textColor="@color/colorBlack"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/comingSoon"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/enterprofilefromsetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="15dp"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        android:src="@drawable/ic_navigate_next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/comingSoon"
-        tools:ignore="MissingConstraints" />
-
-
-    <Switch
-        android:id="@+id/darkmodeswitch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:padding="10dp"
-        android:text="Dark Mode"
-        app:layout_constraintTop_toBottomOf="@id/profiletextview" />
-
     <Switch
         android:id="@+id/autoupdateswitch"
         android:layout_width="match_parent"
@@ -68,7 +29,8 @@
         android:layout_marginRight="5dp"
         android:padding="10dp"
         android:text="Auto Update"
-        app:layout_constraintTop_toBottomOf="@id/darkmodeswitch" />
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/comingSoon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

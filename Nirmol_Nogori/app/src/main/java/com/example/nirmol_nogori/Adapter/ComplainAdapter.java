@@ -1,33 +1,24 @@
 package com.example.nirmol_nogori.Adapter;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nirmol_nogori.DropComplain.ComplainDetailsActivity;
 import com.example.nirmol_nogori.DropComplain.PostDropComplain;
-import com.example.nirmol_nogori.Fragment.ComplainDetailsFragment;
-import com.example.nirmol_nogori.Fragment.UserProfileFragment;
 import com.example.nirmol_nogori.Model.Complain;
 import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
+import com.example.nirmol_nogori.DropComplain.UserProfileActivty;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -73,30 +64,36 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
         holder.location.setText("-at " + complain.getArea());
 
         ComplainerInfo(holder.imageprofile, holder.username, complain.getUserid());
-        issaved(complain.getComplainid(), holder.save);
+        if (firebaseUser != null) {
+            issaved(complain.getComplainid(), holder.save);
+        }
 
         holder.imageprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("complainerid", complain.getUserid());
-                editor.apply();
+//                SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+//                editor.putString("userid", complain.getUserid());
+//                editor.apply();
+                Intent intent = new Intent(mcontext, UserProfileActivty.class);
+                intent.putExtra("userid", complain.getUserid());
                 Log.d("ddddd", "" + complain.getUserid());
 
-                ((FragmentActivity) mcontext).getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container,
-                        new UserProfileFragment()).commit();
+//                ((FragmentActivity) mcontext).getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container,
+//                        new UserProfileFragment()).commit();
+
+                mcontext.startActivity(intent);
             }
         });
 
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("complainerid", complain.getUserid());
-                editor.apply();
+                Intent intent = new Intent(mcontext, UserProfileActivty.class);
+                intent.putExtra("userid", complain.getUserid());
                 Log.d("ddddd", "" + complain.getUserid());
-                ((FragmentActivity) mcontext).getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container,
-                        new UserProfileFragment()).commit();
+
+                mcontext.startActivity(intent);
+
             }
         });
 
@@ -115,12 +112,14 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
         holder.complainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("postid", complain.getComplainid());
-                editor.apply();
+//                SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+//                editor.putString("postid", complain.getComplainid());
+//                editor.apply();
 
-                ((FragmentActivity) mcontext).getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container,
-                        new ComplainDetailsFragment()).commit();
+                Intent intent = new Intent(mcontext, ComplainDetailsActivity.class);
+                intent.putExtra("complainid", "" + complain.getComplainid());
+                Log.d("ddddd", "Complain id:" + complain.getComplainid());
+                mcontext.startActivity(intent);
             }
         });
 
@@ -128,9 +127,9 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
         holder.repost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mcontext,PostDropComplain.class);
-                intent.putExtra("complain_id",""+complain.getComplainid());
-                ((Activity)mcontext). startActivity(intent);
+                Intent intent = new Intent(mcontext, PostDropComplain.class);
+                intent.putExtra("complain_id", "" + complain.getComplainid());
+                ((Activity) mcontext).startActivity(intent);
             }
         });
     }

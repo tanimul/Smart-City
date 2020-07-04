@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.ComplainDetailsFragment">
+    tools:context=".DropComplain.ComplainDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar"
@@ -85,6 +85,5 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,60 @@
     tools:context=".Fragment.Drop_Complain_Admin_Fragment">
 
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_admin_n_a_t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <TextView
-        android:gravity="center"
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:text="User List"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/usersearch"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:background="@android:color/transparent"
+        android:drawableRight="@drawable/ic_search"
+        android:hint="User Search ..." />
+
+</LinearLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:text="start after added complain " />
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/colorWhite"
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/usercard" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

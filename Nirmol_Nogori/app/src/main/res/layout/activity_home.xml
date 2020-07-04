@@ -127,38 +127,38 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_registration"
-        app:layout_constraintVertical_bias="0.814"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button_registration"-->
+<!--        app:layout_constraintVertical_bias="0.814"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        tools:layout_editor_absoluteX="0dp">-->
 
-        <TextView
-            android:id="@+id/textView_wants_to_ba_a_volunteer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Want to be a volunteer ?"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            tools:ignore="MissingConstraints" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView_wants_to_ba_a_volunteer"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Want to be a volunteer ?"-->
+<!--            android:textColor="#000000"-->
+<!--            android:textSize="20dp"-->
+<!--            tools:ignore="MissingConstraints" />-->
 
-        <TextView
-            android:id="@+id/textView_volunteer_form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text=" Form"
-            android:textColor="#E94F1E"
-            android:textSize="25dp"
-            tools:ignore="MissingConstraints" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/textView_volunteer_form"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:text=" Form"-->
+<!--            android:textColor="#E94F1E"-->
+<!--            android:textSize="25dp"-->
+<!--            tools:ignore="MissingConstraints" />-->
+<!--    </LinearLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

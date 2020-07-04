@@ -82,8 +82,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            Users user = new Users(first_name, last_name, user_email,null,user_phone);
-                            databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            String userid=FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            Users user = new Users(first_name, last_name, user_email,null,user_phone,userid);
+                            databaseReference.child(userid)
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
