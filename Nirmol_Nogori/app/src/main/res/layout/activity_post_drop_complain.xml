@@ -54,7 +54,7 @@
                     android:paddingTop="2dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="5dp"
-                    android:text="Drop"
+                    android:text="DROP"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -99,7 +99,7 @@
 
                     <TextView
                         android:id="@+id/username"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
@@ -109,6 +109,35 @@
                         android:textColor="@color/colorBlack"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                          android:visibility="gone"
+                            android:id="@+id/area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="area"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                          android:visibility="gone"
+                            android:id="@+id/closearea"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@null"
+                            android:src="@drawable/ic_close" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -148,14 +177,13 @@
             android:id="@+id/closecomplainimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_close"
             android:layout_margin="20dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/constraintlayot3"
-            app:layout_constraintEnd_toEndOf="parent"
             android:background="@null"
-            />
-        
+            android:src="@drawable/ic_close"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintlayot3" />
+
 
         <LinearLayout
             android:id="@+id/linerlayout3"

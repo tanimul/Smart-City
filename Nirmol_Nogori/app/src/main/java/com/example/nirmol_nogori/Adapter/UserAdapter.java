@@ -41,8 +41,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Userviewholder
     @Override
     public void onBindViewHolder(@NonNull Userviewholder holder, int position) {
         final Users users = userlist.get(position);
-
         holder.username.setText(users.getFirst_name() + " " + users.getLast_name());
+
+        if (users.getPinch() > 10) {
+            holder.username.setTextColor(context.getResources().getColor(R.color.colorred));
+        } else {
+            holder.username.setTextColor(context.getResources().getColor(R.color.colorBlack));
+        }
+
         Picasso.get().load(users.getUser_image_url())
                 .placeholder(R.drawable.ic_user)
                 .fit()
@@ -58,7 +64,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Userviewholder
 
                 Intent intent = new Intent(context, UserProfileActivty.class);
                 intent.putExtra("userid", users.getUserid());
-                Log.d("ddddd", "::" + users.getUserid());
+                Log.d("ddddd", "user id:" + users.getUserid());
 
 
 //                ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()

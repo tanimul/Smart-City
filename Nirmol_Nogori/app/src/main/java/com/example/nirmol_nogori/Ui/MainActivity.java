@@ -372,7 +372,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(TAG, personemail + "");
 
 
-            Users user = new Users(account.getDisplayName(), account.getGivenName(), account.getEmail(), null, null,userid);
+            Users user = new Users(account.getDisplayName(), account.getGivenName(), account.getEmail(), null, null,userid,0);
             databaseReference.child(userid)
                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

@@ -99,6 +99,7 @@
         app:layout_constraintTop_toBottomOf="@id/review_ratingBar"
         tools:ignore="MissingConstraints">
 
+
         <EditText
             android:id="@+id/totalhour_ET"
             android:layout_width="wrap_content"
@@ -108,7 +109,7 @@
             android:layout_weight="1"
             android:background="@drawable/edittext_background"
             android:gravity="center"
-            android:hint="Total Fair"
+            android:hint="Total Hour"
             android:paddingLeft="5dp"
             android:paddingTop="5dp"
             android:paddingRight="15dp"
@@ -124,7 +125,7 @@
             android:layout_weight="1"
             android:background="@drawable/edittext_background"
             android:gravity="center"
-            android:hint="Total Hour"
+            android:hint="Total Fair"
             android:paddingLeft="5dp"
             android:paddingTop="5dp"
             android:paddingRight="15dp"

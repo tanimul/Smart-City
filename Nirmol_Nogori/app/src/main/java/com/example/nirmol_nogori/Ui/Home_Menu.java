@@ -41,6 +41,8 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
     Toolbar toolbar;
     private ImageView headerPic;
     private TextView headerName;
+    private long backpressed;
+    private Toast backtost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +123,16 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
 
             case R.id.nav_logout:
                 logout();
+
+                Intent intent = new Intent(Home_Menu.this, MainActivity.class);
+                intent.putExtra("finish", true);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+                finish();
+
                 break;
 
 
@@ -179,6 +191,23 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
         firebaseAuth.getInstance().signOut();
         finish();
         startActivity(new Intent(Home_Menu.this, Login_User.class));
+    }
+
+    //for Double press for Exit
+    @Override
+    public void onBackPressed() {
+
+        if (backpressed + 2000 > System.currentTimeMillis()) {
+            backtost.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            backtost = Toast.makeText(Home_Menu.this, "press BACK again to Exit", Toast.LENGTH_SHORT);
+            backtost.show();
+        }
+
+        backpressed = System.currentTimeMillis();
+
     }
 
 

@@ -2,6 +2,7 @@ package com.example.nirmol_nogori.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class AdminHome extends AppCompatActivity implements BottomNavigationView
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new Drop_Complain_Admin_Fragment()).commit();
 
         }
+
 
         binding.adminBottomNavigationView.setOnNavigationItemSelectedListener(this);
     }

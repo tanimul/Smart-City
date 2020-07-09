@@ -71,4 +71,7 @@ dependencies {
 
     //firebase config
     implementation 'com.google.firebase:firebase-config:11.6.2'
+
+    //photoview
+    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
 }

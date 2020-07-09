@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -30,12 +32,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Objects;
+
+import bolts.Task;
 
 public class GetReviewFromuser extends AppCompatActivity {
     private ActivityGetReviewFromuserBinding binding;
     private DatePickerDialog datePickerDialog;
     private static final String TAG = "Get_Review_From_User";
     String username = "";
+    ProgressDialog Dialog;
     String userimageurl = null;
 
     @Override
@@ -60,9 +67,12 @@ public class GetReviewFromuser extends AppCompatActivity {
         binding.reviewUserSubmitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reviewsubmit(binding.reviewCleanerTXTName.getText().toString(), binding.reviewCleanerTXTArea.getText().toString()
-                        , binding.workdate.getText().toString(), binding.reviewET.getText().toString(),
-                        binding.totalfairET.getText().toString(), binding.totalhourET.getText().toString(), binding.reviewRatingBar.getRating());
+                if (reviewValidation()) {
+                    reviewsubmit(binding.reviewCleanerTXTName.getText().toString(), binding.reviewCleanerTXTArea.getText().toString()
+                            , binding.workdate.getText().toString(), binding.reviewET.getText().toString(),
+                            binding.totalhourET.getText().toString(), binding.totalfairET.getText().toString(), binding.reviewRatingBar.getRating());
+
+                }
 
             }
         });
@@ -93,8 +103,8 @@ public class GetReviewFromuser extends AppCompatActivity {
 
     //Adding review
     private void reviewsubmit(final String reviewCleanerTXTName, final String reviewCleanerTXTArea, final String workdate,
-                              final String reviewET, final String totalfairET, final String totalhourET, final float rating) {
-        final ProgressDialog Dialog = new ProgressDialog(GetReviewFromuser.this);
+                              final String reviewET, final String totalhourET, final String totalfairET, final float rating) {
+        Dialog = new ProgressDialog(GetReviewFromuser.this);
         Dialog.setMessage("Feedback is being shared ...");
         Dialog.show();
         final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -110,8 +120,46 @@ public class GetReviewFromuser extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 databaseReference.child(reviewCleanerTXTName).child(userid).setValue(review);
+                updatecleanerinformation(totalhourET, totalfairET, rating, reviewCleanerTXTName, reviewCleanerTXTArea);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void updatecleanerinformation(final String totalhourET, final String totalfairET, final float rating, String reviewCleanerTXTName, String reviewCleanerTXTArea) {
+        Log.d(TAG, totalhourET);
+        Log.d(TAG, totalfairET);
+        Log.d(TAG, "" + rating);
+
+        final DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Location and Cleaner")
+                .child(reviewCleanerTXTArea).child(reviewCleanerTXTName);
+        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Cleaner cleaner = dataSnapshot.getValue(Cleaner.class);
+                HashMap<String, Object> hashMap = new HashMap<>();
+                int totalhr = (cleaner.getTotal_hr() + Integer.parseInt(totalhourET));
+                int totalfair = (cleaner.getTotal_fair() + Integer.parseInt(totalfairET));
+                float ratings = (cleaner.getRating() + rating) / 2;
+
+                hashMap.put("rating", ratings);
+                hashMap.put("total_fair", totalfair);
+                hashMap.put("total_hr", totalhr);
+
+                Log.d(TAG, "after calculation:" + totalfair);
+                Log.d(TAG, "after calculation::" + ratings);
+
+                databaseReference2.updateChildren(hashMap);
                 startActivity(new Intent(GetReviewFromuser.this, Home_Menu.class));
                 Dialog.dismiss();
+                finish();
+
             }
 
             @Override
@@ -171,7 +219,7 @@ public class GetReviewFromuser extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-Dialog.dismiss();
+                Dialog.dismiss();
                 Cleaner cleaner = dataSnapshot.getValue(Cleaner.class);
                 binding.reviewCleanerTXTName.setText(cleaner.getName());
                 binding.reviewCleanerTXTArea.setText(cleaner.getLocation());
@@ -189,5 +237,22 @@ Dialog.dismiss();
 
             }
         });
+
+
+    }
+
+
+    //check all Validation
+    public boolean reviewValidation() {
+
+        if (binding.workdate.getText().toString().isEmpty() || binding.reviewET.getText().toString().isEmpty() ||
+                binding.totalfairET.getText().toString().isEmpty() || binding.totalhourET.getText().toString().isEmpty()) {
+            binding.totalhourET.setError("please fillup the all Information");
+            binding.totalhourET.requestFocus();
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }

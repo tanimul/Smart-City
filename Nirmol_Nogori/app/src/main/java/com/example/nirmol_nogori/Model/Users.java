@@ -3,18 +3,28 @@ package com.example.nirmol_nogori.Model;
 public class Users {
 
     private String first_name, last_name, user_email, user_image_url,phoneno,userid;
+    int pinch=0;
 
     public Users() {
 
     }
 
-    public Users(String first_name, String last_name, String user_email, String user_image_url,String phoneno,String userid) {
+    public Users(String first_name, String last_name, String user_email, String user_image_url,String phoneno,String userid,int pinch) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.user_email = user_email;
         this.user_image_url = user_image_url;
         this.phoneno=phoneno;
         this.userid=userid;
+        this.pinch=pinch;
+    }
+
+    public int getPinch() {
+        return pinch;
+    }
+
+    public void setPinch(int pinch) {
+        this.pinch = pinch;
     }
 
     public String getUserid() {

@@ -22,7 +22,6 @@ public class Setting extends AppCompatActivity {
         binding = ActivitySettingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         //check & show autoupdate on or off
         if (switchonoff == true) {
             binding.autoupdateswitch.setChecked(true);

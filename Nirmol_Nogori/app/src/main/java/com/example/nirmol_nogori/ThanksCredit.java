@@ -15,7 +15,7 @@ public class ThanksCredit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityThanksCreditBinding.inflate(getLayoutInflater());
+        binding = ActivityThanksCreditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.backfromthankscredit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,17 +7,27 @@ public class Complain {
     private String date;
     private String details;
     private String userid;
+    private String username;
 
     public Complain() {
     }
 
-    public Complain(String area,String complainid, String complainimage, String date, String details, String userid) {
+    public Complain(String area,String complainid, String complainimage, String date, String details, String userid,String username) {
         this.area = area;
         this.complainimage = complainimage;
         this.date = date;
         this.details = details;
         this.userid = userid;
         this.complainid=complainid;
+        this.username=username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getComplainid() {

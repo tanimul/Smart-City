@@ -73,6 +73,7 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
                             if (task.isSuccessful()) {
                                 Toast.makeText(Login_User.this, "login successfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(Login_User.this, Home_Menu.class));
+                                finish();
                             } else {
                                 Toast.makeText(Login_User.this, "login unsuccessfully", Toast.LENGTH_SHORT).show();
                             }

@@ -8,8 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nirmol_nogori.DropComplain.ComplainDetailsActivity;
+import com.example.nirmol_nogori.Interface.RepostClickInterface;
 import com.example.nirmol_nogori.Model.Repost;
 import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
@@ -29,11 +32,14 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
     private Context mContext;
     private List<Repost> mrepost;
     private FirebaseUser firebaseUser;
+    private RepostClickInterface repostClickInterface;
 
-    public RepostAdapter(Context mContext, List<Repost> mrepost) {
+    public RepostAdapter(Context mContext, List<Repost> mrepost, RepostClickInterface repostClickInterface) {
         this.mContext = mContext;
         this.mrepost = mrepost;
+        this.repostClickInterface = repostClickInterface;
     }
+
 
     @NonNull
     @Override
@@ -52,7 +58,22 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
                 .fit()
                 .centerCrop()
                 .into(holder.repostimage);
-        getUserInfo(holder.imageprofile,holder.user_name,repost.getUserid());
+        getUserInfo(holder.imageprofile, holder.user_name, repost.getUserid());
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                repostClickInterface.OnRepostLongClick(repost.getUserid(),repost.getComplainid(),repost.getRepostid());
+                return true;
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                repostClickInterface.OnRepostsingleClick(repost.getRepostid());
+            }
+        });
 
 //        holder.comment.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -78,7 +99,7 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        public ImageView imageprofile,repostimage;
+        public ImageView imageprofile, repostimage;
         public TextView user_name, repost;
 
         public Viewholder(@NonNull View itemView) {
@@ -103,7 +124,7 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
                         .fit()
                         .centerCrop()
                         .into(imageView);
-                username.setText(user.getFirst_name()+" "+user.getLast_name());
+                username.setText(user.getFirst_name() + " " + user.getLast_name());
             }
 
             @Override
@@ -112,4 +133,5 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
             }
         });
     }
+
 }

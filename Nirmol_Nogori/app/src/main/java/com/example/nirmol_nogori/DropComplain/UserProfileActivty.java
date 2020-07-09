@@ -80,6 +80,7 @@ public class UserProfileActivty extends AppCompatActivity {
                 updateprofilefiled(profileid);
                 binding.savedcomplain.setVisibility(View.GONE);
 
+
             } else {
                 userid = firebaseUser.getUid();
 
@@ -108,8 +109,11 @@ public class UserProfileActivty extends AppCompatActivity {
         binding.userPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserProfileActivty.this, "Choose your Profile picture", Toast.LENGTH_SHORT).show();
-                openGallery();
+
+                if (profileid.equals(userid)) {
+                    Toast.makeText(UserProfileActivty.this, "Choose your Profile picture", Toast.LENGTH_SHORT).show();
+                    openGallery();
+                }
             }
         });
 

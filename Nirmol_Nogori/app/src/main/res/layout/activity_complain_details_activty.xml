@@ -52,38 +52,220 @@
         app:layout_constraintTop_toBottomOf="@id/bar">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/complain_details_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints" />
+            <!--            <androidx.recyclerview.widget.RecyclerView-->
+            <!--                android:id="@+id/complain_details_recycler_view"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                tools:ignore="MissingConstraints" />-->
 
-            <TextView
-                android:id="@+id/textrepostall"
+            <RelativeLayout
+                android:id="@+id/relativelayout_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/complain_details_recycler_view"
-                android:text="Reposts"
-                android:textSize="20sp"
-                android:paddingLeft="5dp"
-                android:paddingBottom="5dp"
-                android:visibility="gone"
-                android:textColor="@color/colorBlack"
-                />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_more" />
+
+                <LinearLayout
+                    android:id="@+id/linerlayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="2dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/complainerimage_profile"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="5dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_user"
+                            app:civ_border_color="@color/colorPrimary"
+                            app:civ_border_width="1dp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/complainername"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="3dp"
+                                android:text="User Name"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/complainearea"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="area"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/complain_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="5dp"
+                        android:text="Description"
+                        android:textColor="@color/colorBlack" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.github.chrisbanes.photoview.PhotoView
+                            android:id="@+id/complain_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="1:1"
+                            tools:ignore="MissingConstraints" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="3dp"
+                        android:weightSum="7">
+
+
+                        <TextView
+                            android:id="@+id/addrepost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="5"
+                            android:background="@drawable/button_7background"
+                            android:paddingLeft="20dp"
+                            android:text="Add Repost?"
+                            android:textAllCaps="false" />
+
+
+                        <ImageView
+                            android:id="@+id/savecomplain"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_weight="0.5"
+                            android:paddingRight="5dp"
+
+                            android:src="@drawable/ic_bookmark_border" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_below="@id/linerlayout1"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/colorLite_ash" />
+
+            </RelativeLayout>
+
+<!--            <TextView-->
+<!--                android:id="@+id/textrepostall"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/relativelayout_1"-->
+<!--                android:paddingLeft="5dp"-->
+<!--                android:paddingBottom="5dp"-->
+<!--                android:text="Reposts"-->
+<!--                android:textColor="@color/colorBlack"-->
+<!--                android:textSize="20sp"-->
+<!--                android:visibility="gone" />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/complain_repost_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textrepostall"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/relativelayout_1"
                 tools:ignore="MissingConstraints" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
+    <RelativeLayout
+        android:id="@+id/repostlongclicklayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/button_7background"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/repostedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Edit"
+            android:visibility="gone"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/repostdelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/repostedit"
+            android:background="@null"
+            android:visibility="gone"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Delete"
+            android:textAllCaps="false" />
+
+
+        <Button
+            android:id="@+id/repostreport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/repostdelete"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Report"
+            android:visibility="gone"
+            android:textAllCaps="false" />
+
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

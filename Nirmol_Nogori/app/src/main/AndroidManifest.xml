@@ -29,22 +29,17 @@
         <activity android:name=".DoorToDoor.Door_to_Door_Location" />
         <activity android:name=".Ui.Setting" />
         <activity android:name=".User.Password_Reset_Activity" />
-        <activity android:name=".Ui.Home_Menu" />
+        <activity
+            android:name=".Ui.Home_Menu"
+            android:parentActivityName=".Ui.MainActivity" />
         <activity android:name=".Ui.Find_Nearest_Dustbine" />
-        <activity
-            android:name=".Admin.Login_Admin"
-            android:parentActivityName=".Ui.MainActivity" />
+        <activity android:name=".Admin.Login_Admin" />
         <activity android:name=".Ui.Home_Activity" />
-        <activity
-            android:name=".User.Registration"
-            android:parentActivityName=".Ui.MainActivity" />
-        <activity
-            android:name=".User.Login_User"
-            android:parentActivityName=".Ui.MainActivity" />
+        <activity android:name=".User.Registration" />
+        <activity android:name=".User.Login_User" />
         <activity android:name=".Ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

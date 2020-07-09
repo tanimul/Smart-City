@@ -25,7 +25,7 @@
             android:id="@+id/admin_bottom_navigation_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:background="?android:attr/windowBackground"
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_nav_view" />
 

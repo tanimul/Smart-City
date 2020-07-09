@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nirmol_nogori.DropComplain.ComplainDetailsActivity;
 import com.example.nirmol_nogori.Model.Complain;
 import com.example.nirmol_nogori.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.Viewholder> 
     private Context context;
     private List<Complain> complains;
     public FragmentManager f_manager;
+    private FirebaseUser firebaseUser;
 
     public PhotoAdapter(Context mcontext, List<Complain> complains) {
         this.context = mcontext;
@@ -58,10 +61,19 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.Viewholder> 
 //                editor.apply();
 
                 Intent intent = new Intent(context, ComplainDetailsActivity.class);
-                Log.d("ddddd", "Complain id:" + complain.getComplainid());
                 intent.putExtra("complainid", complain.getComplainid());
+                intent.putExtra("complainerid", "" + complain.getUserid());
+                Log.d("ddddd", "Complain id:" + complain.getComplainid());
+                Log.d("ddddd", "Complainer id:" + complain.getUserid());
+
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    intent.putExtra("adminid", "adminsecretid");
+                } else {
+                    intent.putExtra("adminid", "null");
+                }
+
                 context.startActivity(intent);
-//
+
 //                ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container,
 //                        new ComplainDetailsFragment()).commit();
 

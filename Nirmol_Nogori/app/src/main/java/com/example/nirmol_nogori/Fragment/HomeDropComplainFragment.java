@@ -69,7 +69,7 @@ public class HomeDropComplainFragment extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         complains = new ArrayList<>();
-        complainAdapter = new ComplainAdapter(getContext(), complains);
+        complainAdapter = new ComplainAdapter(getContext(), complains,false);//pass user as false
         recyclerView.setAdapter(complainAdapter);
 
 
