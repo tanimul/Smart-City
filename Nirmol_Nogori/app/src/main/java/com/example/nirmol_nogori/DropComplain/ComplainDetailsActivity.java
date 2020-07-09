@@ -14,6 +14,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.Adapter.RepostAdapter;
+import com.example.nirmol_nogori.Admin.AdminHome;
 import com.example.nirmol_nogori.DoorToDoor.GetReviewFromuser;
 import com.example.nirmol_nogori.Interface.RepostClickInterface;
 import com.example.nirmol_nogori.Model.Cleaner;
@@ -42,7 +43,7 @@ public class ComplainDetailsActivity extends AppCompatActivity implements Repost
     private ActivityComplainDetailsActivtyBinding binding;
     String re_postid, complainsid;
     private static final String TAG = "Complains_Dtls_Activity";
-    String publisherid, adminid = "";
+    String publisherid, adminid = null;
     FirebaseUser firebaseUser;
     private RepostAdapter repostAdapter;
     private List<Repost> repostList;
@@ -71,8 +72,15 @@ public class ComplainDetailsActivity extends AppCompatActivity implements Repost
 
         }
 
-
-
+        if (firebaseUser != null) {
+            Log.d(TAG, "user:");
+            binding.addrepost.setVisibility(View.VISIBLE);
+            binding.savecomplain.setVisibility(View.VISIBLE);
+        } else {
+            Log.d(TAG, "admin:");
+            binding.addrepost.setVisibility(View.GONE);
+            binding.savecomplain.setVisibility(View.GONE);
+        }
 
         binding.more.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +101,6 @@ public class ComplainDetailsActivity extends AppCompatActivity implements Repost
                                 return true;
 
                             case R.id.report:
-                              //  Toast.makeText(ComplainDetailsActivity.this, "Succesfully report added.", Toast.LENGTH_SHORT).show();
                                 report(publisherid, complainsid, firebaseUser.getUid());
                                 return true;
 
@@ -116,6 +123,10 @@ public class ComplainDetailsActivity extends AppCompatActivity implements Repost
                 } else {
                     popupMenu.getMenu().findItem(R.id.report).setVisible(false);
                 }
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
+                binding.repostreport.setVisibility(View.GONE);
+
                 popupMenu.show();
             }
         });
@@ -129,8 +140,10 @@ public class ComplainDetailsActivity extends AppCompatActivity implements Repost
         binding.backfromPostdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ComplainDetailsActivity.this, DropComplain.class));
                 finish();
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
+                binding.repostreport.setVisibility(View.GONE);
             }
         });
 
@@ -138,17 +151,23 @@ public class ComplainDetailsActivity extends AppCompatActivity implements Repost
         binding.addrepost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
+                binding.repostreport.setVisibility(View.GONE);
                 Intent intent = new Intent(ComplainDetailsActivity.this, PostDropComplain.class);
                 intent.putExtra("complain_id", "" + complainsid);
                 intent.putExtra("edit_request", false);
                 startActivity(intent);
             }
         });
-        
+
 
         binding.savecomplain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
+                binding.repostreport.setVisibility(View.GONE);
                 if (binding.savecomplain.getTag().equals("save")) {
                     FirebaseDatabase.getInstance().getReference("Saves").child(firebaseUser.getUid())
                             .child(complainsid).setValue(true);
@@ -180,6 +199,52 @@ public class ComplainDetailsActivity extends AppCompatActivity implements Repost
             public void onClick(View v) {
 
                 report(publisherid, complainsid, firebaseUser.getUid());
+                binding.repostreport.setVisibility(View.GONE);
+            }
+        });
+
+
+        //for repost menu visibility Gone
+        binding.linerlayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
+                binding.repostreport.setVisibility(View.GONE);
+            }
+        });
+        binding.constraintlayot1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
+                binding.repostreport.setVisibility(View.GONE);
+            }
+        });
+
+        binding.complainDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
+                binding.repostreport.setVisibility(View.GONE);
+            }
+        });
+
+        binding.complainImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
+                binding.repostreport.setVisibility(View.GONE);
+            }
+        });
+
+        binding.toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.repostedit.setVisibility(View.GONE);
+                binding.repostdelete.setVisibility(View.GONE);
                 binding.repostreport.setVisibility(View.GONE);
             }
         });
@@ -223,29 +288,30 @@ public class ComplainDetailsActivity extends AppCompatActivity implements Repost
     private void report(final String publisherid, final String postid, final String uid) {
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Reports")
                 .child(publisherid).child(postid);
-        Log.d(TAG, "" + postid);
+
+        Log.d(TAG, "::" + postid);
         Log.d(TAG, "" + uid);
         Log.d(TAG, "" + publisherid);
-//        Log.d(TAG, "key" + dataSnapshot1.getKey());
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Log.d(TAG, "" + postid);
-                    Log.d(TAG, "" + uid);
-                    Log.d(TAG, "" + publisherid);
-                    Log.d(TAG, "key" + dataSnapshot1.getKey());
-
-                    if (dataSnapshot1.getKey() == uid) {
-                     //   Toast.makeText(ComplainDetailsActivity.this, "already you given a report for this post", Toast.LENGTH_SHORT).show();
-                    } else {
-//                        Toast.makeText(ComplainDetailsActivity.this, "Succesfully report added.", Toast.LENGTH_SHORT).show();
-//                        databaseReference.child(uid).setValue(true);
-//                        updateuserinformation(publisherid);
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    Toast.makeText(ComplainDetailsActivity.this, "Succesfully report added..", Toast.LENGTH_SHORT).show();
+                    databaseReference.child(uid).setValue(true);
+                    updateuserinformation(publisherid);
+                } else {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Log.d(TAG, "key:" + snapshot.getKey());
+                        if (snapshot.getKey().equals(uid)) {
+                            Toast.makeText(ComplainDetailsActivity.this, "You can add just one report..", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ComplainDetailsActivity.this, "Succesfully report added..", Toast.LENGTH_SHORT).show();
+                            databaseReference.child(uid).setValue(true);
+                            updateuserinformation(publisherid);
+                        }
                     }
-
                 }
-
 
             }
 

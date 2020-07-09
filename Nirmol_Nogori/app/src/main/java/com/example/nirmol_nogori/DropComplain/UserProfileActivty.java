@@ -101,8 +101,14 @@ public class UserProfileActivty extends AppCompatActivity {
         binding.backfromprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserProfileActivty.this, DropComplain.class));
-                finish();
+                if (firebaseUser == null) {
+                    finish();
+                } else {
+
+                    startActivity(new Intent(UserProfileActivty.this, DropComplain.class));
+                    finish();
+                }
+
             }
         });
 

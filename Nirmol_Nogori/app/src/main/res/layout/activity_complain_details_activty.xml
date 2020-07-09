@@ -64,7 +64,6 @@
             <!--                tools:ignore="MissingConstraints" />-->
 
             <RelativeLayout
-                android:id="@+id/relativelayout_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -74,10 +73,13 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="5dp"
                     android:src="@drawable/ic_more" />
 
                 <LinearLayout
-                    android:id="@+id/linerlayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -101,6 +103,7 @@
 
 
                         <LinearLayout
+                            android:id="@+id/linerlayout2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
@@ -140,6 +143,7 @@
                         android:textColor="@color/colorBlack" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintlayot1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 

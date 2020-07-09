@@ -185,8 +185,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
                                 return true;
 
                             case R.id.report:
-                                Toast.makeText(mcontext, "Succesfully report added.", Toast.LENGTH_SHORT).show();
-                                report(complain.getUserid(),complain.getComplainid(), firebaseUser.getUid());
+                                report(complain.getUserid(), complain.getComplainid(), firebaseUser.getUid());
                                 return true;
 
                             default:
@@ -232,12 +231,61 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
     }
 
 
-    private void report(String userid, final String complainid, final String reportid) {
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Reports").child(userid);
+    private void report(final String publisherid, final String postid, final String uid) {
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Reports")
+                .child(publisherid).child(postid);
+
+        Log.d(TAG, "::" + postid);
+        Log.d(TAG, "" + uid);
+        Log.d(TAG, "" + publisherid);
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                databaseReference.child(complainid).child(reportid).setValue(true);
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    Toast.makeText(mcontext, "Succesfully report added..", Toast.LENGTH_SHORT).show();
+                    databaseReference.child(uid).setValue(true);
+                    updateuserinformation(publisherid);
+                } else {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Log.d(TAG, "key:" + snapshot.getKey());
+                        if (snapshot.getKey().equals(uid)) {
+                            Toast.makeText(mcontext, "You can add just one report..", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(mcontext, "Succesfully report added..", Toast.LENGTH_SHORT).show();
+                            databaseReference.child(uid).setValue(true);
+                            updateuserinformation(publisherid);
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void updateuserinformation(String publisherid) {
+        Log.d(TAG, publisherid);
+
+        final DatabaseReference databaseReference3 = FirebaseDatabase.getInstance().getReference("Users")
+                .child(publisherid);
+        databaseReference3.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Users users = dataSnapshot.getValue(Users.class);
+                HashMap<String, Object> hashMap = new HashMap<>();
+                int totalpinch = (users.getPinch() + 1);
+
+                hashMap.put("pinch", totalpinch);
+
+                Log.d(TAG, "after calculation:" + totalpinch);
+                databaseReference3.updateChildren(hashMap);
+
+
             }
 
             @Override
@@ -247,6 +295,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
         });
 
     }
+
 
     @Override
     public int getItemCount() {

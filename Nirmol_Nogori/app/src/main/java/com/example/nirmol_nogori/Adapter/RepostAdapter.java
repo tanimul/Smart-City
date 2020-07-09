@@ -63,7 +63,9 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                repostClickInterface.OnRepostLongClick(repost.getUserid(),repost.getComplainid(),repost.getRepostid());
+                if(firebaseUser!=null){
+                    repostClickInterface.OnRepostLongClick(repost.getUserid(),repost.getComplainid(),repost.getRepostid());
+                }
                 return true;
             }
         });
