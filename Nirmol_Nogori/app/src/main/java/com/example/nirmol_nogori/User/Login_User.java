@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 public class Login_User extends AppCompatActivity implements View.OnClickListener {
@@ -50,6 +51,7 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v == binding.buttonLoginAsUser) {
             userLogin();
+
         } else if (v == binding.textViewForgotpass) {
             startActivity(new Intent(Login_User.this, Password_Reset_Activity.class));
 
@@ -71,9 +73,14 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(Login_User.this, "login successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Login_User.this, Home_Menu.class));
-                                finish();
+                                if (mAuth.getCurrentUser().isEmailVerified()) {
+                                    Toast.makeText(Login_User.this, "login successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(Login_User.this, Home_Menu.class));
+                                    finish();
+                                } else {
+                                    Toast.makeText(Login_User.this, "Please Verify your Email address", Toast.LENGTH_SHORT).show();
+                                }
+
                             } else {
                                 Toast.makeText(Login_User.this, "login unsuccessfully", Toast.LENGTH_SHORT).show();
                             }

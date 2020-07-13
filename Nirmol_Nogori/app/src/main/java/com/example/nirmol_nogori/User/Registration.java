@@ -3,6 +3,7 @@ package com.example.nirmol_nogori.User;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.nirmol_nogori.BuildConfig;
+import com.example.nirmol_nogori.DropComplain.UserProfileActivty;
 import com.example.nirmol_nogori.Ui.Home_Activity;
 import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.Ui.Home_Menu;
@@ -29,7 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Objects;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener {
-
+    private static final String TAG = "Registration";
     private ActivityRegistrationBinding binding;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -63,7 +65,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    String first_name, last_name, user_email,user_phone, user_password, user_con_password;
+    String first_name, last_name, user_email, user_phone, user_password, user_con_password;
 
     public void userRegistration() {
 
@@ -80,21 +82,35 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 .addOnCompleteListener(Registration.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         if (task.isSuccessful()) {
-                            String userid=FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            Users user = new Users(first_name, last_name, user_email,null,user_phone,userid,0);
-                            databaseReference.child(userid)
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(Registration.this, "Registration complete", Toast.LENGTH_SHORT).show();
-                                    after_registration();
-                                    Intent intent = new Intent(Registration.this, Home_Menu.class);
-                                    startActivity(intent);
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "Registration processing .please verify the Email");
+                                        Toast.makeText(Registration.this, "Registration processing .please verify the Email", Toast.LENGTH_SHORT).show();
+                                        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        Users user = new Users(first_name, last_name, user_email, null, user_phone, userid, 0);
+                                        databaseReference.child(userid)
+                                                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                after_registration();
+                                                Intent intent = new Intent(Registration.this, Login_User.class);
+                                                startActivity(intent);
+                                                finish();
 
+                                            }
+                                        });
+
+                                    } else {
+                                        Log.d(TAG, "" + task.getException().getMessage());
+                                        Toast.makeText(Registration.this, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                    }
                                 }
                             });
+
                         } else {
                             Toast.makeText(Registration.this, "Registration failed", Toast.LENGTH_SHORT).show();
                         }
@@ -117,33 +133,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     //check all Validation
     public void userRegistrationValidation() {
-
-//Todo check existing  email or not ?
-
- //       firebaseAuth = FirebaseAuth.getInstance();
-//
-//
-//        ActionCodeSettings actionCodeSettings;
-//
-//        actionCodeSettings = ActionCodeSettings.newBuilder()
-//                .setUrl("https://droidmentor.com/finishSignUp?")
-//                .setHandleCodeInApp(true)
-//                .setAndroidPackageName(BuildConfig.APPLICATION_ID, false, null)
-//                .build();
-//
-//        firebaseAuth.sendSignInLinkToEmail(user_email, actionCodeSettings)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        Log.d("dddddd", "onComplete: ");
-//                        if (task.isSuccessful()) {
-//                            Log.d("dddddd", "Email sent.");
-//                        } else {
-//                            Log.d("dddddd", "Email not sent.");
-//                            Objects.requireNonNull(task.getException()).printStackTrace();
-//                        }
-//                    }
-//                });
 
         if (first_name.isEmpty()) {
             binding.edittextFirstname.setError("Enter a First name please");
