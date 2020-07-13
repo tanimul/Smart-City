@@ -286,7 +286,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
-            android:text="Sobahanbag, Mirpur Road, Dhaka-1207"
+            android:text="Kalabagan, Dhanmondi, Dhaka-1205"
             android:textColor="@color/colorBlack" />
 
     </LinearLayout>

@@ -39,6 +39,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
     Toolbar toolbar;
+
     private ImageView headerPic;
     private TextView headerName;
     private long backpressed;
@@ -190,7 +191,6 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
     private void logout() {
         firebaseAuth.getInstance().signOut();
         finish();
-        startActivity(new Intent(Home_Menu.this, Login_User.class));
     }
 
     //for Double press for Exit

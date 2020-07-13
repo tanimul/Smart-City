@@ -31,7 +31,7 @@
                 android:textColorHint="@color/colorPrimaryDark"
                 android:background="@android:color/transparent"
                 android:drawableRight="@drawable/ic_search"
-                android:hint="Loaction Search ..." />
+                android:hint="Location Search ..." />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

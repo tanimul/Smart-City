@@ -94,7 +94,6 @@ public class UserProfileActivty extends AppCompatActivity {
                 }
             }
 
-
         }
 
 
@@ -247,7 +246,6 @@ public class UserProfileActivty extends AppCompatActivity {
                                     Log.d(TAG, "done");
 
                                     databaseReference.child("user_image_url").setValue("" + url);
-
 
                                     updateprofilefiled(FirebaseAuth.getInstance().getCurrentUser().getUid());
 

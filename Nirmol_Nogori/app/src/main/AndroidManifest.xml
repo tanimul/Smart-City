@@ -18,7 +18,6 @@
         <activity android:name=".Term_Condition" />
         <activity android:name=".ThanksCredit" />
         <activity android:name=".Aboutus" />
-        <activity android:name=".DropComplain.LocationShare" />
         <activity android:name=".DropComplain.PostDropComplain" />
         <activity android:name=".DoorToDoor.CleanerProfile" />
         <activity android:name=".DropComplain.DropComplain" />
