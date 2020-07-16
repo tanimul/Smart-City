@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori;
+package com.example.nirmol_nogori.FindNearestDustbine;
 
 import android.util.Log;
 
@@ -10,7 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DownloadUrl  {
+public class DownlodeUrl {
     public String readUrl(String myUrl) throws IOException {
         String data = "";
         InputStream inputStream = null;

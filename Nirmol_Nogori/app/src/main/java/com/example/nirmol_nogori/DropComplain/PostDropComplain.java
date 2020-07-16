@@ -99,7 +99,7 @@ public class PostDropComplain extends AppCompatActivity {
                 binding.complainlocation.setVisibility(View.GONE);
                 binding.closearea.setVisibility(View.VISIBLE);
                 binding.addphotoforcomplain.setVisibility(View.GONE);
-                location=complainid.getString("edit_request_area");
+                location = complainid.getString("edit_request_area");
                 binding.area.setText("-at " + complainid.getString("edit_request_area"));
                 storageReference = FirebaseStorage.getInstance().getReference("Complains");
                 databaseReference = FirebaseDatabase.getInstance().getReference("Complains");
@@ -237,7 +237,7 @@ public class PostDropComplain extends AppCompatActivity {
 
                 progressDialog.setTitle("Updating the Complain...");
                 progressDialog.show();
-                if (!TextUtils.isEmpty(details) && edfilepath_uri != null && area !=null) {
+                if (!TextUtils.isEmpty(details) && edfilepath_uri != null && area != null) {
 
                     HashMap<String, Object> hashMap = new HashMap<>();
                     hashMap.put("area", area);
@@ -456,7 +456,7 @@ public class PostDropComplain extends AppCompatActivity {
     private void initPlacesAPI() {
         try {
             if (!com.google.android.libraries.places.api.Places.isInitialized()) {
-                com.google.android.libraries.places.api.Places.initialize(getApplicationContext(), "AIzaSyCWAzqH-TzKUf5CpVErKYs1iLWhDzA3EF4");
+                com.google.android.libraries.places.api.Places.initialize(getApplicationContext(), "AIzaSyBt5IftoRXNGG2kqGb2aWSiZ8GlWrDTeMQ");
             }
             placesClient = Places.createClient(this);
         } catch (Exception e) {

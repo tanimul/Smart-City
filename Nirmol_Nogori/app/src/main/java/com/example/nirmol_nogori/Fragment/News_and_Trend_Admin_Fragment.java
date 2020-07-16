@@ -74,6 +74,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
         binding.shownewstrend.setOnClickListener(this);
 
 
+
         return view;
     }
 

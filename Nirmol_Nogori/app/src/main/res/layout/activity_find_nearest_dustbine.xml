@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ui.Find_Nearest_Dustbine">
+    tools:context=".FindNearestDustbine.Find_Nearest_Dustbine">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
@@ -114,7 +114,6 @@
             android:textColor="@color/colorBlack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            android:onClick="onClick"
             app:layout_constraintTop_toBottomOf="@+id/search_startLocation" />
 
 

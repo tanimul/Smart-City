@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori;
+package com.example.nirmol_nogori.FindNearestDustbine;
 
 import android.util.Log;
 
@@ -83,4 +83,5 @@ public class DataParser {
         }
         return getPlaces(jsonArray);
     }
+
 }
