@@ -2,6 +2,7 @@ package com.example.nirmol_nogori.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Userviewholder
     private static final String TAG = "User_Adapter";
     private ArrayList<Users> userlist;
     private Context context;
+    private long lastclicktime = 0;
 
 
     public UserAdapter(ArrayList<Users> userlist, Context context) {
@@ -40,6 +42,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Userviewholder
 
     @Override
     public void onBindViewHolder(@NonNull Userviewholder holder, int position) {
+
+
         final Users users = userlist.get(position);
         holder.username.setText(users.getFirst_name() + " " + users.getLast_name());
 
@@ -62,13 +66,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Userviewholder
 //                editor.putString("userid", users.getUserid());
 //                editor.apply();
 
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
                 Intent intent = new Intent(context, UserProfileActivty.class);
                 intent.putExtra("userid", users.getUserid());
                 Log.d("ddddd", "user id:" + users.getUserid());
-
-
-//                ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-//                        .add(R.id.dropcomplain_fragment_container, new UserProfileFragment()).commit();
 
                 context.startActivity(intent);
 

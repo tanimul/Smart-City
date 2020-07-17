@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -44,6 +45,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
     private FirebaseUser firebaseUser;
     private boolean user;
     private static final String TAG = "ComplainAdapter";
+    private long lastclicktime = 0;
 
 
     public ComplainAdapter(Context mcontext, List<Complain> complains, boolean user) {
@@ -62,6 +64,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final Complain complain = complains.get(position);
         Picasso.get().load(complain.getComplainimage())
@@ -84,6 +87,12 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
 //                SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
 //                editor.putString("userid", complain.getUserid());
 //                editor.apply();
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
+
                 Intent intent = new Intent(mcontext, UserProfileActivty.class);
                 intent.putExtra("userid", complain.getUserid());
                 Log.d(TAG, "" + complain.getUserid());
@@ -98,6 +107,12 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
+
                 Intent intent = new Intent(mcontext, UserProfileActivty.class);
                 intent.putExtra("userid", complain.getUserid());
                 Log.d("ddddd", "" + complain.getUserid());
@@ -125,6 +140,11 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
 //                SharedPreferences.Editor editor = mcontext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
 //                editor.putString("postid", complain.getComplainid());
 //                editor.apply();
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
 
                 Intent intent = new Intent(mcontext, ComplainDetailsActivity.class);
                 intent.putExtra("complainid", "" + complain.getComplainid());
@@ -144,6 +164,12 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
         holder.repost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
+
                 Intent intent = new Intent(mcontext, PostDropComplain.class);
                 intent.putExtra("complain_id", "" + complain.getComplainid());
                 intent.putExtra("edit_request",false);
@@ -214,6 +240,12 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
 
     private void editcomplain(String date, String username, String complainid, String userid, String area,
                               String complainimage, String details) {
+        if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+            return;
+        }
+        lastclicktime = SystemClock.elapsedRealtime();
+
+
         Log.d(TAG, "edit request username:" + username);
         Log.d(TAG, "edit request complainid:" + complainid);
 
@@ -328,6 +360,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
 
     private void ComplainerInfo(final ImageView imageprofile, final TextView username, String userid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+        Log.d("Ddddddddd",""+userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

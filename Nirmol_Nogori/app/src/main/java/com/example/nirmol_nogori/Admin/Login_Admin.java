@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class Login_Admin extends AppCompatActivity {
     private ActivityLoginAdminBinding binding;
     DatabaseReference databaseReference;
     private static final String TAG = "Admin_Login";
+    private long lastclicktime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,10 @@ public class Login_Admin extends AppCompatActivity {
         binding.buttonLoginAsAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
                 validation();
             }
         });

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
     private ProgressDialog progressDialog;
     private DatePickerDialog datePickerDialog;
     private StorageTask mUploadTask;
-
+    private long lastclicktime = 0;
 
     public News_and_Trend_Admin_Fragment() {
         // Required empty public constructor
@@ -80,22 +81,27 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+            return;
+        }
+        lastclicktime = SystemClock.elapsedRealtime();
+
 
         if (v == binding.newsphoto) {
             openGallery();
         }
 
-        if (v == binding.newsdate) {
+        else if (v == binding.newsdate) {
             date();
         }
 
-        if (v == binding.saveNews) {
+        else if (v == binding.saveNews) {
 
             if (filedchecking()) {
                 adminid();
             }
         }
-        if(v==binding.shownewstrend){
+       else if(v==binding.shownewstrend){
             Intent intent=new Intent(getContext(), News_nd_Trend.class);
             intent.putExtra("news_trend_admin_request","news_trend_admin_request");
             getActivity().startActivity(intent);
@@ -185,7 +191,8 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
                                 public void onSuccess(Uri uri) {
                                     String newstitle = binding.newstitle.getText().toString();
                                     String newsDate = binding.newsdate.getText().toString().trim();
-                                    String src = binding.newssrc.getText().toString().toLowerCase();
+                                    String src = binding.newssrc.getText().toString();
+                                    String news_link = binding.newslink.getText().toString();
                                     String url = uri.toString();
 
                                     progressDialog.dismiss();
@@ -194,7 +201,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
                                     Log.d(TAG, "done");
 
                                     String uplodeid = databaseReference.push().getKey();
-                                    News news = new News(adminid, newsDate, url, newstitle, src);
+                                    News news = new News(adminid, newsDate, url,news_link, newstitle, src);
                                     databaseReference.child(newsDate).child(uplodeid).setValue(news);
                                     Log.d(TAG, "done" + url);
 
@@ -221,6 +228,7 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
         if (!binding.newstitle.getText().toString().isEmpty()
                 && !binding.newsdate.getText().toString().isEmpty()
                 && !binding.newssrc.getText().toString().isEmpty()
+                && !binding.newslink.getText().toString().isEmpty()
                 && filepath_uri != null) {
             return true;
         } else {
@@ -253,10 +261,12 @@ public class News_and_Trend_Admin_Fragment extends Fragment implements View.OnCl
         binding.newstitle.setText("");
         binding.newssrc.setText("");
         binding.newsdate.setText("");
+        binding.newslink.setText("");
 
         filepath_uri = null;
         Picasso.get().load(R.drawable.adduserphoto).into(binding.newsphoto);
-        binding.newstitle.setHint("News");
+        binding.newstitle.setHint("News Title");
+        binding.newslink.setHint("News Link ");
         binding.newssrc.setHint("Source");
         binding.newsdate.setHint("News Date");
 

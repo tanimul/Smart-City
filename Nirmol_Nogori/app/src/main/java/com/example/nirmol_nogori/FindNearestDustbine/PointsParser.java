@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.nirmol_nogori.Interface.TaskLoadedCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
     TaskLoadedCallback taskCallback;
-    String directionMode = "driving";
+    String directionMode = "walking";
 
     public PointsParser(Context mContext, String directionMode) {
         this.taskCallback = (TaskLoadedCallback) mContext;
@@ -33,7 +34,7 @@ public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<S
         try {
             jObject = new JSONObject(jsonData[0]);
             Log.d("mylog", jsonData[0].toString());
-            Dataparsers parser = new Dataparsers();
+            RouteDataparser parser = new RouteDataparser();
             Log.d("mylog", parser.toString());
 
             // Starts parsing data
@@ -71,7 +72,7 @@ public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<S
             lineOptions.addAll(points);
             if (directionMode.equalsIgnoreCase("walking")) {
                 lineOptions.width(10);
-                lineOptions.color(Color.MAGENTA);
+                lineOptions.color(Color.BLUE);
             } else {
                 lineOptions.width(20);
                 lineOptions.color(Color.BLUE);
@@ -81,7 +82,7 @@ public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<S
 
         // Drawing polyline in the Google Map for the i-th route
         if (lineOptions != null) {
-            //mMap.addPolyline(lineOptions);
+            //map.addPolyline(lineOptions);
             taskCallback.onTaskDone(lineOptions);
 
         } else {

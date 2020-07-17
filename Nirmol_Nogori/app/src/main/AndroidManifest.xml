@@ -15,9 +15,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DropComplain.ComplainDetailsActivity"></activity>
         <activity android:name=".DropComplain.UserProfileActivty" />
-        <activity android:name=".Term_Condition" />
-        <activity android:name=".ThanksCredit" />
-        <activity android:name=".Aboutus" />
+        <activity android:name=".Ui.Term_Condition" />
+        <activity android:name=".Ui.ThanksCredit" />
+        <activity android:name=".Ui.Aboutus" />
         <activity android:name=".DropComplain.PostDropComplain" />
         <activity android:name=".DoorToDoor.CleanerProfile" />
         <activity android:name=".DropComplain.DropComplain" />

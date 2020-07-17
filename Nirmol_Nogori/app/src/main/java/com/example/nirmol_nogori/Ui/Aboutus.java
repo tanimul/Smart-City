@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori;
+package com.example.nirmol_nogori.Ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.nirmol_nogori.DropComplain.DropComplain;
-import com.example.nirmol_nogori.Ui.Home_Menu;
+import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityAboutusBinding;
 
 public class Aboutus extends AppCompatActivity implements View.OnClickListener {

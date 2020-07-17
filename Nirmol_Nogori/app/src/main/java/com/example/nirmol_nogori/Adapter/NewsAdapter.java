@@ -1,12 +1,16 @@
 package com.example.nirmol_nogori.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +25,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Newsholder> {
     private static final String TAG = "News_Adapter";
     private ArrayList<News> news = new ArrayList<>();
     Context context;
+    private long lastclicktime = 0;
 
     public NewsAdapter(Context context, ArrayList<News> news) {
         this.context = context;
@@ -47,6 +52,26 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Newsholder> {
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
+                try {
+                    context.getPackageManager()
+                            .getPackageInfo("com.example.nirmol_nogori", 0); //Checks if FB is even installed.
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(""+newsTrend.getNews_link())));  //Trys to make intent with News's URI
+                } catch (Exception e) {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(""+newsTrend.getNews_link()))); //catches and opens a url to the desired page
+                }
+            }
+        });
 
         Log.d(TAG,""+news.size());
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeDropComplainFragment extends Fragment {
+public class HomeDropComplainFragment extends Fragment implements View.OnClickListener {
     private FragmentHomeDropComplainBinding binding;
     private static final String TAG = "Home_Drop_Comp_Fragment";
     private RecyclerView recyclerView;
@@ -48,6 +49,8 @@ public class HomeDropComplainFragment extends Fragment {
     ProgressBar progressBar;
     private int image_rec_code = 1;
     private Uri filepath_uri;
+    private String userid;
+    private long lastclicktime = 0;
 
 
     public HomeDropComplainFragment() {
@@ -69,37 +72,17 @@ public class HomeDropComplainFragment extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         complains = new ArrayList<>();
-        complainAdapter = new ComplainAdapter(getContext(), complains,false);//pass user as false
+        complainAdapter = new ComplainAdapter(getContext(), complains, false);//pass user as false
         recyclerView.setAdapter(complainAdapter);
 
 
         readComplains();
 
-        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         updateprofilepic(userid);
 
-        binding.goaddcomplianFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PostDropComplain.class));
-                getActivity().finish();
-            }
-        });
-        binding.userPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                SharedPreferences.Editor editor =getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-//                editor.putString("userid", userid);
-//                editor.apply();
-                Log.d(TAG, "" + userid);
-              //  getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.dropcomplain_fragment_container, new UserProfileFragment()).commit();
-                Intent intent=new Intent(getContext(), UserProfileActivty.class);
-                intent.putExtra("userid",userid);
-                Log.d("ddddd", "" + userid);
-                getActivity().startActivity(intent);
-            }
-        });
+        binding.goaddcomplianFragment.setOnClickListener(this);
+        binding.userPhoto.setOnClickListener(this);
 
 
         return view;
@@ -107,7 +90,7 @@ public class HomeDropComplainFragment extends Fragment {
 
     private void updateprofilepic(String userid) {
         String usesid = userid;
-        Log.d("dddd", "update profile");
+        Log.d(TAG, "update profile");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(usesid);
         databaseReference.keepSynced(true);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -129,7 +112,7 @@ public class HomeDropComplainFragment extends Fragment {
     }
 
     private void readComplains() {
-        Log.d("dddd", "read");
+        Log.d(TAG, "read");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Complains");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -160,7 +143,22 @@ public class HomeDropComplainFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+            return;
+        }
+        lastclicktime = SystemClock.elapsedRealtime();
 
+        if (v == binding.goaddcomplianFragment) {
+            startActivity(new Intent(getActivity(), PostDropComplain.class));
+        } else if (v == binding.userPhoto) {
+            Log.d(TAG, "" + userid);
+            Intent intent = new Intent(getContext(), UserProfileActivty.class);
+            intent.putExtra("userid", userid);
+            Log.d(TAG, "" + userid);
+            getActivity().startActivity(intent);
+        }
 
-
+    }
 }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.squareup.picasso.Picasso;
 public class Login_User extends AppCompatActivity implements View.OnClickListener {
     private ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
+    private long lastclicktime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,10 @@ public class Login_User extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+            return;
+        }
+        lastclicktime = SystemClock.elapsedRealtime();
         if (v == binding.buttonLoginAsUser) {
             userLogin();
 

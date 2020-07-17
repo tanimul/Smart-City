@@ -77,10 +77,22 @@
         android:layout_marginRight="5dp"
         android:background="@drawable/edittext_background"
         android:gravity="center"
-        android:hint="News"
+        android:hint="News Title"
         app:layout_constraintTop_toBottomOf="@id/newsphoto"
         tools:ignore="MissingConstraints" />
 
+    <EditText
+        android:id="@+id/newslink"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edittext_background"
+        android:gravity="center"
+        android:hint="News Link"
+        app:layout_constraintTop_toBottomOf="@id/newstitle"
+        tools:ignore="MissingConstraints" />
     <EditText
         android:id="@+id/newssrc"
         android:layout_width="match_parent"
@@ -91,7 +103,7 @@
         android:background="@drawable/edittext_background"
         android:gravity="center"
         android:hint="Source"
-        app:layout_constraintTop_toBottomOf="@id/newstitle"
+        app:layout_constraintTop_toBottomOf="@id/newslink"
         tools:ignore="MissingConstraints" />
 
     <Button

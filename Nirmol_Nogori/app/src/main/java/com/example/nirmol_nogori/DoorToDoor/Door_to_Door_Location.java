@@ -17,6 +17,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -45,6 +46,7 @@ public class Door_to_Door_Location extends AppCompatActivity implements Location
     private DatabaseReference databaseReference;
     ArrayList<String> location = new ArrayList<String>();
     private LocationAdapter locationAdapter;
+    private long lastclicktime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +137,11 @@ public class Door_to_Door_Location extends AppCompatActivity implements Location
     //for recycler views item
     @Override
     public void OnItemClick(String location_name) {
+        if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+            return;
+        }
+        lastclicktime = SystemClock.elapsedRealtime();
+
         Intent intent = new Intent(Door_to_Door_Location.this, Door_to_Door_Service.class);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

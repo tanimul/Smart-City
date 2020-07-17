@@ -1,6 +1,8 @@
 package com.example.nirmol_nogori.Adapter;
 
 import android.content.Context;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,7 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
     private List<Repost> mrepost;
     private FirebaseUser firebaseUser;
     private RepostClickInterface repostClickInterface;
+    private long lastclicktime = 0;
 
     public RepostAdapter(Context mContext, List<Repost> mrepost, RepostClickInterface repostClickInterface) {
         this.mContext = mContext;
@@ -50,6 +53,8 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final Repost repost = mrepost.get(position);
         holder.repost.setText(repost.getRepostdetails());
@@ -63,6 +68,7 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+
                 if(firebaseUser!=null){
                     repostClickInterface.OnRepostLongClick(repost.getUserid(),repost.getComplainid(),repost.getRepostid());
                 }
@@ -73,6 +79,11 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
                 repostClickInterface.OnRepostsingleClick(repost.getRepostid());
             }
         });
@@ -117,16 +128,18 @@ public class RepostAdapter extends RecyclerView.Adapter<RepostAdapter.Viewholder
 
     private void getUserInfo(final ImageView imageView, final TextView username, String userid) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+        Log.d("Ddddddddd",""+userid);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Users user = dataSnapshot.getValue(Users.class);
+
                 Picasso.get().load(user.getUser_image_url())
                         .placeholder(R.drawable.ic_user)
                         .fit()
                         .centerCrop()
                         .into(imageView);
-                username.setText(user.getFirst_name() + " " + user.getLast_name());
+           username.setText(user.getFirst_name() + " " + user.getLast_name());
             }
 
             @Override

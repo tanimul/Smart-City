@@ -78,7 +78,8 @@ public class News_nd_Trend extends AppCompatActivity {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 News news = snapshot.getValue(News.class);
                                 if (news.getNewstitle().equals(newslist.get(position).getNewstitle())
-                                        && news.getSrc().equals(newslist.get(position).getSrc())) {
+                                        && news.getSrc().equals(newslist.get(position).getSrc())
+                                        && news.getNews_link().equals(newslist.get(position).getNews_link())) {
                                     databaseReference.child(snapshot.getKey()).removeValue();
                                     Log.d(TAG, "Deleted .");
                                     Toast.makeText(News_nd_Trend.this, "Deleted the news.", Toast.LENGTH_SHORT).show();

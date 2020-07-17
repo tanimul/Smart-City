@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,7 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
     private Uri filepath_uri;
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
+    private long lastclicktime = 0;
 
 
     public Door_to_Door_Admin_Fragment() {
@@ -76,19 +78,20 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+            return;
+        }
+        lastclicktime = SystemClock.elapsedRealtime();
 
         if (v == binding.clenerphoto) {
             openGallery();
-        }
-
-        if (v == binding.saveCleanerInformation) {
+        } else if (v == binding.saveCleanerInformation) {
             if (filedchecking()) {
                 adminid();
             }
-        }
-        if(v == binding.showlocCleaner){
-            Intent intent=new Intent(getContext(), Door_to_Door_Location.class);
-            intent.putExtra("location_cleaner_admin_request","location_cleaner_admin_request");
+        } else if (v == binding.showlocCleaner) {
+            Intent intent = new Intent(getContext(), Door_to_Door_Location.class);
+            intent.putExtra("location_cleaner_admin_request", "location_cleaner_admin_request");
             getActivity().startActivity(intent);
         }
     }
@@ -98,7 +101,7 @@ public class Door_to_Door_Admin_Fragment extends Fragment implements View.OnClic
         if (admininformation != null) {
             String adminid = admininformation.getString("adminid");
             Log.d(TAG, "" + adminid);
-            
+
             cleanerRegistration(adminid);
         }
 

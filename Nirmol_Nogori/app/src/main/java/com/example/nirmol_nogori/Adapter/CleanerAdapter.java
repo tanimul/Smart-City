@@ -3,6 +3,7 @@ package com.example.nirmol_nogori.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import java.util.List;
 public class CleanerAdapter extends RecyclerView.Adapter<CleanerAdapter.Cleanerholder> {
     private static final String TAG = "Cleaner_Adapter";
     private List<Cleaner> cleaners = new ArrayList<>();
+    private long lastclicktime = 0;
 
     public CleanerAdapter(List<Cleaner> cleaners) {
         this.cleaners = cleaners;
@@ -44,6 +46,7 @@ public class CleanerAdapter extends RecyclerView.Adapter<CleanerAdapter.Cleanerh
     @Override
     public void onBindViewHolder(@NonNull final Cleanerholder holder, final int position) {
 
+
         final Cleaner cleaner = cleaners.get(position);
         holder.name.setText(cleaner.getName());
         holder.location.setText(cleaner.getLocation());
@@ -58,6 +61,11 @@ public class CleanerAdapter extends RecyclerView.Adapter<CleanerAdapter.Cleanerh
         holder.request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
                 MainActivity.CLEANER_REQUEST = true;
                 CleanerProfile.cleanername = cleaner.getName();
                 CleanerProfile.cleanerarea = cleaner.getLocation();
@@ -72,6 +80,11 @@ public class CleanerAdapter extends RecyclerView.Adapter<CleanerAdapter.Cleanerh
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
                 Context context = v.getContext();
                 Intent intent = new Intent(context, CleanerProfile.class);
                 intent.putExtra("cleaner_name", cleaner.getName());

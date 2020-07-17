@@ -2,6 +2,7 @@ package com.example.nirmol_nogori.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.Viewholder> 
     private List<Complain> complains;
     public FragmentManager f_manager;
     private FirebaseUser firebaseUser;
+    private long lastclicktime = 0;
 
     public PhotoAdapter(Context mcontext, List<Complain> complains) {
         this.context = mcontext;
@@ -46,6 +48,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.Viewholder> 
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+
         final Complain complain = complains.get(position);
         Picasso.get().load(complain.getComplainimage())
                 .placeholder(R.drawable.ic_image)
@@ -55,6 +58,11 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.Viewholder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+                    return;
+                }
+                lastclicktime = SystemClock.elapsedRealtime();
+
 
 //                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
 //                editor.putString("postid", complain.getComplainid());

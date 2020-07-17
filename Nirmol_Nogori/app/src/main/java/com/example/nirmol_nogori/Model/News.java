@@ -4,18 +4,28 @@ public class News {
     private String adminid;
     private String date;
     private String news_img_url;
+    private String news_link;
     private String newstitle;
     private String src;
 
-    public News(String adminid, String date, String news_img_url, String newstitle, String src) {
+    public News(String adminid, String date, String news_img_url,String news_link, String newstitle, String src) {
         this.adminid = adminid;
         this.date = date;
         this.news_img_url = news_img_url;
+        this.news_link=news_link;
         this.newstitle = newstitle;
         this.src = src;
     }
 
     public News() {
+    }
+
+    public String getNews_link() {
+        return news_link;
+    }
+
+    public void setNews_link(String news_link) {
+        this.news_link = news_link;
     }
 
     public String getAdminid() {

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,14 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nirmol_nogori.Aboutus;
 import com.example.nirmol_nogori.DoorToDoor.Door_to_Door_Location;
 import com.example.nirmol_nogori.DropComplain.DropComplain;
 import com.example.nirmol_nogori.FindNearestDustbine.Find_Nearest_Dustbine;
 import com.example.nirmol_nogori.NewsAndTrend.News_nd_Trend;
 import com.example.nirmol_nogori.R;
-import com.example.nirmol_nogori.Term_Condition;
-import com.example.nirmol_nogori.ThanksCredit;
 import com.example.nirmol_nogori.databinding.ActivityHomeMenuBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +42,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
     private TextView headerName;
     private long backpressed;
     private Toast backtost;
+    private long lastclicktime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +87,7 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         Log.d(TAG, "navigation item selected");
         switch (item.getItemId()) {
             case R.id.nav_home:
@@ -144,6 +144,11 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public void onClick(View v) {
+
+        if (SystemClock.elapsedRealtime() - lastclicktime < 1000) {
+            return;
+        }
+        lastclicktime = SystemClock.elapsedRealtime();
 
         if (v == binding.homeActivty.buttonDoorToDoorCleaningService) {
             startActivity(new Intent(Home_Menu.this, Door_to_Door_Location.class));

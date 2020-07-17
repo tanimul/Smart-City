@@ -3,16 +3,15 @@ package com.example.nirmol_nogori.FindNearestDustbine;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
+import com.example.nirmol_nogori.Interface.TaskLoadedCallback;
 import com.example.nirmol_nogori.R;
 import com.example.nirmol_nogori.databinding.ActivityFindNearestDustbineBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -29,13 +28,12 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.libraries.places.api.model.Place;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapReadyCallback,TaskLoadedCallback {
+public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
     private static final String TAG = "Find_Nearest_Dustbine";
     private ActivityFindNearestDustbineBinding binding;
     private GoogleMap map;
@@ -93,10 +91,7 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
                     placedestination = new MarkerOptions().position(latLng1).title("locationdestination");
 
                     String url = getDestinaonURl(placestart.getPosition(), placedestination.getPosition(), "walking");
-
-                    new FetchURL(Find_Nearest_Dustbine.this).execute(url, "driving");
-
-
+                    new FetchURL(Find_Nearest_Dustbine.this).execute(url, "walking");
 
 //                    map.addPolyline(new PolylineOptions()
 //                            .add(latLng, new LatLng(position.latitude, position.longitude))
@@ -120,7 +115,7 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
         String parameters = st_start + "&" + st_destination + "&" + mode;
         String output = "json";
 
-        String url="https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + "AIzaSyBoXosK6UDF9Em9Zay4d-lZKm2azxuTqJw";
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + "AIzaSyBoXosK6UDF9Em9Zay4d-lZKm2azxuTqJw";
         return url;
     }
 

@@ -1,4 +1,4 @@
-package com.example.nirmol_nogori;
+package com.example.nirmol_nogori.Ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.nirmol_nogori.Ui.Home_Menu;
 import com.example.nirmol_nogori.databinding.ActivityThanksCreditBinding;
 
 public class ThanksCredit extends AppCompatActivity {
