@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.nirmol_nogori.Adapter.ComplainAdapter;
 import com.example.nirmol_nogori.DropComplain.DropComplain;
 import com.example.nirmol_nogori.DropComplain.PostDropComplain;
+import com.example.nirmol_nogori.Model.Admin;
 import com.example.nirmol_nogori.Model.Complain;
 import com.example.nirmol_nogori.Model.Users;
 import com.example.nirmol_nogori.R;
@@ -51,6 +52,8 @@ public class HomeDropComplainFragment extends Fragment implements View.OnClickLi
     private Uri filepath_uri;
     private String userid;
     private long lastclicktime = 0;
+    private String adminid;
+    private int profilerequestcode = 0;
 
 
     public HomeDropComplainFragment() {
@@ -78,8 +81,21 @@ public class HomeDropComplainFragment extends Fragment implements View.OnClickLi
 
         readComplains();
 
-        userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        updateprofilepic(userid);
+        Bundle bundle = new Bundle();
+        if (bundle != null && Profile_Admin_Fragment.admin_id != null) {
+            Log.d(TAG, "Admin request");
+            Log.d(TAG, "Admin id:" + Profile_Admin_Fragment.admin_id);
+            adminid = Profile_Admin_Fragment.admin_id;
+            profilerequestcode = 1;
+            updateprofilepic(adminid, profilerequestcode);
+
+        } else {
+            Log.d(TAG, "User request");
+            userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            profilerequestcode = 0;
+            updateprofilepic(userid, profilerequestcode);
+        }
+
 
         binding.goaddcomplianFragment.setOnClickListener(this);
         binding.userPhoto.setOnClickListener(this);
@@ -88,20 +104,43 @@ public class HomeDropComplainFragment extends Fragment implements View.OnClickLi
         return view;
     }
 
-    private void updateprofilepic(String userid) {
-        String usesid = userid;
-        Log.d(TAG, "update profile");
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(usesid);
+
+    //for user profile
+    private void updateprofilepic(String userid, final int profilerequestcode) {
+        final String usesid = userid;
+        Log.d(TAG, "uses id:" + usesid);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        if (profilerequestcode != 1) {
+            databaseReference = databaseReference.child("Users").child(usesid);
+        } else {
+            databaseReference = databaseReference.child("Admin").child(usesid);
+        }
+
         databaseReference.keepSynced(true);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Users users = dataSnapshot.getValue(Users.class);
-                Picasso.get().load(users.getUser_image_url())
-                        .placeholder(R.drawable.ic_user)
-                        .fit()
-                        .centerCrop()
-                        .into(binding.userPhoto);
+
+                if (profilerequestcode != 1) {
+                    Users users = dataSnapshot.getValue(Users.class);
+                    Picasso.get().load(users.getUser_image_url())
+                            .placeholder(R.drawable.ic_user)
+                            .fit()
+                            .centerCrop()
+                            .into(binding.userPhoto);
+
+                } else {
+                    Admin users = dataSnapshot.getValue(Admin.class);
+                    Picasso.get().load(users.getImageurl())
+                            .placeholder(R.drawable.ic_user)
+                            .fit()
+                            .centerCrop()
+                            .into(binding.userPhoto);
+                    binding.goaddcomplianFragment.setText(""+users.getName());
+
+                }
+
+
             }
 
             @Override
@@ -151,13 +190,18 @@ public class HomeDropComplainFragment extends Fragment implements View.OnClickLi
         lastclicktime = SystemClock.elapsedRealtime();
 
         if (v == binding.goaddcomplianFragment) {
-            startActivity(new Intent(getActivity(), PostDropComplain.class));
+            if (profilerequestcode != 1) {
+                startActivity(new Intent(getActivity(), PostDropComplain.class));
+            }
+
         } else if (v == binding.userPhoto) {
-            Log.d(TAG, "" + userid);
-            Intent intent = new Intent(getContext(), UserProfileActivty.class);
-            intent.putExtra("userid", userid);
-            Log.d(TAG, "" + userid);
-            getActivity().startActivity(intent);
+            if (profilerequestcode != 1) {
+                Log.d(TAG, "" + userid);
+                Intent intent = new Intent(getContext(), UserProfileActivty.class);
+                intent.putExtra("userid", userid);
+                getActivity().startActivity(intent);
+            }
+
         }
 
     }

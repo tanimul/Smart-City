@@ -24,21 +24,29 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
@@ -59,6 +67,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityMainBinding binding;
@@ -66,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    //private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseAuth.AuthStateListener authStateListener;
     private int RC_sign_in = 1;
     private long backpressed;
     private Toast backtost;
@@ -339,7 +350,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-
                         Log.d(TAG, "firebase Signed in successfully");
                         Toast.makeText(MainActivity.this, "successfully logged", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -363,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void updateUI(FirebaseUser firebaseUser) {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-        Log.d(TAG, "acc" + account);
+        Log.d(TAG, "acc" + account.getEmail());
 
         if (account != null) {
             String userid = firebaseUser.getUid();
@@ -416,10 +426,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            @Override
 //            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 //                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-//
+//                Log.d(TAG,"not nulddddl:"+currentUser);
 //                if (currentUser != null) {
+//                    Log.d(TAG,"not null:"+currentUser);
 //                    // updateUI(currentUser);
 //                } else {
+//                    Log.d(TAG,"null:"+currentUser);
 //                    //   updateUI(null);
 //                }
 //            }
@@ -429,23 +441,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void handlefac_SigninResult(AccessToken accessToken) {
+
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
+                FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (task.isSuccessful()) {
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
                     Log.d(TAG, "New Registration");
                     updateUI(user);
                 } else {
                     Toast.makeText(MainActivity.this, "Could not Registration to Firebase", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Could not Registration to Firebase ");
+                    updateUI(null);
                 }
             }
         });
 
     }
+
+
+
 
     //for Double press for Exit
     @Override
@@ -463,6 +480,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         backpressed = System.currentTimeMillis();
 
     }
-
-
 }

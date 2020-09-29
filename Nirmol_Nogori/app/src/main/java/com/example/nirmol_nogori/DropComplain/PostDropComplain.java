@@ -68,7 +68,7 @@ public class PostDropComplain extends AppCompatActivity {
     private Place place;
     private String location;
     private String fullname;
-    boolean imagereq = true;
+   boolean imagereq = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

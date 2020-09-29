@@ -79,6 +79,9 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
         ComplainerInfo(holder.imageprofile, holder.username, complain.getUserid());
         if (firebaseUser != null) {
             issaved(complain.getComplainid(), holder.save);
+        } else {
+            holder.save.setVisibility(View.GONE);
+            holder.repost.setVisibility(View.GONE);
         }
 
         holder.imageprofile.setOnClickListener(new View.OnClickListener() {
@@ -168,12 +171,12 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
                     return;
                 }
                 lastclicktime = SystemClock.elapsedRealtime();
-
-
+                Log.d(TAG, "firebaseuser:" + firebaseUser);
                 Intent intent = new Intent(mcontext, PostDropComplain.class);
                 intent.putExtra("complain_id", "" + complain.getComplainid());
-                intent.putExtra("edit_request",false);
+                intent.putExtra("edit_request", false);
                 ((Activity) mcontext).startActivity(intent);
+
 
             }
         });
@@ -224,7 +227,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
                 popupMenu.inflate(R.menu.complainmenu);
 
                 //admin id check if true then it's an admin id
-                if (user == true) {
+                if (firebaseUser == null) {
                     popupMenu.getMenu().findItem(R.id.edit).setVisible(false);
                     popupMenu.getMenu().findItem(R.id.report).setVisible(false);
                 } else if (!complain.getUserid().equals(firebaseUser.getUid())) {
@@ -360,7 +363,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
 
     private void ComplainerInfo(final ImageView imageprofile, final TextView username, String userid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
-        Log.d("Ddddddddd",""+userid);
+        Log.d("Ddddddddd", "" + userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

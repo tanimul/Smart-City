@@ -2,7 +2,11 @@ package com.example.nirmol_nogori.FindNearestDustbine;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -69,10 +73,15 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
 
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         map.setMyLocationEnabled(true);
         map.moveCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
         map.getUiSettings().setMapToolbarEnabled(false);
         map.getUiSettings().setMyLocationButtonEnabled(true);
+
 
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -142,6 +151,10 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
 
         private void getLastLocation(FusedLocationProviderClient flpc) {
             Log.d(TAG, "getLastLocation: called");
+            if (ActivityCompat.checkSelfPermission(Find_Nearest_Dustbine.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(Find_Nearest_Dustbine.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
             flpc.getLastLocation()
                     .addOnSuccessListener(new OnSuccessListener<Location>() {
                         @Override
@@ -154,7 +167,7 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
                                     @Override
                                     public void run() {
                                         last_location = location;
-                                        //moveCamera(location, "getLastLocation");
+                                        //   moveCamera(location, "getLastLocation");
                                         yourlocation(location, "getYourLocation");
                                         showarroundustbine(location.getLatitude(), location.getLongitude());
                                     }
@@ -190,7 +203,7 @@ public class Find_Nearest_Dustbine extends AppCompatActivity implements OnMapRea
         dataTransfer[1] = url;
 
         getNearbyPlacesData.execute(dataTransfer);
-        Toast.makeText(Find_Nearest_Dustbine.this, "Showing Nearby schools", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(Find_Nearest_Dustbine.this, "Showing Nearby schools", Toast.LENGTH_SHORT).show();
     }
 
     private String getUrl(double latitude, double longitude, String nearbyPlace) {

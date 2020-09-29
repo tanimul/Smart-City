@@ -106,4 +106,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_adminemail" />
 
+    <TextView
+        android:id="@+id/usingasauser"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textview_adminphone"
+        android:text="Using As a User ?"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

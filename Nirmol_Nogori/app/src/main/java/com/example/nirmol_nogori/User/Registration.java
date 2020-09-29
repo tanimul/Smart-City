@@ -67,7 +67,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             finish();
         } else if (binding.buttonRegistration == v) {
             if (userRegistrationValidation()) {
-                //  userRegistration();
+                  userRegistration();
             } else {
                 Toast.makeText(this, "Please fill the all Informations", Toast.LENGTH_SHORT).show();
             }

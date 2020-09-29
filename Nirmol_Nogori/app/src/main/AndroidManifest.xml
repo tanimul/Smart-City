@@ -8,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logopng"
+        android:icon="@drawable/logocleancity"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -28,8 +28,7 @@
         <activity android:name=".DoorToDoor.Door_to_Door_Location" />
         <activity android:name=".Ui.Setting" />
         <activity android:name=".User.Password_Reset_Activity" />
-        <activity
-            android:name=".Ui.Home_Menu"
+        <activity android:name=".Ui.Home_Menu"
             android:parentActivityName=".Ui.MainActivity" />
         <activity android:name=".FindNearestDustbine.Find_Nearest_Dustbine" />
         <activity android:name=".Admin.Login_Admin" />

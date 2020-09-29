@@ -150,11 +150,20 @@ public class Home_Menu extends AppCompatActivity implements NavigationView.OnNav
         }
         lastclicktime = SystemClock.elapsedRealtime();
 
+        Bundle bundle = getIntent().getExtras();
+
+
         if (v == binding.homeActivty.buttonDoorToDoorCleaningService) {
             startActivity(new Intent(Home_Menu.this, Door_to_Door_Location.class));
 
         } else if (v == binding.homeActivty.buttonDropComplain) {
-            startActivity(new Intent(Home_Menu.this, DropComplain.class));
+
+            Intent intent = new Intent(this, DropComplain.class);
+            if (bundle != null) {
+                intent.putExtra("admin_request for using drop complain", "admin_request for using drop complain");
+
+            }
+            startActivity(intent);
 
         } else if (v == binding.homeActivty.buttonFindNearestDustbine) {
             startActivity(new Intent(Home_Menu.this, Find_Nearest_Dustbine.class));

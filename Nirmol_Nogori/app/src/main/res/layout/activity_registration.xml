@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="নির্মল নগরী"
+        android:text="Smart City"
         android:textColor="#000000"
         android:textSize="35dp"
         tools:ignore="MissingConstraints" />
